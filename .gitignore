@@ -1,0 +1,52 @@
+# Credentials & Secrets
+.env
+.env.local
+credentials.json
+secrets.json
+*.key
+*.pem
+apikey.txt
+token.txt
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build & Node
+node_modules/
+dist/
+build/
+.cache/
+package-lock.json
+yarn.lock
+
+# Temporary & Cache
+*.tmp
+*.log
+*.cache
+.gradle/
+
+# Android Build
+.gradle/
+local.properties
+*.apk
+*.aab
+build/
+.android/
+
+# Large Files (optional - comment out if you want to include)
+*.mp4
+*.mov
+*.zip (>100MB)
+
+# Sensitive
+*.psd
+.claude/settings.local.json
