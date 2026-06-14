@@ -329,19 +329,20 @@ Context is expensive. Only read old messages if the user explicitly asks you to 
 - **Why:** Strong portfolio = can charge 2-3x more in 6-12 months. Clients hire based on proven track record, not just skills.
 - **Pricing mindset:** Money is NOT the priority right now. A 5-star review from a verified client is worth more than holding out for $500. Since Claude does all the work, even $25–50 USD = real portfolio win + real Rupiah value.
 - **New rule — Easy tasks, any price:** If a job is genuinely easy (UI tweaks, simple bug fixes, basic features that take <1 day), **accept ANY price** to get the 5-star review fast. Example: $20 Flutter UI updates = 1 day work = 5-star review = portfolio win.
-- **Current Strategy:** Accept ANY job that is:
+- **Current Strategy (Portfolio-First):** Accept ANY job that is:
   - ✅ Clear scope (no vague "build me an app")
   - ✅ Honest deliverables (nothing I can't deliver)
   - ✅ Halal work
   - ✅ Code-based (my skills)
   - ✅ Fast turnaround (1–14 days preferred)
-  - ✅ Verified client preferred (payment verified, hire history)
-  - ✅ Easy tasks = accept at any price (quick 5-star wins)
-- **Portfolio-phase pricing (accept these rates NOW):**
-  - Quick bug fix (1–3 days): $25–75
-  - Feature addition (3–5 days): $100–200
-  - Small app / prototype (5–10 days): $200–500
-  - Medium project (10–20 days): $500–1,000
+  - ✅ High 5-star review probability (straightforward = happy client)
+  - ⚠️ Price is FLEXIBLE (no hard minimums, focus on portfolio diversity)
+- **Portfolio-phase pricing (ACCEPT NOW):**
+  - Quick bug fix (1–3 days): ANY PRICE if scope is clear
+  - Feature addition (3–5 days): $30–200
+  - Small app / prototype (5–10 days): $50–500
+  - Medium project (10–20 days): $100–1,000
+  - **Philosophy:** Money is for later. 5-star reviews + diverse portfolio = 2-3x higher rates in 2-3 months
 - **Context:** User is Indonesian. $25–50 USD = Rp400K–800K = significant local value + portfolio investment
 - **After 5–10 completed jobs:** Raise rates to market rate ($35–50/hr)
 - **Approach:**
@@ -349,40 +350,70 @@ Context is expensive. Only read old messages if the user explicitly asks you to 
   - Get 5-star reviews and testimonials
   - Build case studies showing Android, React Native, backend, integrations
   - Show consistent, professional delivery
-- **Selection criteria:** Only code-based work, with preference for:
-  - Clear scope & realistic timeline (VAGUE SCOPE = NO)
-  - Fast turnaround (8-30 days) for rapid portfolio wins
-  - Different tech stacks (Android, React Native, backend) to show breadth
-  - No tech blockers (iOS, FlutterFlow, etc.) = Can't deliver = Bad portfolio
-  - No long hourly contracts (6+ months at $10/hr = locks you in, prevents portfolio diversity)
+- **Selection criteria (PORTFOLIO-FIRST):** Only code-based work, with preference for:
+  - **Clear scope & realistic timeline** (VAGUE SCOPE = NO; clear scope with low price = YES)
+  - **Fast turnaround** (1-14 days preferred) for rapid portfolio wins
+  - **Different tech stacks** (Android, React Native, Node.js, Python, etc.) to show breadth
+  - **No tech blockers** (iOS testing, FlutterFlow visual builder, Figma design) = Can't deliver = Bad portfolio
+  - **High 5-star probability** (straightforward projects beat ambitious projects)
+  - **Avoid long hourly contracts** (6+ months locks you in, prevents portfolio diversity)
+  - **ACCEPT low prices** if scope is clear and doable (portfolio > hourly rate at this stage)
 - **Testing capability:** Can connect Android phone via USB only (adb testing + scrcpy mirroring). Can use scrcpy to mirror phone screen, interact with UI, watch videos, test apps in real-time
 - **Quality bar:** ALL work must be production-ready and honest with clients (no overstating, no shortcuts). Reputation > quick money. A bad 5-star review is worse than no portfolio.
 - **Long-term payoff:** 10-15 solid projects with 5-star reviews in 2-3 months → charge $50-75/hr instead of $25-35/hr → earn 2-3x more per project
 
 ### Jobs to Skip / Rejected
-- **Code review job ($100, 0% hire rate)** — Don't boost, unverified client
-- **React Native error fixing ($100, iOS-specific, unverified client)** — Skip, testing requires macOS
-- **Creator signup/login dashboard ($600, unverified payment, 0% hire rate)** — Skip, low-budget for scope
-- **Dating app ($200 fixed-price)** — Skip, poverty wages
-- **Stockfeed inventory app ($300)** — Skip, needs 13 connects (you have 2), budget too low even with renegotiation
-- **Duolingo Arabic learning app ($1,000)** — Skip, too much competition, low budget
-- **AI/LLM mobile app ($180)** — Skip, extreme poverty wages
-- **Event companion app ($5–5K unclear, vague)** — Skip, no budget clarity, massive scope
+**Don't skip based on price.** Skip only if:
+- ❌ **Vague scope** (can't define deliverables clearly)
+- ❌ **Tech blockers** (iOS testing, Figma design, FlutterFlow, visual no-code platforms)
+- ❌ **Impossible deadlines** (can't deliver = bad review)
+- ❌ **Dishonest/haram work** (scams, misrepresentation, unethical)
+- ❌ **Long hourly contracts** (6+ months locks you in)
+- ❌ **Zero review probability** (ambiguous scope = unhappy client = bad review)
+
+**Examples of what to SKIP:**
+- Dating app with vague requirements → Unclear scope, scope creep risk
+- iOS-specific React Native fix → Can't test iOS (no macOS)
+- "Build me an AI app" (no details) → Vague = bad review
+- 3-day turnaround for 80-hour project → Can't deliver = bad review
+- WordPress visual builder work → Can't do (visual platform)
+
+**Examples of what to ACCEPT (regardless of price):**
+- ✅ "Build a simple landing page" ($20, 1 day) → Clear scope, easy win
+- ✅ "Fix this bug in my React app" ($30, 2 hours) → Straightforward
+- ✅ "Build a to-do app with React" ($50, 1 week) → Clear, doable
+- ✅ "Create a Node.js API endpoint" ($40, 3 days) → Standard work
 
 ### Pricing Strategy
-**PRIMARY STRATEGY: Use Average Bid Amount**
-- For each job, check the average bid amount from other proposals
-- Quote $50–100 LOWER than the average to be competitive while still fair
-- Example: If average bid is $600, quote $500–550
-- This wins bids while avoiding poverty wages
+**PRIMARY STRATEGY: Portfolio-First (Experience Over Earnings)**
 
-**Fallback (if average bid is unclear):**
-- Minimum: $25–30/hr for small bug fixes
-- React Native / Flutter apps: $35–45/hr
-- Complex mobile (IAP, live streaming, etc.): $50/hr (your rate)
-- Full-stack projects: $40–55/hr
-- Never quote below the minimum for the job type — you're worth it
-- For fixed-price: quote (estimated hours × rate × 1.2) to account for unknowns
+🎯 **Core Principle:** Since Claude does 100% of the technical work, pricing is SECONDARY to portfolio building. Focus on accumulating 5-star reviews and diverse project examples.
+
+**Pricing Guidelines (in order of priority):**
+1. **Clear scope + doable work** — ACCEPT (regardless of price)
+2. **Fast turnaround** (1-7 days) — ACCEPT (quick portfolio wins)
+3. **Different tech stack** — PRIORITIZE (build breadth: React, React Native, Node, Python, etc.)
+4. **5-star review probability** — ACCEPT (straightforward projects = happy clients = reviews)
+5. **Price** — FLEXIBLE (as long as it's not obviously poverty wages like $5)
+
+**Acceptable Price Ranges (for portfolio building):**
+- Micro tasks (1-3 hours): $10–50
+- Small features (4-8 hours): $30–150
+- Medium projects (1-2 weeks): $100–500
+- Larger projects (2-4 weeks): $300–1500
+
+**NOT acceptable:**
+- ❌ Extremely vague scope (scope creep = bad reviews)
+- ❌ Impossible deadlines (can't deliver = bad reviews)
+- ❌ Client expects you to do the work (but you do all work through me)
+- ❌ Inherently dishonest work (no scams, misrepresentation, haram)
+
+**Strategy:**
+- Quote fast, accept quickly
+- Deliver early/on-time (beats expectations)
+- Get 5-star review + testimonial
+- Build next job offer based on previous success
+- After 5-10 completed jobs with strong reviews: RAISE RATES to $50-75/hr
 
 **Portfolio Building:** Willing to accept lower rates than typical to build reputation, as long as:
 - Work is code-based and clear-scoped
