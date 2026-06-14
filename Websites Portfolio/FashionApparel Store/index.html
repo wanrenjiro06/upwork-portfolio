@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumira — Fashion Statements With Confidence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f3f4f6;
+      --ink: #0e0e10;
+      --ink-soft: #71717a;
+      --line: #e7e7ea;
+      --c1: #ff7a3d;   /* orange */
+      --c2: #ff4d6d;   /* coral pink */
+      --c3: #7c5cff;   /* violet */
+      --c4: #18b6c4;   /* teal */
+      --grad: linear-gradient(120deg, #ff8a3d, #ff4d6d 55%, #ff2e93);
+      --radius: 14px;
+      --max: 1240px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4,.dsp { font-family: 'Archivo', sans-serif; letter-spacing: -0.02em; }
+    a { text-decoration: none; color: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ─── starburst logo ─── */
+    .burst { width: 22px; height: 22px; animation: spin 14s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+      transition: background .35s, box-shadow .35s, color .35s;
+      color: #fff;
+    }
+    nav .nav-in { max-width: var(--max); margin: 0 auto; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 9px; font-family: 'Archivo'; font-weight: 800; font-size: 20px; letter-spacing: .04em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 30px; list-style: none; font-size: 14px; font-weight: 500; }
+    .nav-links a { opacity: .85; transition: opacity .2s; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-right { display: flex; align-items: center; gap: 20px; font-size: 14px; font-weight: 500; }
+    .cart-btn { display: flex; align-items: center; gap: 7px; }
+    .cart-count { background: #fff; color: var(--ink); font-size: 11px; font-weight: 700; min-width: 18px; height: 18px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
+    nav.solid { background: rgba(255,255,255,.92); backdrop-filter: blur(14px); color: var(--ink); box-shadow: 0 1px 0 var(--line); }
+    nav.solid .cart-count { background: var(--ink); color: #fff; }
+
+    /* ─── HERO ─── */
+    .hero { position: relative; min-height: 92vh; display: flex; align-items: center; overflow: hidden; color: #fff; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg, #ff9a3d, #ff4d6d 45%, #ff2e93 75%, #b042ff);
+      background-size: 220% 220%;
+      animation: gradShift 14s ease infinite;
+    }
+    @keyframes gradShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .hero-photo {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+      background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1100&q=80') center/cover;
+      mix-blend-mode: luminosity; opacity: .9;
+      mask-image: linear-gradient(90deg, transparent, #000 28%);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 28%);
+    }
+    .hero-grain { position: absolute; inset: 0; opacity: .5; background-image: radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px); background-size: 26px 26px; }
+    .hero-in { position: relative; z-index: 2; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: 8px 16px; border: 1px solid rgba(255,255,255,.4); border-radius: 100px; margin-bottom: 26px; }
+    .hero h1 { font-size: clamp(44px, 8vw, 104px); font-weight: 800; line-height: .96; text-transform: uppercase; max-width: 900px; }
+    .hero h1 .out { -webkit-text-stroke: 2px #fff; color: transparent; }
+    .hero p { font-size: 17px; max-width: 440px; margin: 24px 0 34px; opacity: .92; }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px; padding: 15px 28px; border-radius: 100px; border: none; transition: transform .2s, background .2s, color .2s; }
+    .btn-light { background: #fff; color: var(--ink); }
+    .btn-light:hover { transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.55); }
+    .btn-ghost:hover { background: rgba(255,255,255,.14); }
+    .hero-scroll { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 2; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .8; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .hero-scroll .line { width: 1px; height: 34px; background: rgba(255,255,255,.6); animation: scrolly 1.8s ease-in-out infinite; transform-origin: top; }
+    @keyframes scrolly { 0%,100%{transform:scaleY(.3); opacity:.4} 50%{transform:scaleY(1); opacity:1} }
+
+    /* ─── MARQUEE ─── */
+    .strip { background: var(--ink); color: #fff; padding: 18px 0; overflow: hidden; }
+    .strip-track { display: flex; gap: 50px; width: max-content; align-items: center; animation: marquee 24s linear infinite; }
+    .strip:hover .strip-track { animation-play-state: paused; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    .strip-item { display: flex; align-items: center; gap: 12px; font-family: 'Archivo'; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; opacity: .85; }
+    .strip-item .d { width: 6px; height: 6px; border-radius: 50%; background: var(--c2); }
+
+    /* ─── SECTION HEADERS ─── */
+    .sec { padding: 100px 0; }
+    .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 46px; flex-wrap: wrap; }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--c2); margin-bottom: 14px; }
+    .sec-head h2 { font-size: clamp(30px, 4vw, 50px); font-weight: 800; text-transform: uppercase; line-height: 1; }
+    .sec-head h2 .g { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .sec-head p { font-size: 15px; color: var(--ink-soft); max-width: 360px; }
+
+    /* ─── FEATURED ─── */
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+    /* ─── PRODUCT CARD ─── */
+    .card { cursor: pointer; }
+    .card .thumb {
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      aspect-ratio: 4/5; background: linear-gradient(135deg, #f1f1f4, #e7e7ec);
+    }
+    .card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+    .card:hover .thumb img { transform: scale(1.06); }
+    .card .tag { position: absolute; top: 12px; left: 12px; font-size: 11px; font-weight: 600; padding: 5px 11px; border-radius: 100px; background: rgba(255,255,255,.9); backdrop-filter: blur(6px); text-transform: capitalize; }
+    .card .sale { position: absolute; top: 12px; right: 12px; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 100px; background: var(--grad); color: #fff; }
+    .card .add {
+      position: absolute; left: 12px; right: 12px; bottom: 12px;
+      background: var(--ink); color: #fff; border: none; padding: 12px; border-radius: 10px;
+      font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px;
+      opacity: 0; transform: translateY(12px); transition: opacity .3s, transform .3s, background .2s;
+    }
+    .card:hover .add { opacity: 1; transform: none; }
+    .card .add:hover { background: var(--c2); }
+    .card .add.added { background: #1bb55c; }
+    .card .meta { padding: 14px 2px 0; }
+    .card .name { font-family: 'Archivo'; font-weight: 600; font-size: 15px; }
+    .card .price { font-size: 14px; margin-top: 3px; }
+    .card .price .now { font-weight: 700; }
+    .card .price .was { color: var(--ink-soft); text-decoration: line-through; margin-left: 8px; font-size: 13px; }
+
+    /* ─── SHOP ─── */
+    .shop { background: var(--bg-soft); }
+    .shop-banner { position: relative; border-radius: 20px; overflow: hidden; min-height: 280px; display: flex; align-items: center; color: #fff; margin-bottom: 44px; transition: background .5s; }
+    .shop-banner .bn-bg { position: absolute; inset: 0; transition: opacity .5s; }
+    .shop-banner .bn-photo { position: absolute; right: 0; top: 0; bottom: 0; width: 46%; background-size: cover; background-position: center top; mix-blend-mode: luminosity; opacity: .85; mask-image: linear-gradient(90deg, transparent, #000 40%); -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%); transition: background-image .5s; }
+    .shop-banner .bn-in { position: relative; z-index: 2; padding: 0 46px; }
+    .shop-banner h3 { font-size: clamp(40px, 6vw, 72px); font-weight: 800; text-transform: uppercase; line-height: 1; }
+    .shop-banner p { font-size: 15px; max-width: 340px; margin-top: 10px; opacity: .92; }
+
+    .shop-body { display: grid; grid-template-columns: 250px 1fr; gap: 40px; align-items: start; }
+
+    .filters .ftitle { font-family: 'Archivo'; font-weight: 700; font-size: 22px; text-transform: uppercase; margin-bottom: 22px; }
+    .fgroup { border-top: 1px solid var(--line); padding: 20px 0; }
+    .fgroup > h4 { font-family: 'Archivo'; font-size: 15px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+    .fopt { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink-soft); padding: 6px 0; cursor: pointer; transition: color .2s; }
+    .fopt:hover { color: var(--ink); }
+    .fopt input { display: none; }
+    .fbox { width: 18px; height: 18px; border: 1.5px solid #c4c4cc; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; transition: background .2s, border-color .2s; }
+    .fopt input:checked + .fbox { background: var(--c3); border-color: var(--c3); }
+    .fbox svg { opacity: 0; transition: opacity .2s; }
+    .fopt input:checked + .fbox svg { opacity: 1; }
+    .fopt.active { color: var(--ink); font-weight: 600; }
+    .sizes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .size { border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 10px 0; font-size: 12px; font-weight: 600; text-align: center; transition: all .2s; }
+    .size:hover { border-color: var(--ink); }
+    .size.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+    .shop-main { }
+    .shop-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .shop-top h3 { font-family: 'Archivo'; font-weight: 700; font-size: 24px; text-transform: uppercase; }
+    .shop-top .count { font-size: 13px; color: var(--ink-soft); font-weight: 400; margin-left: 10px; }
+    .sortby { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-soft); border: 1px solid var(--line); background: #fff; padding: 9px 14px; border-radius: 100px; }
+    .prod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .prod-grid .card .thumb { background: #fff; }
+    .empty { grid-column: 1/-1; text-align: center; padding: 60px 0; color: var(--ink-soft); }
+
+    /* ─── PROMO ─── */
+    .promo { position: relative; border-radius: 24px; overflow: hidden; color: #fff; padding: 80px 60px; }
+    .promo-bg { position: absolute; inset: 0; background: linear-gradient(120deg, #7c5cff, #18b6c4 60%, #00d4a0); background-size: 200% 200%; animation: gradShift 12s ease infinite; }
+    .promo-blur { position: absolute; width: 420px; height: 420px; border-radius: 50%; filter: blur(70px); background: radial-gradient(circle, rgba(255,255,255,.4), transparent); top: -120px; right: -80px; }
+    .promo-in { position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; align-items: center; }
+    .promo h2 { font-size: clamp(30px, 4vw, 50px); font-weight: 800; text-transform: uppercase; line-height: 1.02; margin-bottom: 18px; }
+    .promo p { font-size: 16px; opacity: .92; margin-bottom: 28px; max-width: 420px; }
+    .promo-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .pstat { background: rgba(255,255,255,.14); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.2); border-radius: 16px; padding: 24px; }
+    .pstat .n { font-family: 'Archivo'; font-size: 40px; font-weight: 800; }
+    .pstat .l { font-size: 13px; opacity: .9; margin-top: 4px; }
+
+    /* ─── BLOG ─── */
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .post .pthumb { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/11; background: var(--bg-soft); }
+    .post .pthumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+    .post:hover .pthumb img { transform: scale(1.05); }
+    .post .ptag { font-size: 12px; font-weight: 600; color: var(--c2); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: .05em; }
+    .post h4 { font-size: 18px; font-weight: 600; line-height: 1.3; }
+    .post .pread { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-soft); margin-top: 12px; }
+    .post:hover .pread { color: var(--ink); }
+
+    /* ─── NEWSLETTER ─── */
+    .news { background: var(--ink); color: #fff; border-radius: 28px; padding: 64px; text-align: center; position: relative; overflow: hidden; }
+    .news .nb { position: absolute; width: 500px; height: 500px; border-radius: 50%; filter: blur(90px); background: radial-gradient(circle, rgba(255,77,109,.4), transparent); left: 50%; top: 50%; transform: translate(-50%,-50%); }
+    .news-in { position: relative; z-index: 2; }
+    .news h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 800; text-transform: uppercase; margin-bottom: 14px; }
+    .news p { color: rgba(255,255,255,.7); margin-bottom: 30px; }
+    .news-form { display: flex; gap: 12px; max-width: 460px; margin: 0 auto; }
+    .news-form input { flex: 1; padding: 15px 20px; border-radius: 100px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: #fff; font-size: 14px; font-family: inherit; outline: none; }
+    .news-form input::placeholder { color: rgba(255,255,255,.5); }
+    .news-form input:focus { border-color: var(--c2); }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--ink); color: #fff; padding: 70px 0 36px; }
+    .foot-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .foot-brand .logo { margin-bottom: 16px; }
+    .foot-brand p { font-size: 14px; color: rgba(255,255,255,.65); max-width: 280px; }
+    .foot-col h5 { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.5); margin-bottom: 18px; }
+    .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .foot-col a { font-size: 14px; color: rgba(255,255,255,.78); }
+    .foot-col a:hover { color: #fff; }
+    .foot-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 26px; font-size: 13px; color: rgba(255,255,255,.5); flex-wrap: wrap; gap: 10px; }
+
+    /* toast */
+    .toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(120px); background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 100px; font-size: 14px; font-weight: 500; z-index: 200; display: flex; align-items: center; gap: 10px; transition: transform .4s cubic-bezier(.2,.9,.3,1.2); box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast .dot { width: 8px; height: 8px; border-radius: 50%; background: #1bb55c; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .feat-grid, .prod-grid, .blog-grid { grid-template-columns: 1fr 1fr; }
+      .shop-body { grid-template-columns: 1fr; }
+      .filters { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; }
+      .filters .ftitle { grid-column: 1/-1; }
+      .promo-in { grid-template-columns: 1fr; }
+      .hero-photo { width: 70%; opacity: .55; }
+      .foot-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .feat-grid, .prod-grid, .blog-grid { grid-template-columns: 1fr; }
+      .filters { grid-template-columns: 1fr; }
+      .promo, .news { padding: 44px 26px; }
+      .news-form { flex-direction: column; }
+      .foot-top { grid-template-columns: 1fr; }
+      .sec { padding: 70px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a class="logo">
+      <svg class="burst" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2 7 5-5-2 7 7-2-5 5 7 2-7 2 5 5-7-2 2 7-2-5-2 5 2-7-7 2 5-5-7-2 7-2-5-5 7 2-2-7 2 5z"/></svg>
+      Lumira
+    </a>
+    <ul class="nav-links">
+      <li><a href="#shop" data-cat="men">Men</a></li>
+      <li><a href="#shop" data-cat="women">Women</a></li>
+      <li><a href="#shop" data-cat="kids">Kids</a></li>
+      <li><a href="#shop" data-cat="sports">Sports</a></li>
+      <li><a href="#journal">Journal</a></li>
+    </ul>
+    <div class="nav-right">
+      <span>$0.00</span>
+      <button class="cart-btn" style="background:none;border:none;color:inherit;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-grain"></div>
+  <div class="wrap hero-in">
+    <div class="hero-badge">✦ New Season · 2024 Collection</div>
+    <h1>Making Fashion<br>Statements With<br><span class="out">Confidence</span></h1>
+    <p>Timeless fashion, redefined for today. Discover curated pieces for men, women, kids, and sport — built to move with you.</p>
+    <div class="hero-cta">
+      <a href="#shop" class="btn btn-light">Shop the Collection
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#featured" class="btn btn-ghost">View Lookbook</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll<span class="line"></span></div>
+</header>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-track" id="strip"></div>
+</div>
+
+<!-- FEATURED -->
+<section class="sec wrap" id="featured">
+  <div class="sec-head reveal">
+    <div>
+      <div class="eyebrow">Curated for you</div>
+      <h2>Our <span class="g">Featured</span><br>Collection</h2>
+    </div>
+    <p>A hand-picked edit of this season's standout pieces — premium fabrics, bold cuts, and effortless everyday style.</p>
+  </div>
+  <div class="feat-grid" id="featGrid"></div>
+</section>
+
+<!-- SHOP -->
+<section class="sec shop" id="shop">
+  <div class="wrap">
+    <div class="shop-banner reveal" id="banner">
+      <div class="bn-bg" id="bnBg"></div>
+      <div class="bn-photo" id="bnPhoto"></div>
+      <div class="bn-in">
+        <h3 id="bnTitle">All Products</h3>
+        <p id="bnDesc">Explore the full Lumira range — fashion for every body and every moment.</p>
+      </div>
+    </div>
+
+    <div class="shop-body">
+      <!-- FILTERS -->
+      <aside class="filters reveal">
+        <div class="ftitle">Filters</div>
+
+        <div class="fgroup">
+          <h4>Availability <span style="color:var(--ink-soft)">▴</span></h4>
+          <label class="fopt"><input type="checkbox" id="inStock"><span class="fbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> In Stock (18)</label>
+          <label class="fopt"><input type="checkbox" id="outStock"><span class="fbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Out of Stock (6)</label>
+        </div>
+
+        <div class="fgroup">
+          <h4>Category <span style="color:var(--ink-soft)">▴</span></h4>
+          <div id="catFilters">
+            <label class="fopt" data-cat="men"><input type="checkbox"><span class="fbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Men</label>
+            <label class="fopt" data-cat="women"><input type="checkbox"><span class="fbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Women</label>
+            <label class="fopt" data-cat="kids"><input type="checkbox"><span class="fbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Kids</label>
+            <label class="fopt" data-cat="sports"><input type="checkbox"><span class="fbox"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Sports</label>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <h4>Size <span style="color:var(--ink-soft)">▴</span></h4>
+          <div class="sizes" id="sizes">
+            <div class="size">S</div><div class="size">M</div><div class="size">L</div><div class="size">XL</div>
+            <div class="size">2XL</div><div class="size">3XL</div><div class="size">4XL</div><div class="size">5XL</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- PRODUCTS -->
+      <div class="shop-main">
+        <div class="shop-top">
+          <h3>Shop <span class="count" id="shopCount"></span></h3>
+          <div class="sortby">Sort by: Featured
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="prod-grid" id="prodGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO -->
+<section class="sec wrap">
+  <div class="promo reveal">
+    <div class="promo-bg"></div>
+    <div class="promo-blur"></div>
+    <div class="promo-in">
+      <div>
+        <div class="eyebrow" style="color:rgba(255,255,255,.9)">Limited edition</div>
+        <h2>Welcome to<br>Lumira Threads</h2>
+        <p>Members get early access to limited drops, free shipping over $80, and exclusive styles you won't find anywhere else.</p>
+        <a href="#shop" class="btn btn-light">Become a Member
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="promo-stats">
+        <div class="pstat"><div class="n">92%</div><div class="l">Customers reorder within 60 days</div></div>
+        <div class="pstat"><div class="n">200+</div><div class="l">New styles dropped every season</div></div>
+        <div class="pstat"><div class="n">4.9★</div><div class="l">Average rating from 12k reviews</div></div>
+        <div class="pstat"><div class="n">48h</div><div class="l">Express delivery, worldwide</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section class="sec wrap" id="journal" style="padding-top:0;">
+  <div class="sec-head reveal">
+    <div>
+      <div class="eyebrow">Journal</div>
+      <h2>More <span class="g">Threads</span></h2>
+    </div>
+    <p>Style guides, behind-the-scenes, and the stories woven into every Lumira piece.</p>
+  </div>
+  <div class="blog-grid">
+    <article class="post reveal">
+      <div class="pthumb"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=70" alt="" loading="lazy"></div>
+      <div class="ptag">Style Guide</div>
+      <h4>5 Ways to Style an Oversized Tee This Season</h4>
+      <span class="pread">Read article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+    </article>
+    <article class="post reveal">
+      <div class="pthumb"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&q=70" alt="" loading="lazy"></div>
+      <div class="ptag">Behind the Brand</div>
+      <h4>How We Source Sustainable Fabrics</h4>
+      <span class="pread">Read article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+    </article>
+    <article class="post reveal">
+      <div class="pthumb"><img src="https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=600&q=70" alt="" loading="lazy"></div>
+      <div class="ptag">Lookbook</div>
+      <h4>The Autumn Edit: Warm Tones, Bold Layers</h4>
+      <span class="pread">Read article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+    </article>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="sec wrap" style="padding-top:0;">
+  <div class="news reveal">
+    <div class="nb"></div>
+    <div class="news-in">
+      <h2>Join the Lumira List</h2>
+      <p>Get 10% off your first order, plus early access to new drops.</p>
+      <form class="news-form" onsubmit="return false;">
+        <input type="email" placeholder="Enter your email">
+        <button class="btn btn-light" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo"><svg class="burst" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2 7 5-5-2 7 7-2-5 5 7 2-7 2 5 5-7-2 2 7-2-5-2 5 2-7-7 2 5-5-7-2 7-2-5-5 7 2-2-7 2 5z"/></svg> Lumira</a>
+        <p>Timeless fashion, redefined for today. Crafted for confidence, built to last.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Shop</h5>
+        <ul><li><a href="#shop">Men</a></li><li><a href="#shop">Women</a></li><li><a href="#shop">Kids</a></li><li><a href="#shop">Sports</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul><li><a href="#">About</a></li><li><a href="#journal">Journal</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Support</h5>
+        <ul><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Size Guide</a></li><li><a href="#">FAQ</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2024 Lumira. All rights reserved.</span>
+      <span>Designed &amp; built with care.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg">Added to cart</span></div>
+
+<script>
+  // ─── DATA ───
+  const IMG = {
+    men1:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=70',
+    men2:'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=600&q=70',
+    men3:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&q=70',
+    men4:'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=600&q=70',
+    wom1:'https://images.unsplash.com/photo-1551163943-3f6a855d1153?auto=format&fit=crop&w=600&q=70',
+    wom2:'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=70',
+    wom3:'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=600&q=70',
+    wom4:'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=600&q=70',
+    kid1:'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=600&q=70',
+    kid2:'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=600&q=70',
+    kid3:'https://images.unsplash.com/photo-1503944168849-39f5a59c8e2a?auto=format&fit=crop&w=600&q=70',
+    spo1:'https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=600&q=70',
+    spo2:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=70',
+    spo3:'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=600&q=70'
+  };
+
+  const PRODUCTS = [
+    {n:'Essential Soft Touch Tee', cat:'men', now:15.90, was:20.15, img:IMG.men1, stock:'in', tag:'Men', sale:true},
+    {n:'Boldwave Graphic Oversized Tee', cat:'men', now:15.90, was:20.15, img:IMG.men2, stock:'in', tag:'Men', sale:true},
+    {n:'Modern Core Relaxed Fit Tee', cat:'men', now:25.50, was:30.10, img:IMG.men3, stock:'out', tag:'Men', sale:false},
+    {n:'Limitless Street Crew', cat:'men', now:18.30, was:23.16, img:IMG.men4, stock:'in', tag:'Men', sale:true},
+    {n:'Elegant Flow Midi Dress', cat:'women', now:20.15, was:30.90, img:IMG.wom1, stock:'in', tag:'Women', sale:true},
+    {n:'Classic Grace Linen Blouse', cat:'women', now:20.15, was:25.90, img:IMG.wom2, stock:'in', tag:'Women', sale:true},
+    {n:'Street Muse Oversized Shirt', cat:'women', now:23.16, was:28.30, img:IMG.wom3, stock:'out', tag:'Women', sale:false},
+    {n:'Weekend Glow Lounge Set', cat:'women', now:20.15, was:26.90, img:IMG.wom4, stock:'in', tag:'Women', sale:true},
+    {n:'Little Explorer Graphic Tee', cat:'kids', now:12.15, was:15.90, img:IMG.kid1, stock:'in', tag:'Kids', sale:true},
+    {n:'Sunshine Smile Polo Shirt', cat:'kids', now:13.16, was:18.30, img:IMG.kid2, stock:'in', tag:'Kids', sale:true},
+    {n:'Playtime Adventure Hoodie', cat:'kids', now:15.13, was:21.90, img:IMG.kid3, stock:'out', tag:'Kids', sale:false},
+    {n:'PowerFlex Performance Tee', cat:'sports', now:20.15, was:25.90, img:IMG.spo1, stock:'in', tag:'Sports', sale:true},
+    {n:'AeroMove Running Jacket', cat:'sports', now:23.16, was:28.30, img:IMG.spo2, stock:'in', tag:'Sports', sale:true},
+    {n:'Velocity Dry-Tech Tee', cat:'sports', now:15.13, was:21.90, img:IMG.spo3, stock:'in', tag:'Sports', sale:true}
+  ];
+
+  const BANNERS = {
+    all:    {grad:'linear-gradient(120deg,#ff8a3d,#ff4d6d 55%,#ff2e93)', title:'All Products', desc:'Explore the full Lumira range — fashion for every body and every moment.', photo:'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=75'},
+    men:    {grad:'linear-gradient(120deg,#0e6b86,#18b6c4 60%,#0a3b5c)', title:'Men', desc:"Modern men's fashion for comfort, confidence, and timeless everyday style.", photo:'https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=900&q=75'},
+    women:  {grad:'linear-gradient(120deg,#ff7a18,#ff3d2e 60%,#c2185b)', title:'Women', desc:"Elegant women's wear combining comfort, versatility, and effortless sophistication.", photo:'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=75'},
+    kids:   {grad:'linear-gradient(120deg,#ff9a3d,#ff5d6d 60%,#ff3d8a)', title:'Kids', desc:"Fun, comfy kids' clothing designed for play, joy, and adventure.", photo:'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=900&q=75'},
+    sports: {grad:'linear-gradient(120deg,#0a1a3c,#1e3a8a 55%,#2563eb)', title:'Sports', desc:'Performance sportswear built for comfort, movement, and active modern living.', photo:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=75'}
+  };
+
+  // ─── RENDER HELPERS ───
+  function cardHTML(p, i){
+    return `<div class="card reveal" style="transition-delay:${(i%3)*0.06}s">
+      <div class="thumb">
+        <span class="tag">${p.tag}</span>
+        ${p.sale ? '<span class="sale">Sale</span>' : ''}
+        <img src="${p.img}" alt="${p.n}" loading="lazy" onerror="this.style.opacity=0">
+        <button class="add" data-name="${p.n}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add to Cart
+        </button>
+      </div>
+      <div class="meta">
+        <div class="name">${p.n}</div>
+        <div class="price"><span class="now">$${p.now.toFixed(2)}</span><span class="was">$${p.was.toFixed(2)}</span></div>
+      </div>
+    </div>`;
+  }
+
+  // featured = first 6
+  document.getElementById('featGrid').innerHTML = PRODUCTS.slice(0,6).map(cardHTML).join('');
+
+  // ─── SHOP FILTERING ───
+  const prodGrid = document.getElementById('prodGrid');
+  const shopCount = document.getElementById('shopCount');
+  let activeCats = new Set();
+  let stockFilter = { in:false, out:false };
+
+  function applyBanner(){
+    const key = activeCats.size === 1 ? [...activeCats][0] : 'all';
+    const b = BANNERS[key];
+    document.getElementById('bnBg').style.background = b.grad;
+    document.getElementById('bnPhoto').style.backgroundImage = `url('${b.photo}')`;
+    document.getElementById('bnTitle').textContent = b.title;
+    document.getElementById('bnDesc').textContent = b.desc;
+  }
+
+  function renderShop(){
+    let list = PRODUCTS.filter(p => {
+      const catOk = activeCats.size === 0 || activeCats.has(p.cat);
+      let stockOk = true;
+      if (stockFilter.in && !stockFilter.out) stockOk = p.stock === 'in';
+      else if (stockFilter.out && !stockFilter.in) stockOk = p.stock === 'out';
+      return catOk && stockOk;
+    });
+    shopCount.textContent = `(${list.length} item${list.length!==1?'s':''})`;
+    prodGrid.innerHTML = list.length
+      ? list.map(cardHTML).join('')
+      : '<div class="empty">No products match these filters. Try clearing a few.</div>';
+    // re-observe new cards + bind add buttons
+    prodGrid.querySelectorAll('.reveal').forEach(el => { io.observe(el); });
+    bindAddButtons(prodGrid);
+    applyBanner();
+  }
+
+  // category filter checkboxes
+  document.querySelectorAll('#catFilters .fopt').forEach(opt => {
+    opt.addEventListener('change', () => {
+      const cat = opt.dataset.cat;
+      const checked = opt.querySelector('input').checked;
+      opt.classList.toggle('active', checked);
+      checked ? activeCats.add(cat) : activeCats.delete(cat);
+      renderShop();
+    });
+  });
+  // stock filters
+  document.getElementById('inStock').addEventListener('change', e => { stockFilter.in = e.target.checked; e.target.closest('.fopt').classList.toggle('active', e.target.checked); renderShop(); });
+  document.getElementById('outStock').addEventListener('change', e => { stockFilter.out = e.target.checked; e.target.closest('.fopt').classList.toggle('active', e.target.checked); renderShop(); });
+  // size toggles
+  document.querySelectorAll('#sizes .size').forEach(s => s.addEventListener('click', () => s.classList.toggle('on')));
+
+  // nav category quick links
+  document.querySelectorAll('.nav-links a[data-cat]').forEach(a => {
+    a.addEventListener('click', () => {
+      const cat = a.dataset.cat;
+      // reset, select one category
+      activeCats = new Set([cat]);
+      document.querySelectorAll('#catFilters .fopt').forEach(opt => {
+        const on = opt.dataset.cat === cat;
+        opt.querySelector('input').checked = on;
+        opt.classList.toggle('active', on);
+      });
+      renderShop();
+    });
+  });
+
+  // ─── CART ───
+  let cart = 0;
+  const cartCount = document.getElementById('cartCount');
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toastMsg');
+  let toastTimer;
+  function bindAddButtons(scope){
+    scope.querySelectorAll('.add').forEach(btn => {
+      if (btn.dataset.bound) return; btn.dataset.bound = '1';
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        cart++; cartCount.textContent = cart;
+        btn.classList.add('added');
+        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Added';
+        setTimeout(() => {
+          btn.classList.remove('added');
+          btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add to Cart';
+        }, 1200);
+        toastMsg.textContent = `${btn.dataset.name} added to cart`;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+      });
+    });
+  }
+  bindAddButtons(document.getElementById('featGrid'));
+
+  // ─── MARQUEE STRIP ───
+  const labels = ['Free Shipping Over $80','New Drops Weekly','Sustainable Fabrics','Easy 30-Day Returns','Worldwide Delivery','Members Get 10% Off'];
+  const strip = document.getElementById('strip');
+  const set = labels.map(l => `<span class="strip-item"><span class="d"></span>${l}</span>`).join('');
+  strip.innerHTML = set + set;
+
+  // ─── NAV SOLID ON SCROLL ───
+  const nav = document.getElementById('nav');
+  const heroH = () => document.querySelector('.hero').offsetHeight - 80;
+  window.addEventListener('scroll', () => nav.classList.toggle('solid', window.scrollY > heroH()));
+
+  // ─── SCROLL REVEAL ───
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // initial shop render
+  renderShop();
+</script>
+</body>
+</html>
