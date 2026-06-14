@@ -159,6 +159,110 @@
 6. I deliver the code/deliverables in the job folder
 7. You submit/verify with the client; I handle any tech questions
 
+---
+
+## Job Screening Workflow (Framer → GoFullPage → Code)
+
+**How you can use design platforms safely:**
+
+1. **Framer design** (you do this)
+   - You design in Framer (or use Framer template)
+   - You do the UX/design work (user research, wireframes, prototypes)
+
+2. **GoFullPage screenshot** (you do this)
+   - Screenshot the Framer design
+   - Export as image/PDF
+
+3. **I code it** (I do this)
+   - I build HTML/CSS/JavaScript from your screenshots
+   - You don't use Framer directly; you just see the output
+
+**This works because:** You do the design work, I do the code work. No platform restrictions violated.
+
+---
+
+## Jobs to TARGET (Portfolio-Building Phase)
+
+✅ **APPLY to these:**
+- "Build a React landing page" ($50-200, 2-5 days)
+- "Fix this bug in my React app" ($30-75, 1-2 days)
+- "Create a contact form with validation" ($40-100, 1-2 days)
+- "Build a Node.js REST API endpoint" ($75-150, 2-3 days)
+- "Polish existing website" (clear scope, 1-2 weeks, $100-300)
+- "Convert this design to HTML/CSS" ($75-250, 3-5 days)
+- "Android UI fix" ($30-75, 1-2 days)
+- "Build a simple React app" ($100-300, 5-7 days)
+
+---
+
+## Jobs to SKIP (Even if price is high)
+
+❌ **SKIP these (regardless of budget):**
+- "Must be built in Webflow" / "Must use FlutterFlow" / "Must use Leadpages" (platform blocker)
+- "Figma design required" / "Adobe Illustrator expertise" (design tools blocked)
+- "Full website redesign" without scope details (vague = scope creep)
+- "Ongoing project" with undefined duration (lock-in risk)
+- "Build me an app" with no details (too vague)
+- "UI/UX Designer needed" without your having design portfolio (design work, not coding)
+- "Show examples of [platform] work you've done" when you don't have them (instant rejection)
+
+---
+
+## Red Flags to Watch For
+
+🚨 **MAJOR (Skip immediately):**
+- Budget is extremely low ($50 for "full website") + scope is large
+- "Must have published apps" or "Must have [platform] experience" when you don't
+- Vague scope + "ongoing" = unclear commitment
+- "Visual platform required" (Webflow, FlutterFlow, Framer itself as builder, etc.)
+- Design work required ("Create wireframes," "Design UI," "Show design portfolio")
+
+⚠️ **MEDIUM (Proceed with caution):**
+- Budget seems low but scope is clear (negotiate or skip)
+- 10+ proposals already (high competition, low win rate)
+- "Ongoing project" without defined duration (ask client for specifics)
+- Client inactive (last viewed "2 weeks ago" = slow responder)
+- Platform recommendation required ("What platform would you use?")
+
+---
+
+## Screening Decision Tree
+
+**For every job, ask:**
+
+1. **Can I do this work?** (Code-based? No design tools? No iOS testing?)
+   - NO → Skip
+   - YES → Continue
+
+2. **Is scope clear?** (Can I define exactly what "done" looks like?)
+   - NO (vague scope) → Skip
+   - YES → Continue
+
+3. **Will I likely get a 5-star review?** (Straightforward work? Happy client likely?)
+   - NO (high complexity, risky, low trust) → Skip
+   - YES → Apply
+
+4. **Is budget realistic for the work?** (Even if low, not poverty wages?)
+   - NO (under $20-30 for major scope) → Skip
+   - YES → Apply
+
+---
+
+## When to Apply (Even at Low Prices)
+
+✅ **Apply if:**
+- Clear, specific scope ("5-page website, contact form, responsive")
+- You're confident you can deliver ("polish existing code" not "redesign from scratch")
+- Fast timeline (1-2 weeks max = quick 5-star wins)
+- 5-star probability is high (straightforward deliverable)
+- Client is active (viewed recently, responsive)
+
+❌ **Don't apply if:**
+- Scope is vague ("full website", "make it better", "improve it")
+- Duration is unclear ("ongoing", no end date)
+- Work requires expertise you don't have (design, marketing, iOS testing)
+- Client has red flags (inactive, 50+ proposals, platform-specific requirements)
+
 ### Cleanup after a job is delivered
 Once a job is finished and the milestone is paid, clean up disk space but keep what the client might still ask for.
 
