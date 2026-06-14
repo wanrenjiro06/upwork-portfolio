@@ -380,8 +380,19 @@ Context is expensive. Only read old messages if the user explicitly asks you to 
 **Portfolio Setup:**
 - Keep 3 separate portfolio items (NOT combined) — better visibility, appears in more searches
 - Format: Title → My role → Description (with ✅ checkmarks) → Skills & deliverables → Live link
-- Skills tagging: Use "Animation" (not "Animation Design"), "Landing Page Design", "Website Design", "UI/UX Design", "HTML5", "CSS3", "JavaScript", "Responsive Design"
-- Each portfolio item shows different skill type (SaaS, agency, e-commerce) to demonstrate breadth
+
+**Portfolio Item Skills (Final):**
+
+1. **Quillo (SaaS Landing Page):**
+   - Landing Page Design, Web Design, UI/UX Design, HTML5, CSS3, JavaScript, Animation, Responsive Design
+
+2. **Meridian (Creative Agency Portfolio):**
+   - Web Design, UI/UX Design, HTML5, CSS3, JavaScript, Animation, Responsive Design, Portfolio Design (or closest match)
+
+3. **Lumira (E-commerce Store):**
+   - Ecommerce Website Development, HTML5, CSS3, JavaScript, Responsive Design, UI/UX Design
+
+Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose closest match.
 
 **First Application:**
 - Applied to Netlify/Node.js developer job ($100, 2-3 hours, posted 6 min ago, <5 proposals)
