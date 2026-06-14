@@ -366,7 +366,7 @@ Context is expensive. Only read old messages if the user explicitly asks you to 
 
 ---
 
-## Current Job Status (as of 2026-06-11)
+## Current Job Status (as of 2026-06-14)
 
 ### Active Proposals
 1. **React Native Live-Streaming & Short-Video App**
@@ -388,9 +388,20 @@ Context is expensive. Only read old messages if the user explicitly asks you to 
    - Payment: 2 milestones - $300 upfront (June 12), $1,500 on delivery (June 19)
    - Next: Wait for client counter-offer or acceptance
 
+3. **[$250] Web - Notifications - App doesn't display notification on Edge Browser** (Expensify)
+   - Client: Expensify (real company, OSS contributor work)
+   - Budget: $250 fixed-price
+   - Status: 🟡 Proposal in progress (ready to post on GitHub issue #93455)
+   - Scope: Fix notification display on Microsoft Edge by wiring `silent` parameter to Notification constructor (1-line fix)
+   - Files: `src/libs/Notification/LocalNotification/BrowserNotifications.ts` line ~62
+   - Root cause: `silent: true` hardcoded; Edge suppresses visual toast when silent flag is set, Chrome/Brave/Firefox still show banner
+   - Fix: Change `silent: true` → `silent` to pass the parameter through (already exists in push() signature)
+   - Timeline: PR ready within 24 hours
+   - Next: Post proposal on GitHub issue, apply on Upwork (6 connects)
+
 ### Connect Status
-- Current: 1 connect left (after Refer & Earn proposal)
-- Strategy: Buy more connects ($10 for 10) if no positive responses in 3 days from either proposal
+- Current: 8 connects left (after Expensify proposal, was 1 after Refer & Earn)
+- Strategy: Applied for Expensify bug fix (6 connects); buying more connects for portfolio jobs
 
 ### Portfolio Websites (Web Design Showcase)
 **3 live design portfolio pieces deployed to Netlify:**
