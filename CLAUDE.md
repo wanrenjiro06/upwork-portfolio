@@ -366,6 +366,35 @@ Context is expensive. Only read old messages if the user explicitly asks you to 
 
 ---
 
+## Upwork Profile Setup (Completed 2026-06-14)
+
+**Profile Structure & Learnings:**
+- **Headline:** "Landing Page & E-commerce Builder | React | Node.js | Payment Integration" (specific WHAT you build, then HOW)
+- **About Me:** 350-400 words max (NOT 700+). People skim, don't read full long profiles. Keep it punchy.
+- **Content flow:** Opening → What I do → Proof (portfolio) → Reliability promise (response time, delivery) → Call to action
+- **Response time:** 12 hours (not 24, more competitive)
+- **Delivery promises:** Website builds (2–5 days) | Bug fixes (same-day to 2 days) | Payment integration (2–4 days) | Mobile apps (1–2 weeks)
+- **Revisions:** Two rounds included, major scope changes billed separately
+- **Communication:** Daily status updates (no ghosting)
+
+**Portfolio Setup:**
+- Keep 3 separate portfolio items (NOT combined) — better visibility, appears in more searches
+- Format: Title → My role → Description (with ✅ checkmarks) → Skills & deliverables → Live link
+- Skills tagging: Use "Animation" (not "Animation Design"), "Landing Page Design", "Website Design", "UI/UX Design", "HTML5", "CSS3", "JavaScript", "Responsive Design"
+- Each portfolio item shows different skill type (SaaS, agency, e-commerce) to demonstrate breadth
+
+**First Application:**
+- Applied to Netlify/Node.js developer job ($100, 2-3 hours, posted 6 min ago, <5 proposals)
+- Proposal: "I can have this done in 2 hours. I've deployed 50+ Node.js projects to Netlify. Install 2 files, verify build, test endpoints, deploy. Live in 2 hours, test link before payment. Starting now."
+
+**Key Wins:**
+- Profile live and searchable
+- 3 portfolio items added
+- First job applied
+- Ready to apply to 2-3 more jobs in next 24 hours
+
+---
+
 ## Current Job Status (as of 2026-06-14)
 
 ### Active Proposals
