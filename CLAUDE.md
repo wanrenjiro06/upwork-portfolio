@@ -216,6 +216,10 @@
 - Vague scope + "ongoing" = unclear commitment
 - "Visual platform required" (Webflow, FlutterFlow, Framer itself as builder, etc.)
 - Design work required ("Create wireframes," "Design UI," "Show design portfolio")
+- **Payment method NOT verified** — always check, skip if unverified (risk of non-payment)
+- **$X total spent ÷ hires = avg < $15/hire** — client pays nothing, not worth time
+- **"Show your best [X] you made in past"** when you have no [X] portfolio — instant skip
+- **Client joined < 7 days ago + 0% hire rate** — high ghost risk (check payment verified first)
 
 ⚠️ **MEDIUM (Proceed with caution):**
 - Budget seems low but scope is clear (negotiate or skip)
@@ -333,6 +337,9 @@ When a client looks at their dashboard, they only see the first two sentences of
 - "I can fix the Stock badge overflow in your Android layout by adding a minWidth constraint to the TextView."
 
 The first two sentences must prove you understand the problem and can solve it — before they even click to read more.
+
+### Watch for Hidden Filter Words
+Some clients hide a required word/phrase in the job description to filter out copy-paste proposals. Common signals: "Start your proposal with the word X", "Include the phrase Y in your bid", "Comment BEST_PAYWALL". Always scan the full job description for these before writing the proposal — missing it = instant discard.
 
 ### Don't Give Away the Solution
 Show that you know the answer — but don't explain it in detail. If you spell out the exact fix, the client can just do it themselves and won't need to hire you.
@@ -581,11 +588,35 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
 - Budget 1–2 weeks for review cycles
 
 ### Next Steps When New Session Starts
-1. Check if React Native client has responded (should check Upwork messages)
-2. If yes → Start development (use Sonnet as main model, Opus for hard problems)
-3. If no after 3 days → Buy connects, apply to other quality jobs
-4. Focus on 40 hrs/week, daily commits, weekly Monday progress reports
-5. Build reputation through this contract (22+ weeks of visible, steady work)
+1. Check Upwork messages — waiting on responses to 2 proposals (React/Next.js $30 fix + Booking Platform $2,500)
+2. Buy 100 connects ($15) before applying to anything new — currently at 0
+3. If React Native $44K client responded → start development (Sonnet main, Opus for hard problems)
+4. Next portfolio piece to build: Restaurant/Food ordering page (need Framer inspo screenshot first)
+5. Deploy Estate + Pulse to Netlify → add both to Upwork portfolio
+6. Keep applying: target 2-3 more proposals per week, clear-scope jobs only
+
+### Active Proposals (as of 2026-06-15)
+1. **React.js / Next.js Small Fix** — $30 fixed, 1-2 hours
+   - Client: US, 5.0 stars/190 reviews, 91% hire rate, payment verified
+   - Folder: `C:\UpWork\React-NextJS-Small-Fix\PROPOSAL.md`
+   - Status: Submitted, waiting
+
+2. **Full-Stack React + Node.js — Booking Platform** — $2,500 fixed
+   - Client: Australia, new account (Jun 4, 2026), payment verified
+   - Scope: Fix silent Stripe webhook drop + clean up repo + add email/SMS/AI integrations
+   - Cover letter starts with "deploy" (their filter word — critical)
+   - Folder: `C:\UpWork\FullStack-ReactNode-Booking\PROPOSAL.md`
+   - Status: Submitted, waiting
+   - Long-term: rebuild booking flow next quarter after first task
+
+### Jobs Screened & Rejected (2026-06-15)
+- **Mobile App for Play** ($15-30/hr) → SKIP: payment not verified, brand-new client, vague scope
+- **High Converting Paywall** ($75) → SKIP: design work (UI/UX portfolio required, we have none)
+- **AI Full-Stack MERN Bug Fixes** ($15 fixed) → SKIP: $9.71 avg spend per hire, vague scope, poverty wages
+
+### Connects
+- 100 connects = $15 (Freelancer Plus) — buy before applying to anything
+- React/Next.js job = 11 connects · Booking Platform = 15 connects
 
 ---
 
@@ -704,6 +735,14 @@ C:\UpWork\Websites Portfolio\
 │   ANIM: count-ups (IntersectionObserver), chart draw, donut sweep,
 │   bar fills, drifting bg mesh (translate-only for perf), live clock,
 │   shimmer on upgrade card, hover lifts. prefers-reduced-motion honored.
+│   NAVIGATION (added 2026-06-15, commit 16e08fc): All 10 sidebar nav
+│   items now switch pages with smooth fade animation. Each page has
+│   full unique content. Topbar title + breadcrumb update on switch.
+│   Pages: Dashboard | Analytics | Revenue | Customers | Reports |
+│   Funnels | Integrations | Activity | Settings | Help & Docs.
+│   Interactive: customer search+filter chips, activity type filter,
+│   settings save toast, analytics chart + heatmap lazy-draw on first
+│   visit, download/connect button toasts. No console errors.
 │
 └── [Future pieces: Restaurant/Food ordering, Blog/CMS, etc.]
 ```
