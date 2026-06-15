@@ -30,6 +30,12 @@
       "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
       "runtimeArgs": ["-m", "http.server", "3004", "--directory", "C:\\UpWork\\Websites Portfolio\\SalesFunnel"],
       "port": 3004
+    },
+    {
+      "name": "real-estate",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3005", "--directory", "C:\\UpWork\\Websites Portfolio\\RealEstate"],
+      "port": 3005
     }
   ]
 }

@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nexvolt — Every signal becomes action, automatically</title>
+<meta name="description" content="Nexvolt is the analytics automation platform that turns every signal into action — automatically. Detect, decide, and trigger workflows in real time across your entire stack." />
+<meta name="theme-color" content="#08070F" />
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Nexvolt — Every signal becomes action, automatically" />
+<meta property="og:description" content="The analytics automation platform that turns every signal into action — automatically. Detect, decide, trigger — in real time." />
+<meta property="og:site_name" content="Nexvolt" />
+<meta property="og:url" content="https://nexvolt.app/" />
+<meta property="og:image" content="https://nexvolt.app/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Nexvolt — Every signal becomes action, automatically" />
+<meta name="twitter:description" content="The analytics automation platform that turns every signal into action — automatically." />
+
+<!-- Google Fonts: Sora (headings) + Inter (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   NEXVOLT — Flagship SaaS landing page
+   Theme is fully driven by CSS variables derived from brand.
+   ============================================================ */
+
+:root {
+  /* Brand gradient stops */
+  --grad-1: #7C3AED;   /* violet */
+  --grad-2: #4F46E5;   /* indigo */
+  --grad-3: #2563EB;   /* royal blue */
+  --grad-4: #22D3EE;   /* electric cyan */
+
+  /* Core brand */
+  --accent: #A78BFA;          /* luminous violet accent */
+  --accent-soft: #C4B5FD;
+  --bg: #08070F;              /* deep near-black base */
+  --bg-elev: #0E0C18;         /* elevated surface */
+  --bg-card: #110F1E;         /* card surface */
+  --bg-card-2: #15122596;     /* translucent card */
+
+  /* Text */
+  --text: #F4F2FF;
+  --text-muted: #B7B3CC;
+  --text-dim: #837EA0;
+
+  /* Lines & borders */
+  --hairline: rgba(167, 139, 250, 0.14);
+  --hairline-strong: rgba(167, 139, 250, 0.28);
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+  /* Reusable brand gradient */
+  --brand-gradient: linear-gradient(120deg, var(--grad-1), var(--grad-2), var(--grad-3), var(--grad-4));
+  --brand-gradient-soft: linear-gradient(120deg, rgba(124,58,237,0.18), rgba(37,99,235,0.14), rgba(34,211,238,0.16));
+
+  /* Fonts */
+  --font-heading: 'Sora', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4.5rem;
+  --space-7: 7rem;
+
+  /* Radii */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-soft: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 40px -8px rgba(124, 58, 237, 0.55);
+
+  /* Layout */
+  --maxw: 1180px;
+  --nav-h: 72px;
+}
+
+/* ---------- Reset & base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+/* Background ambient grid + vignette */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(79, 70, 229, 0.20), transparent 55%),
+    radial-gradient(circle at 90% 10%, rgba(34, 211, 238, 0.10), transparent 45%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+section { position: relative; z-index: 1; }
+
+/* Focus visibility for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Skip-to-content link — visually hidden until focused (WCAG 2.4.1 Bypass Blocks) */
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 200;
+}
+.skip-link:focus {
+  left: 16px; top: 12px;
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-sm);
+  color: var(--text); font-weight: 600; font-size: 0.9rem;
+}
+
+/* Utility: gradient text */
+.gradient-text {
+  background: var(--brand-gradient);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: textShift 12s ease infinite;
+}
+@keyframes textShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-weight: 600; font-size: 0.95rem;
+  padding: 13px 26px; border-radius: var(--r-pill);
+  transition: transform 0.18s ease-out, box-shadow 0.25s ease-out, background 0.25s ease;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--brand-gradient);
+  background-size: 180% 180%;
+  color: #fff;
+  box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.7);
+  animation: btnGrad 8s ease infinite;
+}
+@keyframes btnGrad { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -8px rgba(124, 58, 237, 0.85); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--hairline-strong);
+  color: var(--text);
+  backdrop-filter: blur(6px);
+}
+.btn-ghost:hover { transform: translateY(-2px); border-color: var(--accent); background: rgba(167,139,250,0.08); }
+
+.btn-lg { padding: 16px 34px; font-size: 1.02rem; }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  background: rgba(8, 7, 15, 0.62);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid var(--hairline);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.navbar.scrolled { background: rgba(8, 7, 15, 0.86); border-bottom-color: var(--hairline-strong); }
+
+.nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+/* Logo wordmark */
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 800; font-size: 1.45rem; letter-spacing: -0.03em;
+  display: flex; align-items: center; gap: 9px;
+}
+.logo .mark {
+  width: 30px; height: 30px; border-radius: 9px;
+  background: var(--brand-gradient);
+  background-size: 200% 200%;
+  animation: btnGrad 8s ease infinite;
+  display: grid; place-items: center;
+  box-shadow: 0 4px 16px -4px rgba(124,58,237,0.8);
+}
+.logo .mark svg { width: 17px; height: 17px; }
+.logo .word { background: var(--brand-gradient); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: textShift 10s ease infinite; }
+
+/* Nav links */
+.nav-links { display: flex; align-items: center; gap: 34px; }
+.nav-links a {
+  position: relative; font-size: 0.94rem; font-weight: 500; color: var(--text-muted);
+  transition: color 0.2s ease; padding: 6px 0;
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; height: 2px; width: 0;
+  background: var(--brand-gradient);
+  transition: width 0.25s ease-out; border-radius: 2px;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+
+/* Hamburger */
+.hamburger {
+  display: none; width: 44px; height: 44px; border-radius: 12px;
+  border: 1px solid var(--hairline-strong); background: rgba(255,255,255,0.03);
+  align-items: center; justify-content: center;
+}
+.hamburger span { display: block; width: 20px; height: 2px; background: var(--text); border-radius: 2px; position: relative; transition: transform 0.25s ease, opacity 0.2s ease; }
+.hamburger span::before, .hamburger span::after { content: ""; position: absolute; left: 0; width: 20px; height: 2px; background: var(--text); border-radius: 2px; transition: transform 0.25s ease, top 0.25s ease; }
+.hamburger span::before { top: -6px; }
+.hamburger span::after { top: 6px; }
+.hamburger[aria-expanded="true"] span { background: transparent; }
+.hamburger[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+.hamburger[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+
+/* Mobile slide-down menu */
+.mobile-menu {
+  position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;
+  background: rgba(10, 9, 20, 0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--hairline-strong);
+  padding: 18px 24px 28px;
+  display: flex; flex-direction: column; gap: 6px;
+  transform: translateY(-12px); opacity: 0; pointer-events: none; visibility: hidden;
+  transition: transform 0.28s ease, opacity 0.28s ease, visibility 0.28s ease;
+}
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; visibility: visible; }
+.mobile-menu a { font-size: 1.05rem; font-weight: 500; padding: 12px 8px; border-radius: 10px; color: var(--text-muted); }
+.mobile-menu a:hover { background: rgba(167,139,250,0.08); color: var(--text); }
+.mobile-menu .btn { margin-top: 12px; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero { position: relative; padding: var(--space-7) 0 var(--space-6); overflow: hidden; }
+
+/* Animated multi-stop gradient backdrop */
+.hero-bg {
+  position: absolute; inset: -20% -10%; z-index: 0;
+  background: linear-gradient(125deg, var(--grad-1), var(--grad-2), var(--grad-3), var(--grad-4), var(--grad-1));
+  background-size: 280% 280%;
+  opacity: 0.16;
+  filter: blur(8px);
+  animation: heroShift 12s ease-in-out infinite;
+}
+@keyframes heroShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Drifting radial glow blobs */
+.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.55; z-index: 0; pointer-events: none; }
+.blob-1 { width: 480px; height: 480px; background: radial-gradient(circle, rgba(124,58,237,0.7), transparent 70%); top: -120px; left: -80px; animation: drift1 20s ease-in-out infinite; }
+.blob-2 { width: 420px; height: 420px; background: radial-gradient(circle, rgba(34,211,238,0.45), transparent 70%); top: 40px; right: -100px; animation: drift2 24s ease-in-out infinite; }
+.blob-3 { width: 360px; height: 360px; background: radial-gradient(circle, rgba(37,99,235,0.5), transparent 70%); bottom: -140px; left: 35%; animation: drift3 28s ease-in-out infinite; }
+@keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,40px)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-50px,30px)} }
+@keyframes drift3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-30px)} }
+
+.hero-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--accent-soft);
+  background: rgba(167,139,250,0.10);
+  border: 1px solid var(--hairline-strong);
+  padding: 7px 16px; border-radius: var(--r-pill);
+  margin-bottom: 24px;
+}
+.hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--grad-4); box-shadow: 0 0 10px var(--grad-4); animation: pulse 2.4s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:0.5; transform:scale(0.7)} }
+
+.hero h1 { font-size: clamp(2.6rem, 5.4vw, 4.1rem); font-weight: 800; letter-spacing: -0.035em; margin-bottom: 22px; }
+.hero h1 .line { display: block; }
+
+.hero-sub { font-size: 1.16rem; color: var(--text-muted); max-width: 520px; margin-bottom: 34px; }
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.hero-trust { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 32px; color: var(--text-dim); font-size: 0.86rem; }
+.hero-trust .stars { color: var(--accent); letter-spacing: 2px; }
+.hero-trust .divider { width: 1px; height: 18px; background: var(--hairline-strong); }
+
+/* ---------- Dashboard mockup ---------- */
+/* The float (translateY) lives on .mockup-wrap; the JS cursor-tilt (rotate)
+   lives on .mockup. Keeping them on separate elements stops the running
+   keyframe from clobbering the inline rotate transform every frame. */
+.mockup-wrap { perspective: 1200px; position: relative; z-index: 2; animation: floaty 7s ease-in-out infinite; }
+.mockup {
+  background: linear-gradient(160deg, rgba(21,18,37,0.9), rgba(14,12,24,0.95));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-soft), 0 0 0 1px rgba(167,139,250,0.06) inset;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+@keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+.mockup-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.mockup-dots { display: flex; gap: 7px; }
+.mockup-dots span { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,0.14); }
+.mockup-dots span:first-child { background: rgba(124,58,237,0.7); }
+.mockup-title { font-size: 0.78rem; color: var(--text-dim); font-weight: 500; }
+.mockup-badge { font-size: 0.7rem; font-weight: 600; color: var(--grad-4); background: rgba(34,211,238,0.1); padding: 4px 10px; border-radius: var(--r-pill); border: 1px solid rgba(34,211,238,0.25); }
+
+/* Stat tiles */
+.stat-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.stat-tile { background: rgba(255,255,255,0.03); border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 12px; }
+.stat-tile .label { font-size: 0.66rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.stat-tile .value { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; }
+.stat-tile .trend { font-size: 0.68rem; font-weight: 600; margin-top: 2px; }
+.stat-tile .trend.up { color: #4ade80; }
+.stat-tile .trend.cyan { color: var(--grad-4); }
+
+/* Bar chart */
+.chart-card { background: rgba(255,255,255,0.02); border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 14px 16px 12px; margin-bottom: 14px; }
+.chart-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.chart-head .t { font-size: 0.8rem; font-weight: 600; }
+.chart-head .s { font-size: 0.68rem; color: var(--text-dim); }
+.bars { display: flex; align-items: flex-end; gap: 9px; height: 96px; }
+.bar { flex: 1; border-radius: 6px 6px 2px 2px; background: var(--brand-gradient); background-size: 100% 200%; height: 0; transition: height 1s cubic-bezier(0.22, 1, 0.36, 1); position: relative; opacity: 0.92; }
+.bars.in-view .bar { height: var(--h); }
+
+/* Notification mini cards */
+.notif { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 10px 12px; margin-top: 8px; }
+.notif .ic { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; flex-shrink: 0; background: var(--brand-gradient-soft); border: 1px solid var(--hairline-strong); }
+.notif .ic svg { width: 15px; height: 15px; color: var(--accent-soft); }
+.notif .tx { flex: 1; min-width: 0; }
+.notif .tx .a { font-size: 0.76rem; font-weight: 600; }
+.notif .tx .b { font-size: 0.68rem; color: var(--text-dim); }
+.notif .time { font-size: 0.64rem; color: var(--text-dim); white-space: nowrap; }
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.section { padding: var(--space-7) 0; }
+.section-head { text-align: center; max-width: 660px; margin: 0 auto var(--space-5); }
+.eyebrow {
+  display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 14px;
+}
+.section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); font-weight: 700; margin-bottom: 16px; }
+.section-head p { color: var(--text-muted); font-size: 1.08rem; }
+
+/* ============================================================
+   MARQUEE (trusted by)
+   ============================================================ */
+.marquee-section { padding: var(--space-5) 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+.marquee-label { text-align: center; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 28px; }
+.marquee { position: relative; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.marquee-track { display: flex; gap: 64px; width: max-content; animation: scroll 28s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.logo-item {
+  font-family: var(--font-heading); font-weight: 700; font-size: 1.4rem; letter-spacing: -0.02em;
+  color: var(--text-dim); opacity: 0.6; filter: grayscale(1);
+  display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  transition: opacity 0.25s ease, color 0.25s ease;
+}
+.logo-item:hover { opacity: 1; color: var(--text); }
+.logo-item svg { width: 22px; height: 22px; }
+/* Branded badge mark: rounded square with the company initial, so resting
+   state reads as a designed logomark rather than a placeholder primitive. */
+.logo-item .logo-mark {
+  width: 28px; height: 28px; border-radius: 8px;
+  display: grid; place-items: center; flex-shrink: 0;
+  font-family: var(--font-heading); font-weight: 800; font-size: 0.92rem;
+  letter-spacing: 0; color: var(--text);
+  background: rgba(167,139,250,0.12);
+  border: 1px solid var(--hairline-strong);
+}
+.logo-item:hover .logo-mark {
+  background: var(--brand-gradient); background-size: 160% 160%;
+  border-color: transparent; color: #fff;
+}
+
+/* ============================================================
+   FEATURES
+   ============================================================ */
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.feature-card {
+  position: relative; background: var(--bg-card);
+  border: 1px solid var(--hairline); border-radius: var(--r-md);
+  padding: 30px 26px; overflow: hidden;
+  transition: transform 0.25s ease-out, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+.feature-card::before {
+  content: ""; position: absolute; inset: 0; border-radius: var(--r-md); padding: 1px;
+  background: var(--brand-gradient);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-soft), var(--shadow-glow); }
+.feature-card:hover::before { opacity: 1; }
+.feature-icon {
+  width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 20px;
+  background: var(--brand-gradient-soft); border: 1px solid var(--hairline-strong);
+}
+.feature-icon svg { width: 26px; height: 26px; color: var(--accent-soft); }
+.feature-card h3 { font-size: 1.22rem; font-weight: 700; margin-bottom: 10px; }
+.feature-card p { color: var(--text-muted); font-size: 0.96rem; }
+
+/* ============================================================
+   STATS BAND
+   ============================================================ */
+.stats-band { background: var(--brand-gradient-soft); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); padding: var(--space-6) 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; text-align: center; }
+.stat-block .num { font-family: var(--font-heading); font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em; }
+.stat-block .num .gradient-text { display: inline-block; }
+/* On the tinted stats band, render numbers as crisp high-contrast near-white
+   text instead of gradient-clipped — gradient text on a same-hue gradient band
+   loses contrast and reads muddy. */
+.stats-band .stat-block .num .gradient-text {
+  -webkit-text-fill-color: var(--text);
+  color: var(--text);
+  background: none;
+  animation: none;
+}
+.stat-block .lbl { color: var(--text-muted); font-size: 1.02rem; margin-top: 6px; }
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; position: relative; }
+.steps::before {
+  content: ""; position: absolute; top: 38px; left: 12%; right: 12%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--hairline-strong), var(--accent), var(--hairline-strong), transparent);
+  z-index: 0;
+}
+.step { position: relative; z-index: 1; text-align: center; }
+.step-num {
+  width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 22px;
+  display: grid; place-items: center;
+  background: var(--bg-card); border: 1px solid var(--hairline-strong);
+  position: relative;
+}
+.step-num::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; background: var(--brand-gradient); opacity: 0.18; filter: blur(10px); z-index: -1; }
+.step-num .n { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; }
+.step-icon { width: 30px; height: 30px; position: absolute; bottom: -4px; right: -4px; border-radius: 9px; background: var(--brand-gradient); display: grid; place-items: center; box-shadow: 0 4px 12px -4px rgba(124,58,237,0.7); }
+.step-icon svg { width: 15px; height: 15px; color: #fff; }
+.step h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+.step p { color: var(--text-muted); font-size: 0.96rem; max-width: 280px; margin: 0 auto; }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.testi-card {
+  background: var(--bg-card); border: 1px solid var(--hairline); border-radius: var(--r-md);
+  padding: 28px 26px; transition: transform 0.25s ease-out, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+.testi-card:hover { transform: translateY(-5px); border-color: var(--hairline-strong); box-shadow: var(--shadow-soft); }
+.testi-stars { color: var(--accent); letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 14px; }
+.testi-quote { font-size: 1rem; color: var(--text); line-height: 1.7; margin-bottom: 22px; }
+.testi-person { display: flex; align-items: center; gap: 13px; }
+.avatar {
+  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  display: grid; place-items: center; font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; color: #fff;
+  background: var(--brand-gradient); background-size: 160% 160%;
+  box-shadow: 0 4px 14px -4px rgba(124,58,237,0.6);
+}
+.testi-person .name { font-weight: 600; font-size: 0.95rem; }
+.testi-person .role { font-size: 0.82rem; color: var(--text-dim); }
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-toggle { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 46px; }
+.pricing-toggle span { font-size: 0.95rem; font-weight: 500; color: var(--text-dim); transition: color 0.2s; }
+.pricing-toggle span.active { color: var(--text); }
+.toggle-switch { position: relative; width: 56px; height: 30px; border-radius: var(--r-pill); background: rgba(255,255,255,0.08); border: 1px solid var(--hairline-strong); transition: background 0.25s; }
+.toggle-switch[aria-checked="true"] { background: var(--brand-gradient); }
+.toggle-knob { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform 0.25s cubic-bezier(0.22,1,0.36,1); }
+.toggle-switch[aria-checked="true"] .toggle-knob { transform: translateX(26px); }
+.save-badge { font-size: 0.74rem; font-weight: 600; color: var(--grad-4); background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.3); padding: 3px 10px; border-radius: var(--r-pill); }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.price-card {
+  position: relative; background: var(--bg-card); border: 1px solid var(--hairline); border-radius: var(--r-lg);
+  padding: 34px 30px; display: flex; flex-direction: column;
+  transition: transform 0.25s ease-out, border-color 0.25s ease;
+}
+.price-card:hover { transform: translateY(-4px); border-color: var(--hairline-strong); }
+.price-card.popular {
+  border: none; transform: scale(1.04); z-index: 2;
+  box-shadow: var(--shadow-soft), var(--shadow-glow);
+}
+.price-card.popular::before {
+  content: ""; position: absolute; inset: 0; border-radius: var(--r-lg); padding: 1.5px;
+  background: var(--brand-gradient); background-size: 200% 200%; animation: btnGrad 8s ease infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.price-card.popular:hover { transform: scale(1.04) translateY(-4px); }
+.popular-badge {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  background: var(--brand-gradient); color: #fff; font-size: 0.74rem; font-weight: 700;
+  padding: 6px 16px; border-radius: var(--r-pill); letter-spacing: 0.04em;
+  box-shadow: 0 6px 18px -6px rgba(124,58,237,0.8);
+}
+.price-name { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+.price-desc { font-size: 0.86rem; color: var(--text-dim); margin-bottom: 24px; }
+.price-amount { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+.price-amount .currency { font-size: 1.4rem; font-weight: 700; font-family: var(--font-heading); }
+.price-amount .num { font-family: var(--font-heading); font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; transition: opacity 0.3s ease, transform 0.3s ease; }
+.price-amount .period { font-size: 0.9rem; color: var(--text-dim); }
+.price-amount.swap .num { opacity: 0; transform: translateY(-6px); }
+.price-billed { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 26px; min-height: 18px; }
+.price-features { flex: 1; margin-bottom: 28px; }
+.price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.92rem; color: var(--text-muted); padding: 7px 0; }
+.price-features li svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; color: var(--grad-4); }
+.price-card .btn { width: 100%; }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item { border: 1px solid var(--hairline); border-radius: var(--r-md); margin-bottom: 14px; overflow: hidden; background: var(--bg-card); transition: border-color 0.25s ease; }
+.faq-item.open { border-color: var(--hairline-strong); }
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 22px 24px; text-align: left; font-family: var(--font-heading); font-size: 1.06rem; font-weight: 600;
+}
+.faq-q:hover { color: var(--accent-soft); }
+.faq-icon { width: 26px; height: 26px; flex-shrink: 0; position: relative; }
+.faq-icon::before, .faq-icon::after { content: ""; position: absolute; background: var(--accent); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+.faq-icon::before { top: 12px; left: 4px; width: 18px; height: 2px; }
+.faq-icon::after { top: 4px; left: 12px; width: 2px; height: 18px; }
+.faq-item.open .faq-icon::after { transform: rotate(90deg); opacity: 0; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.34s ease; }
+.faq-a-inner { padding: 0 24px 24px; color: var(--text-muted); font-size: 0.98rem; line-height: 1.7; }
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final-cta { padding: var(--space-6) 0; }
+.cta-banner {
+  position: relative; overflow: hidden;
+  border-radius: var(--r-lg); text-align: center;
+  padding: var(--space-6) 36px;
+  border: 1px solid var(--hairline-strong);
+}
+.cta-banner-bg {
+  position: absolute; inset: -30%;
+  background: linear-gradient(125deg, var(--grad-1), var(--grad-2), var(--grad-3), var(--grad-4), var(--grad-1));
+  background-size: 280% 280%; opacity: 0.85;
+  animation: heroShift 12s ease-in-out infinite; z-index: 0;
+}
+.cta-banner::after { content:""; position:absolute; inset:0; background: radial-gradient(circle at 50% 120%, rgba(8,7,15,0.55), transparent 60%); z-index:1; }
+.cta-banner > * { position: relative; z-index: 2; }
+.cta-banner h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: #fff; margin-bottom: 16px; max-width: 680px; margin-inline: auto; text-shadow: 0 2px 30px rgba(0,0,0,0.3); }
+.cta-banner p { color: rgba(255,255,255,0.92); font-size: 1.12rem; margin-bottom: 32px; max-width: 520px; margin-inline: auto; }
+.cta-banner .btn-ghost { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.5); color: #fff; }
+.cta-banner .btn-ghost:hover { background: rgba(255,255,255,0.28); }
+.cta-banner .btn-white { background: #fff; color: var(--grad-2); }
+.cta-banner .btn-white:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -8px rgba(0,0,0,0.5); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer { padding-top: var(--space-6); border-top: 1px solid var(--hairline); position: relative; overflow: hidden; }
+.footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; padding-bottom: var(--space-5); }
+.footer-brand .logo { margin-bottom: 18px; }
+.footer-brand p { color: var(--text-muted); font-size: 0.95rem; max-width: 320px; margin-bottom: 22px; }
+.socials { display: flex; gap: 12px; }
+.socials a { width: 40px; height: 40px; border-radius: 11px; border: 1px solid var(--hairline-strong); display: grid; place-items: center; color: var(--text-muted); transition: all 0.22s ease; }
+.socials a:hover { color: #fff; border-color: var(--accent); transform: translateY(-3px); background: rgba(167,139,250,0.1); }
+.socials a svg { width: 18px; height: 18px; }
+.footer-col h4 { font-family: var(--font-heading); font-size: 0.92rem; font-weight: 700; margin-bottom: 18px; color: var(--text); }
+.footer-col ul li { margin-bottom: 11px; }
+.footer-col ul a { color: var(--text-muted); font-size: 0.92rem; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--accent-soft); }
+
+.footer-watermark {
+  font-family: var(--font-heading); font-weight: 800; letter-spacing: -0.04em;
+  font-size: clamp(4rem, 18vw, 15rem); line-height: 0.85; text-align: center;
+  background: var(--brand-gradient); background-size: 200% 200%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  opacity: 0.13; animation: textShift 14s ease infinite; user-select: none;
+  margin: 10px 0 -2.4vw; pointer-events: none;
+}
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding: 26px 0 36px; border-top: 1px solid var(--hairline); }
+.footer-bottom p { color: var(--text-dim); font-size: 0.85rem; }
+.footer-legal { display: flex; gap: 22px; }
+.footer-legal a { color: var(--text-dim); font-size: 0.85rem; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--text); }
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) {
+  .nav-links, .nav-cta .btn { display: none; }
+  .hamburger { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-sub { max-width: 100%; }
+  .features-grid, .testi-grid, .pricing-grid, .steps { grid-template-columns: 1fr; }
+  .steps::before { display: none; }
+  .price-card.popular { transform: scale(1); }
+  .price-card.popular:hover { transform: translateY(-4px); }
+  .stats-grid { gap: 24px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+/* Intermediate tablet band: keep feature & testimonial cards two-up so small
+   tablets / landscape phones aren't a single tall stack. */
+@media (max-width: 980px) and (min-width: 681px) {
+  .features-grid, .testi-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  :root { --nav-h: 64px; --space-7: 4.5rem; --space-6: 3.2rem; }
+  .container { padding: 0 18px; }
+  .stat-tiles { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .hero h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .cta-banner { padding: var(--space-5) 22px; }
+  .pricing-toggle { flex-wrap: wrap; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+  .bars .bar { height: var(--h) !important; transition: none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#home" class="skip-link">Skip to content</a>
+
+<!-- ===================== NAVBAR ===================== -->
+<header>
+  <nav class="navbar" id="navbar" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="#home" class="logo" aria-label="Nexvolt home">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5H11L10 22L19.5 10H13L13 2Z" fill="#fff"/></svg>
+        </span>
+        <span class="word">Nexvolt</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#pricing" class="btn btn-primary">Start free</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#how">How it Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#pricing" class="btn btn-primary">Start free</a>
+  </div>
+</header>
+
+<main>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="home">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
+    <div class="blob blob-3" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-inner">
+        <!-- Left: copy -->
+        <div class="hero-copy">
+          <span class="hero-eyebrow"><span class="dot" aria-hidden="true"></span> Analytics automation, live</span>
+          <h1>
+            <span class="line">Every signal</span>
+            <span class="line">becomes <span class="gradient-text">action</span></span>
+          </h1>
+          <p class="hero-sub">Nexvolt watches every metric across your stack, decides what matters, and triggers the right workflow the instant it happens — automatically, in real time.</p>
+          <div class="hero-actions">
+            <a href="#pricing" class="btn btn-primary btn-lg">Start free trial</a>
+            <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
+          </div>
+          <div class="hero-trust">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span>4.9 / 5 from 2,300+ teams</span>
+            <span class="divider" aria-hidden="true"></span>
+            <span>No credit card required</span>
+          </div>
+        </div>
+
+        <!-- Right: dashboard mockup -->
+        <div class="mockup-wrap">
+          <div class="mockup" id="mockup" role="img" aria-label="Nexvolt analytics dashboard preview showing live metrics, a signal volume chart, and automated triggers">
+            <div class="mockup-head">
+              <div class="mockup-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="mockup-title">Signal Console</span>
+              <span class="mockup-badge">● Live</span>
+            </div>
+
+            <!-- Stat tiles -->
+            <div class="stat-tiles">
+              <div class="stat-tile">
+                <div class="label">Signals/min</div>
+                <div class="value">18.4K</div>
+                <div class="trend up">▲ 12.6%</div>
+              </div>
+              <div class="stat-tile">
+                <div class="label">Auto-actions</div>
+                <div class="value">3,902</div>
+                <div class="trend up">▲ 8.1%</div>
+              </div>
+              <div class="stat-tile">
+                <div class="label">Latency</div>
+                <div class="value">42ms</div>
+                <div class="trend cyan">▼ 0.4%</div>
+              </div>
+            </div>
+
+            <!-- Bar chart -->
+            <div class="chart-card">
+              <div class="chart-head">
+                <span class="t">Signal volume</span>
+                <span class="s">Last 7 days</span>
+              </div>
+              <div class="bars" id="bars">
+                <div class="bar" style="--h: 52%"></div>
+                <div class="bar" style="--h: 70%"></div>
+                <div class="bar" style="--h: 45%"></div>
+                <div class="bar" style="--h: 86%"></div>
+                <div class="bar" style="--h: 64%"></div>
+                <div class="bar" style="--h: 95%"></div>
+                <div class="bar" style="--h: 74%"></div>
+              </div>
+            </div>
+
+            <!-- Notification mini cards -->
+            <div class="notif">
+              <div class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4.5 13.5H11L10 22L19.5 10H13L13 2Z"/></svg>
+              </div>
+              <div class="tx">
+                <div class="a">Churn risk spike detected</div>
+                <div class="b">Triggered retention playbook · 14 users</div>
+              </div>
+              <span class="time">now</span>
+            </div>
+            <div class="notif">
+              <div class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="tx">
+                <div class="a">Revenue goal reached</div>
+                <div class="b">Slack alert sent to #growth</div>
+              </div>
+              <span class="time">2m</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MARQUEE ===================== -->
+  <section class="marquee-section" aria-label="Trusted by leading teams">
+    <div class="container">
+      <p class="marquee-label">Powering automation for fast-moving teams</p>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track" id="marqueeTrack">
+        <!-- Set duplicated in JS for seamless loop -->
+        <span class="logo-item"><span class="logo-mark" aria-hidden="true">N</span>Nimbus</span>
+        <span class="logo-item"><span class="logo-mark" aria-hidden="true">Q</span>Quantyl</span>
+        <span class="logo-item"><span class="logo-mark" aria-hidden="true">A</span>Apex Labs</span>
+        <span class="logo-item"><span class="logo-mark" aria-hidden="true">S</span>Stellaris</span>
+        <span class="logo-item"><span class="logo-mark" aria-hidden="true">N</span>Northwind</span>
+        <span class="logo-item"><span class="logo-mark" aria-hidden="true">G</span>Gridpoint</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Capabilities</span>
+        <h2>One platform from signal to action</h2>
+        <p>Every tool you need to detect what matters and respond instantly — no scripts to babysit, no dashboards to refresh.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- 1 -->
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+          </div>
+          <h3>Real-time signal capture</h3>
+          <p>Ingest events from your databases, APIs, and product analytics with sub-50ms latency and zero sampling.</p>
+        </article>
+        <!-- 2 -->
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L4.5 13.5H11L10 22L19.5 10H13L13 2Z"/></svg>
+          </div>
+          <h3>Automated triggers</h3>
+          <p>Turn any threshold or anomaly into an action — fire webhooks, alerts, or full workflows the moment it happens.</p>
+        </article>
+        <!-- 3 -->
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.5 2.5M16.5 16.5L19 19M19 5l-2.5 2.5M7.5 16.5L5 19"/></svg>
+          </div>
+          <h3>Anomaly detection</h3>
+          <p>Machine-learned baselines flag the outliers that matter and ignore the noise — tuned automatically per metric.</p>
+        </article>
+        <!-- 4 -->
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          </div>
+          <h3>200+ integrations</h3>
+          <p>Connect Slack, Stripe, Snowflake, HubSpot, PagerDuty and more in a click — bi-directional and always in sync.</p>
+        </article>
+        <!-- 5 -->
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Enterprise-grade security</h3>
+          <p>SOC 2 Type II, end-to-end encryption, SSO, and granular role controls — built for regulated teams.</p>
+        </article>
+        <!-- 6 -->
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+          </div>
+          <h3>Live dashboards</h3>
+          <p>Composable, shareable views that update as data streams in — drill from a headline metric to a single event.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS BAND ===================== -->
+  <section class="stats-band" aria-label="Key results">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-block reveal">
+          <div class="num"><span class="gradient-text" data-count="2300" data-suffix="+">0</span></div>
+          <div class="lbl">Teams automating with Nexvolt</div>
+        </div>
+        <div class="stat-block reveal">
+          <div class="num"><span class="gradient-text" data-count="50" data-suffix="M+">0</span></div>
+          <div class="lbl">Signals processed every day</div>
+        </div>
+        <div class="stat-block reveal">
+          <div class="num"><span class="gradient-text" data-count="200" data-suffix="K+">0</span></div>
+          <div class="lbl">Automated actions triggered daily</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">How it works</span>
+        <h2>From raw data to action in three steps</h2>
+        <p>Connect your sources, define what matters, and let Nexvolt handle the rest — automatically, around the clock.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">
+            <span class="n gradient-text">1</span>
+            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+          </div>
+          <h3>Connect your stack</h3>
+          <p>Plug in your databases, product analytics, and tools through 200+ native integrations in minutes.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">
+            <span class="n gradient-text">2</span>
+            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+          </div>
+          <h3>Define your signals</h3>
+          <p>Set the metrics, thresholds, and anomalies that matter — or let smart baselines suggest them for you.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">
+            <span class="n gradient-text">3</span>
+            <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4.5 13.5H11L10 22L19.5 10H13L13 2Z"/></svg></span>
+          </div>
+          <h3>Automate the response</h3>
+          <p>Nexvolt fires the right workflow the instant a signal lands — alerts, webhooks, or multi-step playbooks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="section" aria-label="Testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Loved by teams</span>
+        <h2>Why teams switch to Nexvolt</h2>
+        <p>Operations, growth, and engineering leaders rely on Nexvolt to catch what matters and act on it instantly.</p>
+      </div>
+
+      <div class="testi-grid">
+        <article class="testi-card reveal">
+          <div class="testi-stars" aria-hidden="true">★★★★★</div>
+          <p class="testi-quote">"We cut our incident response time by 70%. Nexvolt catches the anomaly and runs our playbook before anyone's even looking at the dashboard."</p>
+          <div class="testi-person">
+            <div class="avatar" aria-hidden="true">SK</div>
+            <div>
+              <div class="name">Sarah Kim</div>
+              <div class="role">VP Engineering, Quantyl</div>
+            </div>
+          </div>
+        </article>
+        <article class="testi-card reveal">
+          <div class="testi-stars" aria-hidden="true">★★★★★</div>
+          <p class="testi-quote">"It replaced a tangle of cron jobs and brittle scripts. Now every signal becomes an action automatically — exactly as promised."</p>
+          <div class="testi-person">
+            <div class="avatar" aria-hidden="true">MR</div>
+            <div>
+              <div class="name">Marcus Reyes</div>
+              <div class="role">Head of Growth, Nimbus</div>
+            </div>
+          </div>
+        </article>
+        <article class="testi-card reveal">
+          <div class="testi-stars" aria-hidden="true">★★★★★</div>
+          <p class="testi-quote">"The setup took an afternoon and paid for itself in a week. Our team finally trusts the alerts because they're never just noise."</p>
+          <div class="testi-person">
+            <div class="avatar" aria-hidden="true">AP</div>
+            <div>
+              <div class="name">Aisha Patel</div>
+              <div class="role">Director of Ops, Stellaris</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Pricing</span>
+        <h2>Simple pricing that scales with you</h2>
+        <p>Start free, upgrade when you're ready. Every plan includes real-time capture and unlimited integrations.</p>
+      </div>
+
+      <!-- Monthly / Yearly toggle -->
+      <div class="pricing-toggle reveal">
+        <span id="lblMonthly" class="active">Monthly</span>
+        <button class="toggle-switch" id="billingToggle" role="switch" aria-checked="false" aria-label="Toggle yearly billing">
+          <span class="toggle-knob"></span>
+        </button>
+        <span id="lblYearly">Yearly</span>
+        <span class="save-badge">Save 20%</span>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Starter -->
+        <article class="price-card reveal">
+          <div class="price-name">Starter</div>
+          <div class="price-desc">For small teams getting started with automation.</div>
+          <div class="price-amount" data-monthly="29" data-yearly="23">
+            <span class="currency">$</span><span class="num">29</span><span class="period">/mo</span>
+          </div>
+          <div class="price-billed" data-billed></div>
+          <ul class="price-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Up to 1M signals / month</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> 10 automated workflows</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> 50+ integrations</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Email & chat support</li>
+          </ul>
+          <a href="#" class="btn btn-ghost">Get started</a>
+        </article>
+
+        <!-- Growth (popular) -->
+        <article class="price-card popular reveal">
+          <span class="popular-badge">Most Popular</span>
+          <div class="price-name">Growth</div>
+          <div class="price-desc">For scaling teams that live in real time.</div>
+          <div class="price-amount" data-monthly="89" data-yearly="71">
+            <span class="currency">$</span><span class="num">89</span><span class="period">/mo</span>
+          </div>
+          <div class="price-billed" data-billed></div>
+          <ul class="price-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Up to 25M signals / month</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Unlimited workflows</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> 200+ integrations</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Anomaly detection (AI)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Priority support</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Start free trial</a>
+        </article>
+
+        <!-- Enterprise -->
+        <article class="price-card reveal">
+          <div class="price-name">Enterprise</div>
+          <div class="price-desc">For organizations with advanced needs.</div>
+          <div class="price-amount" data-monthly="249" data-yearly="199">
+            <span class="currency">$</span><span class="num">249</span><span class="period">/mo</span>
+          </div>
+          <div class="price-billed" data-billed></div>
+          <ul class="price-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Unlimited signals</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> SSO, SAML & audit logs</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Dedicated infrastructure</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> 99.99% uptime SLA</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Dedicated success manager</li>
+          </ul>
+          <a href="#" class="btn btn-ghost">Contact sales</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions, answered</h2>
+        <p>Everything you need to know before getting started. Still curious? Reach out any time.</p>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">How does Nexvolt connect to my data?<span class="faq-icon" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Nexvolt connects through 200+ native integrations covering databases, warehouses, product analytics, and SaaS tools. Most connections take under five minutes with read-only credentials, and you can also stream events directly to our ingestion API.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Do I need to write code to set up automations?<span class="faq-icon" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. The visual workflow builder lets you define signals and actions without code. For advanced cases, you can drop in custom logic, webhooks, or call our API — so it scales from no-code to fully programmable.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">How fast does Nexvolt react to a signal?<span class="faq-icon" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Signals are processed with sub-50ms median latency end to end. From the moment an event lands to the moment your workflow fires, it's effectively instant — that's what "every signal becomes action, automatically" means in practice.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Is my data secure?<span class="faq-icon" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Nexvolt is SOC 2 Type II certified with end-to-end encryption in transit and at rest, SSO/SAML, granular role-based access controls, and full audit logging. Enterprise plans add dedicated infrastructure and a signed BAA on request.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Can I change or cancel my plan anytime?<span class="faq-icon" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Absolutely. Upgrade, downgrade, or cancel at any time directly from your dashboard — no contracts on Starter and Growth. Yearly plans are billed annually and save you 20% compared to monthly.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="final-cta" aria-label="Get started">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div class="cta-banner-bg" aria-hidden="true"></div>
+        <h2>Turn your next signal into action today</h2>
+        <p>Join thousands of teams who let Nexvolt watch, decide, and act — so they don't have to.</p>
+        <a href="#pricing" class="btn btn-white btn-lg">Start your free trial</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="logo" aria-label="Nexvolt home">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5H11L10 22L19.5 10H13L13 2Z" fill="#fff"/></svg>
+          </span>
+          <span class="word">Nexvolt</span>
+        </a>
+        <p>The analytics automation platform that turns every signal into action — automatically, in real time.</p>
+        <div class="socials">
+          <a href="#" aria-label="Nexvolt on X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="Nexvolt on LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          </a>
+          <a href="#" aria-label="Nexvolt on GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.38-1.34-1.75-1.34-1.75-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12.01 12.01 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+          </a>
+          <a href="#" aria-label="Nexvolt on YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3.02 3.02 0 00-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 00.5 6.2 31.5 31.5 0 000 12a31.5 31.5 0 00.5 5.8 3.02 3.02 0 002.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 002.12-2.14A31.5 31.5 0 0024 12a31.5 31.5 0 00-.5-5.8zM9.6 15.6V8.4l6.2 3.6z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Customers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API reference</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#faq">Support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Large gradient watermark -->
+    <div class="footer-watermark" aria-hidden="true">Nexvolt</div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Nexvolt, Inc. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   NEXVOLT — interactions (vanilla JS, no dependencies)
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Footer year ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- Navbar scrolled state ---------- */
+  const navbar = document.getElementById('navbar');
+  function onScroll() {
+    navbar.classList.toggle('scrolled', window.scrollY > 12);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Mobile menu toggle ---------- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function setMenu(open) {
+    hamburger.setAttribute('aria-expanded', String(open));
+    mobileMenu.classList.toggle('open', open);
+    // Remove the closed menu from the focus order + a11y tree entirely.
+    if ('inert' in mobileMenu) mobileMenu.inert = !open;
+  }
+  // Closed by default — also pulls the links out of the tab order on desktop.
+  setMenu(false);
+  hamburger.addEventListener('click', function () {
+    setMenu(hamburger.getAttribute('aria-expanded') !== 'true');
+  });
+  // Close menu when a link inside it is clicked
+  mobileMenu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { setMenu(false); });
+  });
+  // Close on Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setMenu(false);
+  });
+  // Force the menu closed when the viewport widens past the breakpoint where
+  // the hamburger is hidden — otherwise the overlay can get stuck open with no
+  // visible toggle and aria-expanded frozen at "true".
+  const desktopMq = window.matchMedia('(min-width: 981px)');
+  function onMqChange(e) { if (e.matches) setMenu(false); }
+  if (desktopMq.addEventListener) desktopMq.addEventListener('change', onMqChange);
+  else if (desktopMq.addListener) desktopMq.addListener(onMqChange);
+
+  /* ---------- Inert demo links ----------
+     Several links are placeholders (href="#"). A bare "#" scrolls to the top
+     and shifts focus context unexpectedly, so neutralise the jump for those
+     while leaving real in-page anchors (#features, #pricing, ...) untouched. */
+  document.querySelectorAll('a[href="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); });
+  });
+
+  /* ---------- Seamless marquee (duplicate set) ---------- */
+  const track = document.getElementById('marqueeTrack');
+  if (track) {
+    // Duplicate the items for a seamless -50% loop, but mark the clones
+    // aria-hidden so screen readers don't announce every brand twice.
+    const originals = Array.prototype.slice.call(track.children);
+    originals.forEach(function (node) {
+      const clone = node.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+  }
+
+  /* ---------- Scroll reveal + bar chart + count-up via one observer ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const bars = document.getElementById('bars');
+  let barsTriggered = false;
+
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        // Stagger by the element's real position among its siblings (computed
+        // up front), not the observer's per-batch index — so the cascade is
+        // deterministic whether elements enter together or one at a time.
+        const idx = parseInt(entry.target.dataset.revealIndex || '0', 10);
+        entry.target.style.transitionDelay = (idx * 80) + 'ms';
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(function (el) {
+    const parent = el.parentElement;
+    const sibs = parent ? parent.querySelectorAll(':scope > .reveal') : [el];
+    const idx = Array.prototype.indexOf.call(sibs, el);
+    el.dataset.revealIndex = Math.min(idx < 0 ? 0 : idx, 4);
+    revealObserver.observe(el);
+  });
+
+  /* ---------- Bar chart grow on view ---------- */
+  if (bars) {
+    const barObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !barsTriggered) {
+          barsTriggered = true;
+          const barEls = bars.querySelectorAll('.bar');
+          barEls.forEach(function (bar, idx) {
+            bar.style.transitionDelay = (idx * 90) + 'ms';
+          });
+          bars.classList.add('in-view');
+          barObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    barObserver.observe(bars);
+  }
+
+  /* ---------- Count-up stats ---------- */
+  function animateCount(el) {
+    const target = parseFloat(el.getAttribute('data-count'));
+    const suffix = el.getAttribute('data-suffix') || '';
+    const divide = parseFloat(el.getAttribute('data-divide')) || 1;
+    const duration = 1600;
+    const start = performance.now();
+
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - p, 3);
+      const current = target * eased;
+      const display = divide > 1 ? (current / divide) : current;
+      el.textContent = Math.round(display).toString() + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = Math.round(target / divide).toString() + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const countEls = document.querySelectorAll('[data-count]');
+  const countObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        if (prefersReduced) {
+          const el = entry.target;
+          const divide = parseFloat(el.getAttribute('data-divide')) || 1;
+          el.textContent = Math.round(parseFloat(el.getAttribute('data-count')) / divide) + (el.getAttribute('data-suffix') || '');
+        } else {
+          animateCount(entry.target);
+        }
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  countEls.forEach(function (el) { countObserver.observe(el); });
+
+  /* ---------- Mockup cursor parallax tilt ----------
+     The float animation runs on .mockup-wrap, so .mockup owns its `transform`
+     exclusively here. The handler is rAF-throttled and the wrap rect is cached
+     (refreshed on enter/scroll/resize) instead of being read every mousemove. */
+  const mockup = document.getElementById('mockup');
+  const isTouch = window.matchMedia('(pointer: coarse)').matches;
+  if (mockup && !prefersReduced && !isTouch) {
+    const wrap = mockup.parentElement;
+    let rect = null;
+    let pending = null;
+    let lastX = 0, lastY = 0;
+
+    function refreshRect() { rect = wrap.getBoundingClientRect(); }
+
+    function applyTilt() {
+      pending = null;
+      if (!rect) refreshRect();
+      const x = (lastX - rect.left) / rect.width - 0.5;
+      const y = (lastY - rect.top) / rect.height - 0.5;
+      mockup.style.transform = 'rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg) translateZ(0)';
+    }
+
+    wrap.addEventListener('mouseenter', refreshRect);
+    wrap.addEventListener('mousemove', function (e) {
+      lastX = e.clientX; lastY = e.clientY;
+      if (pending === null) pending = requestAnimationFrame(applyTilt);
+    });
+    wrap.addEventListener('mouseleave', function () {
+      if (pending !== null) { cancelAnimationFrame(pending); pending = null; }
+      mockup.style.transform = '';
+    });
+    window.addEventListener('scroll', refreshRect, { passive: true });
+    window.addEventListener('resize', refreshRect);
+  }
+
+  /* ---------- Pricing billing toggle ---------- */
+  const billingToggle = document.getElementById('billingToggle');
+  const lblMonthly = document.getElementById('lblMonthly');
+  const lblYearly = document.getElementById('lblYearly');
+  const amounts = document.querySelectorAll('.price-amount');
+
+  function renderPrices(yearly) {
+    amounts.forEach(function (amt) {
+      const numEl = amt.querySelector('.num');
+      const periodEl = amt.querySelector('.period');
+      const value = yearly ? amt.getAttribute('data-yearly') : amt.getAttribute('data-monthly');
+      const billedEl = amt.parentElement.querySelector('[data-billed]');
+
+      // quick fade/slide swap
+      amt.classList.add('swap');
+      setTimeout(function () {
+        numEl.textContent = value;
+        if (periodEl) periodEl.textContent = '/mo';
+        if (billedEl) {
+          billedEl.textContent = yearly
+            ? ('Billed $' + (parseInt(value, 10) * 12) + ' annually')
+            : 'Billed monthly';
+        }
+        amt.classList.remove('swap');
+      }, 160);
+    });
+  }
+
+  function setBilling(yearly) {
+    billingToggle.setAttribute('aria-checked', String(yearly));
+    lblMonthly.classList.toggle('active', !yearly);
+    lblYearly.classList.toggle('active', yearly);
+    renderPrices(yearly);
+  }
+
+  billingToggle.addEventListener('click', function () {
+    setBilling(billingToggle.getAttribute('aria-checked') !== 'true');
+  });
+  // initialise billed labels (monthly)
+  renderPrices(false);
+
+  /* ---------- FAQ accordion (one open at a time) ---------- */
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function (item, idx) {
+    const btn = item.querySelector('.faq-q');
+    const answer = item.querySelector('.faq-a');
+    // Programmatically associate the trigger with its panel for screen readers.
+    const answerId = 'faq-a-' + (idx + 1);
+    const btnId = 'faq-q-' + (idx + 1);
+    answer.id = answerId;
+    btn.id = btnId;
+    btn.setAttribute('aria-controls', answerId);
+    answer.setAttribute('role', 'region');
+    answer.setAttribute('aria-labelledby', btnId);
+    btn.addEventListener('click', function () {
+      const isOpen = item.classList.contains('open');
+      // close all
+      faqItems.forEach(function (other) {
+        other.classList.remove('open');
+        other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      // open this one if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* Recompute the open FAQ panel's height on resize/orientation change — the
+     inline max-height is captured at click time, so a reflow to more lines
+     (e.g. rotating a phone) would otherwise clip the bottom of the answer. */
+  function recomputeOpenFaq() {
+    document.querySelectorAll('.faq-item.open .faq-a').forEach(function (a) {
+      a.style.maxHeight = a.scrollHeight + 'px';
+    });
+  }
+  let faqResizeTimer = null;
+  function onFaqResize() {
+    if (faqResizeTimer !== null) clearTimeout(faqResizeTimer);
+    faqResizeTimer = setTimeout(recomputeOpenFaq, 150);
+  }
+  window.addEventListener('resize', onFaqResize);
+  window.addEventListener('orientationchange', onFaqResize);
+})();
+</script>
+
+</body>
+</html>

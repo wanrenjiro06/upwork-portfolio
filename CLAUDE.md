@@ -654,6 +654,28 @@ C:\UpWork\Websites Portfolio\
 │   - Browser CSS cache can cause stale styles. Solution: restart the
 │     preview server to force fresh renderer + clean CSS load.
 │
+├── RealEstate (Estate — appointment-booking landing)
+│   ├── index.html      (single long landing page)
+│   ├── styles.css      (monochrome editorial design system)
+│   ├── script.js       (nav, reveal, FAQ, booking-form validation)
+│   ├── hero.mp4        (background video for hero section, 0.87 MB)
+│   └── Netlify URL: (to be deployed)
+│   NOTE: Editorial monochrome aesthetic (VERDANT-inspired —
+│   black/white/warm-gray, huge condensed Archivo wordmark, stats
+│   band, full-bleed showcases, dark statement sections, marquee).
+│   PURPOSE: maximize "Book Appointment" conversions — CTA repeated
+│   in nav, hero (×2), about, dark statement, every listing, marquee,
+│   + a dedicated booking form (name/phone/email/interest/date/time
+│   /message → validation → success state).
+│   HERO VIDEO: Muted autoplay background video (hero.mp4) set at 22%
+│   opacity with a dark gradient overlay (62%→92% black) on top, so
+│   all text remains fully legible. Video loops infinitely, works on
+│   mobile + desktop, playsinline for iOS.
+│   ALL content is placeholder: styled image placeholders (hatch +
+│   "IMAGE · ratio" labels) and lorem/[placeholder] text, so the
+│   client drops in their own photos & copy. Replicates the design
+│   structure, NOT VERDANT's actual copy (avoids copying their text).
+│
 └── [Future pieces: Blog/CMS, Dashboard, etc.]
 ```
 
@@ -737,7 +759,8 @@ netlify deploy --prod
 | Lumira | FashionApparel Store | 3002 | fashion-store ✅ |
 | Nexvolt | Nexvolt | 3003 | nexvolt ✅ |
 | ConversionOS (Sales Funnel) | SalesFunnel | 3004 | sales-funnel ✅ |
-| Blog/CMS | BlogTemplate | 3005 | blog-template (to add) |
+| Estate (Real Estate landing) | RealEstate | 3005 | real-estate ✅ |
+| Blog/CMS | BlogTemplate | 3006 | blog-template (to add) |
 | Dashboard | Dashboard | 3006 | dashboard (to add) |
 
 ### Workflow When Building New Portfolio Pieces
