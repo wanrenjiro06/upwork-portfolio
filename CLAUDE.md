@@ -676,7 +676,36 @@ C:\UpWork\Websites Portfolio\
 │   client drops in their own photos & copy. Replicates the design
 │   structure, NOT VERDANT's actual copy (avoids copying their text).
 │
-└── [Future pieces: Blog/CMS, Dashboard, etc.]
+├── SaasDashboard (Pulse — Revenue Intelligence dashboard)
+│   ├── index.html      (self-contained: inline CSS + JS)
+│   ├── (design refs)   (DashfolioNEO Framer screenshots used as inspo)
+│   └── Netlify URL: (to be deployed)
+│   NOTE: Real SaaS analytics/admin dashboard (HIGH-VALUE piece —
+│   separates profile from "landing page only" builders). Built from
+│   DashfolioNEO's DNA (grouped dark sidebar shell, premium near-black
+│   theme, live clock, stack tile grid) but turned into an actual
+│   working analytics dashboard, NOT a portfolio site.
+│   PRODUCT: "Pulse" — invented SaaS, revenue intelligence.
+│   SIGNATURE (unique, not generic):
+│   - Animated EKG "pulse-line" logo (gradient stroke)
+│   - Spectral accent gradient: emerald #34d399 → cyan #22d3ee →
+│     indigo #818cf8 → fuchsia #e879f9 (distinct from the violet
+│     aurora used in SalesFunnel/Nexvolt)
+│   - Conic "halo" glow behind the featured Revenue KPI
+│   LAYOUT: fixed sidebar (workspace switcher + grouped nav +
+│   upgrade card + user), sticky topbar (search ⌘K, live clock,
+│   notifications, gradient Invite), 4 KPI cards w/ count-up +
+│   sparklines, big Revenue area chart, Traffic donut, goal bars,
+│   transactions table, live activity feed, integrations grid.
+│   CHARTS: hand-rolled animated SVG (NO Chart.js) — area chart with
+│   Catmull-Rom smoothing + stroke-draw + gradient fill + hover
+│   tooltip, sparklines, conic-segment donut, progress bars. Shows
+│   real JS skill & keeps it self-contained (only ext = Google Fonts).
+│   ANIM: count-ups (IntersectionObserver), chart draw, donut sweep,
+│   bar fills, drifting bg mesh (translate-only for perf), live clock,
+│   shimmer on upgrade card, hover lifts. prefers-reduced-motion honored.
+│
+└── [Future pieces: Restaurant/Food ordering, Blog/CMS, etc.]
 ```
 
 ### How to Build a New Portfolio Item
@@ -760,8 +789,8 @@ netlify deploy --prod
 | Nexvolt | Nexvolt | 3003 | nexvolt ✅ |
 | ConversionOS (Sales Funnel) | SalesFunnel | 3004 | sales-funnel ✅ |
 | Estate (Real Estate landing) | RealEstate | 3005 | real-estate ✅ |
-| Blog/CMS | BlogTemplate | 3006 | blog-template (to add) |
-| Dashboard | Dashboard | 3006 | dashboard (to add) |
+| Pulse (SaaS Dashboard) | SaasDashboard | 3006 | saas-dashboard ✅ |
+| Blog/CMS | BlogTemplate | 3007 | blog-template (to add) |
 
 ### Workflow When Building New Portfolio Pieces
 

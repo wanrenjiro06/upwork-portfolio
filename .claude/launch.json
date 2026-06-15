@@ -36,6 +36,12 @@
       "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
       "runtimeArgs": ["-m", "http.server", "3005", "--directory", "C:\\UpWork\\Websites Portfolio\\RealEstate"],
       "port": 3005
+    },
+    {
+      "name": "saas-dashboard",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3006", "--directory", "C:\\UpWork\\Websites Portfolio\\SaasDashboard"],
+      "port": 3006
     }
   ]
 }
