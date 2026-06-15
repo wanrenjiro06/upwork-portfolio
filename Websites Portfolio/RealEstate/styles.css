@@ -58,7 +58,7 @@ ul { list-style: none; }
 .btn:hover .ar { transform: translate(3px,-3px); }
 .btn--lg { padding: 18px 32px; font-size: 1rem; }
 
-/* ---------- Placeholder media ---------- */
+/* ---------- Placeholder / real media ---------- */
 .ph { position: relative; background: var(--stone); overflow: hidden; display: grid; place-items: center; color: #A6A39A; }
 .ph::after { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.025) 0 12px, transparent 12px 24px); pointer-events: none; }
 .ph__in { position: relative; z-index: 1; display: grid; justify-items: center; gap: 10px; text-align: center; padding: 20px; }
@@ -66,6 +66,9 @@ ul { list-style: none; }
 .ph__label { font-family: var(--f-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
 .ph--dark { background: #242422; color: #6E6C64; }
 .ph--dark::after { background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 12px, transparent 12px 24px); }
+/* Real images inside .ph containers */
+.ph > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 0; }
+.ph.has-img::after { display: none; }
 
 /* ---------- Nav ---------- */
 .nav { position: sticky; top: 0; z-index: 100; background: rgba(14,14,14,0.92); color: var(--paper); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-d); }
@@ -238,6 +241,10 @@ ul { list-style: none; }
 .footer ul a { color: rgba(255,255,255,0.72); font-size: 0.9rem; transition: color .2s; }
 .footer ul a:hover { color: var(--paper); }
 .footer__bar { border-top: 1px solid var(--line-d); padding-top: 24px; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; color: var(--muted-d); font-size: 0.82rem; }
+
+/* Avatar with real photo */
+.av--img { background: none; border: none; padding: 0; overflow: hidden; }
+.av--img img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
 
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
