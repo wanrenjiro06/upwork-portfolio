@@ -274,6 +274,141 @@
   @media(prefers-reduced-motion:reduce){
     *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   }
+
+  /* === page switching === */
+  .page{display:none;flex-direction:column;gap:20px;padding:24px 26px 40px}
+  .page.active{display:flex;animation:fadeIn .22s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* === page header row === */
+  .ph{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .ph__l h2{font-family:var(--f-disp);font-size:1.4rem;font-weight:600;letter-spacing:-.02em}
+  .ph__l p{font-size:.86rem;color:var(--muted);margin-top:3px}
+
+  /* === 3-col stat row === */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .stat{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:18px 20px;transition:.3s var(--ease)}
+  .stat:hover{border-color:var(--line-2);transform:translateY(-2px)}
+  .stat__l{font-size:.76rem;color:var(--muted);margin-bottom:8px}
+  .stat__v{font-family:var(--f-disp);font-size:1.6rem;font-weight:600;letter-spacing:-.02em}
+  .stat__d{font-size:.72rem;color:var(--faint);margin-top:6px}
+
+  /* === filter chips === */
+  .chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .chip{padding:6px 14px;border-radius:20px;font-size:.78rem;font-weight:500;border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:.2s var(--ease);background:none}
+  .chip.on{color:var(--text);border-color:var(--line-2);background:rgba(255,255,255,.05)}
+  .chip:hover:not(.on){color:var(--text)}
+
+  /* === inline search === */
+  .inl-search{display:flex;align-items:center;gap:9px;padding:9px 14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.02);color:var(--muted);transition:.25s var(--ease)}
+  .inl-search:focus-within{border-color:rgba(52,211,153,.4)}
+  .inl-search svg{width:15px;height:15px;flex:none}
+  .inl-search input{background:none;border:none;outline:none;color:var(--text);font-size:.84rem;font-family:inherit;width:220px}
+  .inl-search input::placeholder{color:var(--faint)}
+
+  /* === heatmap === */
+  .hmap-wrap{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:3px;height:120px;margin-top:12px}
+  .hc{border-radius:3px;transition:.2s}
+  .hmap-labels{display:flex;gap:0;margin-top:6px;padding-left:34px}
+  .hmap-labels span{flex:1;font-size:.6rem;color:var(--faint);text-align:center}
+  .hmap-days{display:flex;flex-direction:column;gap:3px;margin-right:6px}
+  .hmap-days span{font-size:.62rem;color:var(--faint);height:calc((120px - 18px)/7);display:flex;align-items:center}
+
+  /* === device bars === */
+  .dev-row{display:flex;align-items:center;gap:12px;font-size:.82rem;margin-bottom:13px}
+  .dev-bar{flex:1;height:8px;border-radius:20px;background:rgba(255,255,255,.05);overflow:hidden}
+  .dev-bar i{display:block;height:100%;border-radius:20px}
+
+  /* === funnel === */
+  .funnel{display:flex;flex-direction:column;gap:6px;max-width:620px;margin:0 auto}
+  .funnel__step{position:relative;overflow:hidden;display:flex;align-items:center;gap:18px;padding:16px 20px;border:1px solid var(--line);border-radius:var(--radius-sm);background:rgba(255,255,255,.018);transition:.2s var(--ease)}
+  .funnel__step:hover{background:rgba(255,255,255,.035)}
+  .funnel__fill{position:absolute;left:0;top:0;bottom:0;opacity:.12;pointer-events:none}
+  .funnel__n{font-family:var(--f-disp);font-size:1.5rem;font-weight:700;min-width:90px}
+  .funnel__m{flex:1}
+  .funnel__m b{font-size:.88rem;font-weight:600;display:block}
+  .funnel__m span{font-size:.74rem;color:var(--muted)}
+  .funnel__pct{font-family:var(--f-mono);font-size:.8rem;font-weight:600;padding:4px 11px;border-radius:8px;background:rgba(52,211,153,.1);color:var(--g1)}
+  .funnel__arrow{text-align:center;font-size:.68rem;color:var(--faint);padding:2px 0;letter-spacing:.04em}
+
+  /* === report rows === */
+  .rpt-list{display:flex;flex-direction:column;gap:10px}
+  .rpt{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--line);border-radius:var(--radius-sm);background:rgba(255,255,255,.012);transition:.2s var(--ease)}
+  .rpt:hover{background:rgba(255,255,255,.03);border-color:var(--line-2)}
+  .rpt__ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none;border:1px solid var(--line-2);background:var(--panel-2)}
+  .rpt__ic svg{width:17px;height:17px}
+  .rpt__m{flex:1;min-width:0}
+  .rpt__m b{font-size:.84rem;font-weight:600;display:block}
+  .rpt__m span{font-size:.72rem;color:var(--muted)}
+  .rpt__tag{font-size:.66rem;font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid var(--line-2);color:var(--faint)}
+  .btn-sm{padding:7px 14px;border-radius:9px;border:1px solid var(--line-2);font-size:.78rem;font-weight:600;color:var(--muted);transition:.2s var(--ease);background:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  .btn-sm:hover{color:var(--g1);border-color:rgba(52,211,153,.4)}
+  .btn-sm.conn{border-color:rgba(52,211,153,.3);color:var(--g1);background:rgba(52,211,153,.07)}
+
+  /* === settings === */
+  .set-sec{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:22px 24px;margin-bottom:0}
+  .set-sec h3{font-family:var(--f-disp);font-size:.98rem;font-weight:600;margin-bottom:2px}
+  .set-sec .sub{font-size:.76rem;color:var(--muted);padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+  .set-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+  .sf{display:flex;flex-direction:column;gap:5px}
+  .sf label{font-size:.74rem;color:var(--muted);font-weight:500}
+  .sf input,.sf select{background:rgba(255,255,255,.03);border:1px solid var(--line-2);border-radius:9px;padding:9px 13px;color:var(--text);font-size:.85rem;font-family:inherit;outline:none;transition:.2s var(--ease)}
+  .sf input:focus,.sf select:focus{border-color:rgba(52,211,153,.4)}
+  .sf select option{background:#121724}
+  .av-row{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+  .av-row img{width:60px;height:60px;border-radius:13px;object-fit:cover;border:1px solid var(--line-2)}
+  .av-row .av-m b{font-size:.86rem;font-weight:600;display:block}
+  .av-row .av-m span{font-size:.72rem;color:var(--muted)}
+  .tgl-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}
+  .tgl-row:last-child{border-bottom:none}
+  .tgl-row .tm b{font-size:.84rem;font-weight:500;display:block}
+  .tgl-row .tm span{font-size:.71rem;color:var(--muted)}
+  .tgl{position:relative;width:40px;height:22px;flex:none;cursor:pointer}
+  .tgl input{opacity:0;width:0;height:0;position:absolute}
+  .tgl__s{position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:20px;transition:.25s var(--ease)}
+  .tgl__s::before{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:var(--muted);top:3px;left:3px;transition:.25s var(--ease)}
+  .tgl input:checked+.tgl__s{background:rgba(52,211,153,.32)}
+  .tgl input:checked+.tgl__s::before{background:var(--g1);transform:translateX(18px)}
+  .danger{border-color:rgba(251,113,133,.25)!important;background:rgba(251,113,133,.03)!important}
+  .danger h3{color:var(--bad)}
+  .btn-danger{padding:9px 18px;border-radius:9px;background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.3);color:var(--bad);font-size:.83rem;font-weight:600;transition:.2s var(--ease);cursor:pointer}
+  .btn-danger:hover{background:rgba(251,113,133,.2)}
+
+  /* === docs / help === */
+  .doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .doc-cat{border:1px solid var(--line);border-radius:var(--radius-sm);background:rgba(255,255,255,.012);padding:18px;display:flex;align-items:flex-start;gap:13px;transition:.25s var(--ease);cursor:pointer}
+  .doc-cat:hover{border-color:var(--line-2);background:rgba(255,255,255,.03);transform:translateY(-2px)}
+  .doc-cat__ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none;border:1px solid var(--line-2)}
+  .doc-cat__ic svg{width:18px;height:18px}
+  .doc-cat b{font-size:.86rem;font-weight:600;display:block}
+  .doc-cat span{font-size:.73rem;color:var(--muted)}
+  .art{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s}
+  .art:last-child{border-bottom:none}
+  .art:hover .art-title{color:var(--g1)}
+  .art svg{width:15px;height:15px;color:var(--faint);flex:none}
+  .art-title{font-size:.84rem;font-weight:500;flex:1}
+  .art time{font-size:.7rem;color:var(--faint)}
+
+  /* === integrations manage === */
+  .int-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .int-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px;background:rgba(255,255,255,.012);display:flex;flex-direction:column;gap:12px;transition:.25s var(--ease)}
+  .int-card:hover{border-color:var(--line-2);background:rgba(255,255,255,.025)}
+  .int-card__top{display:flex;align-items:center;gap:11px}
+  .int-card__g{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;flex:none}
+  .int-card__g svg{width:19px;height:19px}
+  .int-card__m b{font-size:.83rem;font-weight:600;display:block}
+  .int-card__m span{font-size:.69rem;color:var(--muted)}
+  .int-card p{font-size:.75rem;color:var(--faint);line-height:1.5;flex:1}
+  .int-card__foot{display:flex;align-items:center;justify-content:space-between}
+
+  /* === toast === */
+  .toast{position:fixed;bottom:28px;right:28px;background:var(--panel-2);border:1px solid rgba(52,211,153,.3);border-radius:12px;padding:12px 18px;font-size:.84rem;color:var(--g1);font-weight:500;z-index:999;transform:translateY(14px);opacity:0;transition:.3s var(--ease);pointer-events:none;display:flex;align-items:center;gap:8px}
+  .toast.show{transform:none;opacity:1}
+  .toast svg{width:16px;height:16px}
+
+  @media(max-width:1100px){.stat-row{grid-template-columns:repeat(2,1fr)}.int-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:840px){.set-grid{grid-template-columns:1fr}.doc-grid{grid-template-columns:1fr}}
+  @media(max-width:560px){.stat-row{grid-template-columns:1fr}.int-grid{grid-template-columns:1fr}.page{padding:18px 16px 32px}}
 </style>
 </head>
 <body>
@@ -299,20 +434,20 @@
 
     <nav class="nav">
       <div class="nav__grp">Overview</div>
-      <a class="nav__i active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg> Dashboard</a>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V5M4 19h16M8 16l3-4 3 3 4-7"/></svg> Analytics</a>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg> Revenue <span class="nav__badge">+12%</span></a>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0M16 7.5a3 3 0 010 6M19 20a5 5 0 00-4-4.9"/></svg> Customers</a>
+      <a class="nav__i active" data-nav="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg> Dashboard</a>
+      <a class="nav__i" data-nav="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V5M4 19h16M8 16l3-4 3 3 4-7"/></svg> Analytics</a>
+      <a class="nav__i" data-nav="revenue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg> Revenue <span class="nav__badge">+12%</span></a>
+      <a class="nav__i" data-nav="customers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0M16 7.5a3 3 0 010 6M19 20a5 5 0 00-4-4.9"/></svg> Customers</a>
 
       <div class="nav__grp">Workspace</div>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3h7l5 5v13H7z" /><path d="M14 3v5h5M10 13h6M10 17h6"/></svg> Reports</a>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg> Funnels</a>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><circle cx="17" cy="17" r="4"/></svg> Integrations</a>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Activity <span class="nav__dot"></span></a>
+      <a class="nav__i" data-nav="reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3h7l5 5v13H7z" /><path d="M14 3v5h5M10 13h6M10 17h6"/></svg> Reports</a>
+      <a class="nav__i" data-nav="funnels"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg> Funnels</a>
+      <a class="nav__i" data-nav="integrations"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><circle cx="17" cy="17" r="4"/></svg> Integrations</a>
+      <a class="nav__i" data-nav="activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Activity <span class="nav__dot"></span></a>
 
       <div class="nav__grp">Account</div>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.13-1.3l2-1.6-2-3.4-2.4 1a7 7 0 00-2.27-1.3L13.8 2h-3.6l-.33 2.6a7 7 0 00-2.27 1.3l-2.4-1-2 3.4 2 1.6A7 7 0 005 12a7 7 0 00.13 1.3l-2 1.6 2 3.4 2.4-1a7 7 0 002.27 1.3l.33 2.6h3.6l.33-2.6a7 7 0 002.27-1.3l2.4 1 2-3.4-2-1.6A7 7 0 0019 12z"/></svg> Settings</a>
-      <a class="nav__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.2a3 3 0 015.6 1.4c0 2-3 2.4-3 4M12 17.5h.01"/></svg> Help &amp; Docs</a>
+      <a class="nav__i" data-nav="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.13-1.3l2-1.6-2-3.4-2.4 1a7 7 0 00-2.27-1.3L13.8 2h-3.6l-.33 2.6a7 7 0 00-2.27 1.3l-2.4-1-2 3.4 2 1.6A7 7 0 005 12a7 7 0 00.13 1.3l-2 1.6 2 3.4 2.4-1a7 7 0 002.27 1.3l.33 2.6h3.6l.33-2.6a7 7 0 002.27-1.3l2.4 1 2-3.4-2-1.6A7 7 0 0019 12z"/></svg> Settings</a>
+      <a class="nav__i" data-nav="help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.2a3 3 0 015.6 1.4c0 2-3 2.4-3 4M12 17.5h.01"/></svg> Help &amp; Docs</a>
     </nav>
 
     <div class="up">
@@ -348,7 +483,8 @@
       <button class="btn-grad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg> Invite</button>
     </div>
 
-    <div class="content">
+    <!-- ===== PAGE: DASHBOARD ===== -->
+    <div class="page active" id="p-dashboard">
 
       <!-- greeting -->
       <div class="greet reveal">
@@ -506,7 +642,328 @@
         </div>
       </div>
 
-    </div>
+    </div><!-- /p-dashboard -->
+
+    <!-- ===== PAGE: ANALYTICS ===== -->
+    <div class="page" id="p-analytics">
+      <div class="ph">
+        <div class="ph__l"><h2>Analytics</h2><p>User behaviour, traffic, and engagement metrics.</p></div>
+        <div class="seg" style="font-size:.78rem"><button class="on">This Month</button><button>Last Month</button><button>YTD</button></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat__l">Page Views</div><div class="stat__v mono">1.24M</div><div class="stat__d"><span class="delta up" style="padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="10" height="10"><path d="M7 17L17 7M9 7h8v8"/></svg>18.2%</span> vs last month</div></div>
+        <div class="stat"><div class="stat__l">Avg Session Duration</div><div class="stat__v mono">4m 32s</div><div class="stat__d"><span class="delta up" style="padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="10" height="10"><path d="M7 17L17 7M9 7h8v8"/></svg>6.1%</span> vs last month</div></div>
+        <div class="stat"><div class="stat__l">Bounce Rate</div><div class="stat__v mono">34.1%</div><div class="stat__d"><span class="delta up" style="padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="10" height="10"><path d="M7 17L17 7M9 7h8v8"/></svg>−2.3%</span> lower is better</div></div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card__h"><div><h3>User Growth</h3><div class="sub">New registered users · 12 months</div></div></div>
+          <div class="chart-wrap"><svg id="achart" viewBox="0 0 720 220" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+        </div>
+        <div class="card">
+          <div class="card__h"><div><h3>Device Breakdown</h3><div class="sub">Sessions by device type</div></div></div>
+          <div style="margin-top:14px">
+            <div class="dev-row"><span style="width:60px;font-size:.78rem;color:var(--muted)">Mobile</span><div class="dev-bar"><i style="width:58%;background:var(--g1)"></i></div><span class="mono" style="font-size:.76rem;color:var(--muted);width:36px;text-align:right">58%</span></div>
+            <div class="dev-row"><span style="width:60px;font-size:.78rem;color:var(--muted)">Desktop</span><div class="dev-bar"><i style="width:36%;background:var(--g2)"></i></div><span class="mono" style="font-size:.76rem;color:var(--muted);width:36px;text-align:right">36%</span></div>
+            <div class="dev-row"><span style="width:60px;font-size:.78rem;color:var(--muted)">Tablet</span><div class="dev-bar"><i style="width:6%;background:var(--g3)"></i></div><span class="mono" style="font-size:.76rem;color:var(--muted);width:36px;text-align:right">6%</span></div>
+          </div>
+          <div style="border-top:1px solid var(--line);margin-top:18px;padding-top:16px">
+            <div class="card__h" style="margin-bottom:10px"><div><h3 style="font-size:.9rem">Top Traffic Sources</h3></div></div>
+            <div class="src">
+              <div class="src__i"><i style="background:var(--g1)"></i><span>Google Organic</span><span class="pct">38%</span></div>
+              <div class="src__i"><i style="background:var(--g2)"></i><span>Direct</span><span class="pct">24%</span></div>
+              <div class="src__i"><i style="background:var(--g3)"></i><span>Twitter / X</span><span class="pct">16%</span></div>
+              <div class="src__i"><i style="background:var(--g4)"></i><span>Product Hunt</span><span class="pct">14%</span></div>
+              <div class="src__i"><i style="background:var(--faint)"></i><span>Other</span><span class="pct">8%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Activity Heatmap</h3><div class="sub">User sessions by hour · last 7 days</div></div></div>
+        <div style="display:flex;gap:6px;margin-top:12px">
+          <div class="hmap-days"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+          <div style="flex:1"><div class="hmap-wrap" id="heatmap"></div><div class="hmap-labels" id="hmap-labels"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Top Pages</h3><div class="sub">Most visited pages this month</div></div></div>
+        <table>
+          <thead><tr><th>Page</th><th>Views</th><th>Unique</th><th>Avg Time</th><th>Bounce</th></tr></thead>
+          <tbody>
+            <tr><td style="font-family:var(--f-mono);font-size:.8rem;color:var(--g1)">/dashboard</td><td>84,210</td><td>61,400</td><td>5m 12s</td><td><span class="st ok"><i></i>21%</span></td></tr>
+            <tr><td style="font-family:var(--f-mono);font-size:.8rem;color:var(--g2)">/pricing</td><td>52,480</td><td>48,200</td><td>3m 44s</td><td><span class="st pend"><i></i>38%</span></td></tr>
+            <tr><td style="font-family:var(--f-mono);font-size:.8rem;color:var(--g3)">/features</td><td>41,900</td><td>36,800</td><td>4m 08s</td><td><span class="st pend"><i></i>31%</span></td></tr>
+            <tr><td style="font-family:var(--f-mono);font-size:.8rem">/signup</td><td>38,620</td><td>38,620</td><td>2m 22s</td><td><span class="st ok"><i></i>18%</span></td></tr>
+            <tr><td style="font-family:var(--f-mono);font-size:.8rem">/blog</td><td>29,140</td><td>26,900</td><td>6m 55s</td><td><span class="st fail"><i></i>52%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /p-analytics -->
+
+    <!-- ===== PAGE: REVENUE ===== -->
+    <div class="page" id="p-revenue">
+      <div class="ph">
+        <div class="ph__l"><h2>Revenue</h2><p>MRR, ARR, and plan-level breakdown.</p></div>
+        <button class="btn-grad" style="font-size:.82rem;padding:8px 16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M12 5v14M5 12h14"/></svg> Export</button>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat__l">Annual Recurring Revenue</div><div class="stat__v mono">$3.41M</div><div class="stat__d"><span class="delta up" style="padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="10" height="10"><path d="M7 17L17 7M9 7h8v8"/></svg>12.4%</span> YoY</div></div>
+        <div class="stat"><div class="stat__l">Monthly Recurring Revenue</div><div class="stat__v mono">$284K</div><div class="stat__d"><span class="delta up" style="padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="10" height="10"><path d="M7 17L17 7M9 7h8v8"/></svg>8.1%</span> MoM</div></div>
+        <div class="stat"><div class="stat__l">Avg Revenue Per User</div><div class="stat__v mono">$52.00</div><div class="stat__d"><span class="delta up" style="padding:2px 6px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="10" height="10"><path d="M7 17L17 7M9 7h8v8"/></svg>3.2%</span> MoM</div></div>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Revenue by Plan</h3><div class="sub">MRR contribution per pricing tier</div></div></div>
+        <table>
+          <thead><tr><th>Plan</th><th>Price/mo</th><th>Subscribers</th><th>MRR</th><th>Share</th><th>vs last month</th></tr></thead>
+          <tbody>
+            <tr><td><span class="plan pro">Pro</span></td><td class="amt">$49</td><td>2,840</td><td class="amt">$139,160</td><td><div class="bar" style="width:120px"><i data-bar="49" style="background:var(--g3)"></i></div></td><td><span class="delta up" style="padding:2px 7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="9" height="9"><path d="M7 17L17 7M9 7h8v8"/></svg>+9.4%</span></td></tr>
+            <tr><td><span class="plan ent">Enterprise</span></td><td class="amt">$499</td><td>242</td><td class="amt">$120,758</td><td><div class="bar" style="width:120px"><i data-bar="43" style="background:var(--g4)"></i></div></td><td><span class="delta up" style="padding:2px 7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="9" height="9"><path d="M7 17L17 7M9 7h8v8"/></svg>+14.2%</span></td></tr>
+            <tr><td><span class="plan">Starter</span></td><td class="amt">$19</td><td>1,240</td><td class="amt">$23,560</td><td><div class="bar" style="width:120px"><i data-bar="8" style="background:var(--g2)"></i></div></td><td><span class="delta down" style="padding:2px 7px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="9" height="9"><path d="M7 7l10 10M15 17H7V9"/></svg>−2.1%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Top Customers by Lifetime Value</h3><div class="sub">All-time revenue per account</div></div></div>
+        <table>
+          <thead><tr><th>Customer</th><th>Plan</th><th>Joined</th><th>Lifetime Value</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Orion Labs</b><span>James Park · 48 seats</span></div></div></td><td><span class="plan ent">Enterprise</span></td><td style="color:var(--faint)">Jan 2023</td><td class="amt">$18,964</td><td><span class="st ok"><i></i>Active</span></td></tr>
+            <tr><td><div class="cust"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Flux Systems</b><span>Sarah Chen · 22 seats</span></div></div></td><td><span class="plan ent">Enterprise</span></td><td style="color:var(--faint)">Mar 2023</td><td class="amt">$12,475</td><td><span class="st ok"><i></i>Active</span></td></tr>
+            <tr><td><div class="cust"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Nova Corp</b><span>Marcus Webb · 8 seats</span></div></div></td><td><span class="plan pro">Pro</span></td><td style="color:var(--faint)">Aug 2022</td><td class="amt">$8,820</td><td><span class="st ok"><i></i>Active</span></td></tr>
+            <tr><td><div class="cust"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Drift App</b><span>Elena Rodriguez · 5 seats</span></div></div></td><td><span class="plan pro">Pro</span></td><td style="color:var(--faint)">Nov 2022</td><td class="amt">$6,272</td><td><span class="st pend"><i></i>At risk</span></td></tr>
+            <tr><td><div class="cust"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Orbit IO</b><span>Aisha Khan · 3 seats</span></div></div></td><td><span class="plan pro">Pro</span></td><td style="color:var(--faint)">Feb 2024</td><td class="amt">$3,136</td><td><span class="st ok"><i></i>Active</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /p-revenue -->
+
+    <!-- ===== PAGE: CUSTOMERS ===== -->
+    <div class="page" id="p-customers">
+      <div class="ph">
+        <div class="ph__l"><h2>Customers</h2><p>4,322 total accounts · 3,841 active</p></div>
+        <button class="btn-grad" style="font-size:.82rem;padding:8px 16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M12 5v14M5 12h14"/></svg> Add Customer</button>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px">
+          <label class="inl-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="cust-search" placeholder="Search customers…" /></label>
+          <div class="chips">
+            <button class="chip on" data-cfilter="all">All</button>
+            <button class="chip" data-cfilter="active">Active</button>
+            <button class="chip" data-cfilter="trial">Trial</button>
+            <button class="chip" data-cfilter="churned">Churned</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>Customer</th><th>Plan</th><th>MRR</th><th>Status</th><th>Joined</th><th>LTV</th></tr></thead>
+          <tbody id="cust-tbody">
+            <tr data-status="active"><td><div class="cust"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Sarah Chen</b><span>sarah@flux.io</span></div></div></td><td><span class="plan pro">Pro</span></td><td class="amt">$49</td><td><span class="st ok"><i></i>Active</span></td><td style="color:var(--faint)">Jun 2024</td><td class="amt">$588</td></tr>
+            <tr data-status="active"><td><div class="cust"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Marcus Webb</b><span>m.webb@nova.co</span></div></div></td><td><span class="plan ent">Enterprise</span></td><td class="amt">$499</td><td><span class="st ok"><i></i>Active</span></td><td style="color:var(--faint)">Aug 2022</td><td class="amt">$8,820</td></tr>
+            <tr data-status="trial"><td><div class="cust"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Elena Rodriguez</b><span>elena@drift.app</span></div></div></td><td><span class="plan">Trial</span></td><td class="amt">—</td><td><span class="st pend"><i></i>Trial</span></td><td style="color:var(--faint)">Jun 2026</td><td class="amt">$0</td></tr>
+            <tr data-status="active"><td><div class="cust"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>James Park</b><span>james@arc.dev</span></div></div></td><td><span class="plan pro">Pro</span></td><td class="amt">$49</td><td><span class="st ok"><i></i>Active</span></td><td style="color:var(--faint)">Jan 2023</td><td class="amt">$3,528</td></tr>
+            <tr data-status="churned"><td><div class="cust"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Aisha Khan</b><span>aisha@orbit.io</span></div></div></td><td><span class="plan">Starter</span></td><td class="amt">$0</td><td><span class="st fail"><i></i>Churned</span></td><td style="color:var(--faint)">Mar 2025</td><td class="amt">$228</td></tr>
+            <tr data-status="active"><td><div class="cust"><img src="https://images.unsplash.com/photo-1542178243-bc20204b769f?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Priya Nair</b><span>priya@zenith.io</span></div></div></td><td><span class="plan ent">Enterprise</span></td><td class="amt">$499</td><td><span class="st ok"><i></i>Active</span></td><td style="color:var(--faint)">Oct 2023</td><td class="amt">$4,491</td></tr>
+            <tr data-status="trial"><td><div class="cust"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Tom Holloway</b><span>tom@keystone.co</span></div></div></td><td><span class="plan">Trial</span></td><td class="amt">—</td><td><span class="st pend"><i></i>Trial</span></td><td style="color:var(--faint)">Jun 2026</td><td class="amt">$0</td></tr>
+            <tr data-status="active"><td><div class="cust"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop&crop=faces&auto=format" alt=""/><div><b>Leila Morse</b><span>leila@stackline.io</span></div></div></td><td><span class="plan pro">Pro</span></td><td class="amt">$49</td><td><span class="st ok"><i></i>Active</span></td><td style="color:var(--faint)">Apr 2025</td><td class="amt">$686</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div><!-- /p-customers -->
+
+    <!-- ===== PAGE: REPORTS ===== -->
+    <div class="page" id="p-reports">
+      <div class="ph">
+        <div class="ph__l"><h2>Reports</h2><p>Scheduled and on-demand analytics exports.</p></div>
+        <button class="btn-grad" style="font-size:.82rem;padding:8px 16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M12 5v14M5 12h14"/></svg> Generate Report</button>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Scheduled Reports</h3><div class="sub">Auto-delivered to your inbox</div></div></div>
+        <div class="rpt-list" style="margin-top:14px">
+          <div class="rpt"><span class="rpt__ic" style="color:var(--g1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span><div class="rpt__m"><b>Revenue Summary</b><span>Every Monday · wan.alvaro09@gmail.com</span></div><span class="rpt__tag">Weekly</span><button class="btn-sm">Edit</button></div>
+          <div class="rpt"><span class="rpt__ic" style="color:var(--g3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 7l9 6 9-6M3 7v10l9 6 9-6V7M3 7l9-4 9 4"/></svg></span><div class="rpt__m"><b>Churn Analysis</b><span>1st of each month · wan.alvaro09@gmail.com</span></div><span class="rpt__tag">Monthly</span><button class="btn-sm">Edit</button></div>
+          <div class="rpt"><span class="rpt__ic" style="color:var(--g2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0"/></svg></span><div class="rpt__m"><b>User Acquisition</b><span>Every Friday · wan.alvaro09@gmail.com</span></div><span class="rpt__tag">Weekly</span><button class="btn-sm">Edit</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Recent Reports</h3><div class="sub">Last 30 days</div></div></div>
+        <div class="rpt-list" style="margin-top:14px">
+          <div class="rpt"><span class="rpt__ic" style="color:var(--g1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span><div class="rpt__m"><b>Revenue Summary · Jun 9, 2026</b><span>Generated automatically · 248 KB PDF</span></div><span class="rpt__tag" style="color:var(--g1);border-color:rgba(52,211,153,.3)">Ready</span><button class="btn-sm">↓ Download</button></div>
+          <div class="rpt"><span class="rpt__ic" style="color:var(--g2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19V5M4 19h16M8 16l3-4 3 3 4-7"/></svg></span><div class="rpt__m"><b>Q2 Growth Report · Jun 1, 2026</b><span>Manual export · 1.2 MB PDF</span></div><span class="rpt__tag" style="color:var(--g1);border-color:rgba(52,211,153,.3)">Ready</span><button class="btn-sm">↓ Download</button></div>
+          <div class="rpt"><span class="rpt__ic" style="color:var(--g3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span><div class="rpt__m"><b>Churn Analysis · Jun 1, 2026</b><span>Generated automatically · 184 KB PDF</span></div><span class="rpt__tag" style="color:var(--g1);border-color:rgba(52,211,153,.3)">Ready</span><button class="btn-sm">↓ Download</button></div>
+          <div class="rpt"><span class="rpt__ic" style="color:var(--g4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0"/></svg></span><div class="rpt__m"><b>User Acquisition · May 26, 2026</b><span>Generated automatically · 92 KB PDF</span></div><span class="rpt__tag" style="color:var(--g1);border-color:rgba(52,211,153,.3)">Ready</span><button class="btn-sm">↓ Download</button></div>
+          <div class="rpt"><span class="rpt__ic" style="color:var(--warn)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19V5M4 19h16M8 16l3-4 3 3 4-7"/></svg></span><div class="rpt__m"><b>Revenue Summary · May 19, 2026</b><span>Generated automatically · 231 KB PDF</span></div><span class="rpt__tag" style="color:var(--g1);border-color:rgba(52,211,153,.3)">Ready</span><button class="btn-sm">↓ Download</button></div>
+        </div>
+      </div>
+    </div><!-- /p-reports -->
+
+    <!-- ===== PAGE: FUNNELS ===== -->
+    <div class="page" id="p-funnels">
+      <div class="ph">
+        <div class="ph__l"><h2>Funnels</h2><p>Conversion pipeline · last 30 days</p></div>
+        <div class="seg"><button class="on">Signup Funnel</button><button>Upgrade Funnel</button></div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card__h"><div><h3>Signup → Paid Conversion</h3><div class="sub">Average conversion: 7.1%</div></div></div>
+          <div class="funnel" style="margin-top:18px">
+            <div class="funnel__step"><div class="funnel__fill" style="width:100%;background:var(--g1)"></div><div class="funnel__n mono">12,400</div><div class="funnel__m"><b>Visitors</b><span>Landed on any page</span></div></div>
+            <div class="funnel__arrow">▼ 30.97% continued</div>
+            <div class="funnel__step" style="margin:0 4%"><div class="funnel__fill" style="width:92%;background:var(--g2)"></div><div class="funnel__n mono">3,840</div><div class="funnel__m"><b>Signed Up</b><span>Created an account</span></div><span class="funnel__pct">31.0%</span></div>
+            <div class="funnel__arrow">▼ 76.0% continued</div>
+            <div class="funnel__step" style="margin:0 9%"><div class="funnel__fill" style="width:84%;background:var(--g3)"></div><div class="funnel__n mono">2,920</div><div class="funnel__m"><b>Trial Started</b><span>Completed onboarding</span></div><span class="funnel__pct">76.0%</span></div>
+            <div class="funnel__arrow">▼ 63.0% continued</div>
+            <div class="funnel__step" style="margin:0 14%"><div class="funnel__fill" style="width:76%;background:var(--g4)"></div><div class="funnel__n mono">1,840</div><div class="funnel__m"><b>Activated</b><span>Used a core feature</span></div><span class="funnel__pct">63.0%</span></div>
+            <div class="funnel__arrow">▼ 47.9% continued</div>
+            <div class="funnel__step" style="margin:0 20%"><div class="funnel__fill" style="width:60%;background:var(--g1)"></div><div class="funnel__n mono">882</div><div class="funnel__m"><b>Paid</b><span>Converted to paid plan</span></div><span class="funnel__pct">47.9%</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card__h"><div><h3>Drop-off Analysis</h3><div class="sub">Biggest conversion gaps</div></div></div>
+          <div style="display:flex;flex-direction:column;gap:16px;margin-top:14px">
+            <div><div class="goal__t" style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:8px"><b>Visitor → Signup</b><span class="mono" style="color:var(--bad)">−69%</span></div><div class="bar"><i data-bar="31" style="background:var(--bad)"></i></div><div style="font-size:.72rem;color:var(--faint);margin-top:5px">8,560 dropped off — improve landing page CTA clarity</div></div>
+            <div><div class="goal__t" style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:8px"><b>Trial → Activated</b><span class="mono" style="color:var(--warn)">−37%</span></div><div class="bar"><i data-bar="63" style="background:var(--warn)"></i></div><div style="font-size:.72rem;color:var(--faint);margin-top:5px">1,080 dropped off — simplify first-use experience</div></div>
+            <div><div class="goal__t" style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:8px"><b>Activated → Paid</b><span class="mono" style="color:var(--g1)">−52%</span></div><div class="bar"><i data-bar="48" style="background:var(--g2)"></i></div><div style="font-size:.72rem;color:var(--faint);margin-top:5px">958 dropped off — add upgrade prompts at value moments</div></div>
+          </div>
+          <div style="border-top:1px solid var(--line);margin-top:22px;padding-top:18px">
+            <div class="card__h" style="margin-bottom:8px"><div><h3 style="font-size:.9rem">Industry Benchmark</h3></div></div>
+            <div class="src">
+              <div class="src__i"><i style="background:var(--g1)"></i><span>Your conversion</span><span class="pct" style="color:var(--g1)">7.1%</span></div>
+              <div class="src__i"><i style="background:var(--faint)"></i><span>Industry avg (SaaS)</span><span class="pct">4.8%</span></div>
+              <div class="src__i"><i style="background:var(--g4)"></i><span>Top quartile</span><span class="pct">12%+</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /p-funnels -->
+
+    <!-- ===== PAGE: INTEGRATIONS ===== -->
+    <div class="page" id="p-integrations">
+      <div class="ph">
+        <div class="ph__l"><h2>Integrations</h2><p>5 connected · 6 available</p></div>
+        <label class="inl-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search integrations…" /></label>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Connected</h3><div class="sub">Active integrations syncing with Pulse</div></div></div>
+        <div class="int-grid" style="margin-top:14px">
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(99,91,255,.14)"><svg viewBox="0 0 24 24" fill="#635bff"><path d="M13.5 9.4c0-.7.6-1 1.5-1 1.3 0 3 .4 4.3 1.1V5.7A11.4 11.4 0 0015 5c-3 0-5 1.6-5 4.2 0 4.1 5.6 3.4 5.6 5.2 0 .8-.7 1.1-1.7 1.1-1.4 0-3.3-.6-4.7-1.4v4c1.6.7 3.2 1 4.7 1 3.1 0 5.2-1.5 5.2-4.2 0-4.4-5.6-3.6-5.6-5.5z"/></svg></span><div class="int-card__m"><b>Stripe</b><span>Payments & billing</span></div></div><p>Sync payment events, subscriptions, and invoices in real-time.</p><div class="int-card__foot"><span class="st ok"><i></i>Connected</span><button class="btn-sm conn">Configure</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(74,21,75,.22)"><svg viewBox="0 0 24 24"><path fill="#36C5F0" d="M5.5 14.5A2 2 0 113.5 12.5h2z"/><path fill="#2EB67D" d="M9.5 5.5A2 2 0 1111.5 3.5v2z"/><path fill="#ECB22E" d="M18.5 9.5A2 2 0 1120.5 11.5h-2z"/><path fill="#E01E5A" d="M14.5 18.5A2 2 0 1112.5 20.5v-2z"/><circle cx="9.5" cy="14.5" r="2" fill="#36C5F0"/><circle cx="9.5" cy="9.5" r="2" fill="#2EB67D"/><circle cx="14.5" cy="9.5" r="2" fill="#ECB22E"/><circle cx="14.5" cy="14.5" r="2" fill="#E01E5A"/></svg></span><div class="int-card__m"><b>Slack</b><span>Notifications & alerts</span></div></div><p>Get real-time alerts for payments, churn events, and milestones.</p><div class="int-card__foot"><span class="st ok"><i></i>Connected</span><button class="btn-sm conn">Configure</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(255,255,255,.07)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a4 4 0 011-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 015 0c1.9-1.3 2.7-1 2.7-1 .6 1.4.2 2.4.1 2.7a4 4 0 011 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7 1 .7 1.8v2.7c0 .3.2.6.7.5A10 10 0 0012 2z"/></svg></span><div class="int-card__m"><b>GitHub</b><span>Dev activity</span></div></div><p>Track deploys and link code commits to revenue events.</p><div class="int-card__foot"><span class="st ok"><i></i>Connected</span><button class="btn-sm conn">Configure</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(255,255,255,.07)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M5 5v14h14V8.8L15.2 5H5z" opacity=".15"/><path d="M5 5v14h14V8.8L15.2 5H5zm3 4h6v1.5H8zm0 3h8v1.5H8zm0 3h8v1.5H8z"/></svg></span><div class="int-card__m"><b>Notion</b><span>Docs & wikis</span></div></div><p>Sync customer notes and meeting summaries to Notion pages.</p><div class="int-card__foot"><span class="st ok"><i></i>Connected</span><button class="btn-sm conn">Configure</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(94,106,210,.18)"><svg viewBox="0 0 24 24" fill="#5E6AD2"><path d="M3 13.5L10.5 21A9 9 0 013 13.5zM3.2 11L13 20.8a9 9 0 002.3-.8L4 8.7zm1.8-3.7L16.7 19a9 9 0 001.6-1.4L6.4 5.7zm3-2.6a9 9 0 0112 12z"/></svg></span><div class="int-card__m"><b>Linear</b><span>Issue tracking</span></div></div><p>Turn churn signals into Linear issues assigned to your team.</p><div class="int-card__foot"><span class="st ok"><i></i>Connected</span><button class="btn-sm conn">Configure</button></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Available</h3><div class="sub">Add more tools to your workspace</div></div></div>
+        <div class="int-grid" style="margin-top:14px">
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(255,122,0,.12)"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="#FF7A00" opacity=".8"/><path d="M9 8.5l7 3.5-7 3.5V8.5z" fill="#fff"/></svg></span><div class="int-card__m"><b>HubSpot</b><span>CRM sync</span></div></div><p>Bi-directional CRM sync for contacts, deals, and lifecycle stages.</p><div class="int-card__foot"><span class="st" style="color:var(--faint)">Not connected</span><button class="btn-sm">Connect</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(0,161,224,.12)"><svg viewBox="0 0 24 24" fill="#00A1E0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 5a3 3 0 110 6 3 3 0 010-6zm0 11a7.97 7.97 0 01-6-2.72C7.11 14.46 9.41 13 12 13s4.89 1.46 6 3.28A7.97 7.97 0 0112 18z"/></svg></span><div class="int-card__m"><b>Salesforce</b><span>Enterprise CRM</span></div></div><p>Push Pulse customer health scores directly into Salesforce records.</p><div class="int-card__foot"><span class="st" style="color:var(--faint)">Not connected</span><button class="btn-sm">Connect</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(255,255,255,.06)"><svg viewBox="0 0 24 24" fill="#F24E1E"><path d="M8 2h4v4H8a2 2 0 110-4z"/><path fill="#FF7262" d="M12 2h0a2 2 0 110 4h0z"/><path fill="#A259FF" d="M12 6h0a2 2 0 110 4h0z"/><path fill="#1ABCFE" d="M8 6h4v4H8a2 2 0 110-4z"/><path fill="#0ACF83" d="M8 10h4v2a2 2 0 11-4 0z"/></svg></span><div class="int-card__m"><b>Figma</b><span>Design files</span></div></div><p>Link product designs to feature flags and revenue attribution.</p><div class="int-card__foot"><span class="st" style="color:var(--faint)">Not connected</span><button class="btn-sm">Connect</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(22,96,255,.12)"><svg viewBox="0 0 24 24" fill="#1660FF"><circle cx="12" cy="12" r="10"/><path d="M12 7v10M7 12h10" stroke="#fff" stroke-width="2"/></svg></span><div class="int-card__m"><b>Intercom</b><span>Customer support</span></div></div><p>Show plan and MRR data inside every Intercom conversation.</p><div class="int-card__foot"><span class="st" style="color:var(--faint)">Not connected</span><button class="btn-sm">Connect</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(52,152,219,.12)"><svg viewBox="0 0 24 24" fill="none" stroke="#3498db" stroke-width="1.8"><path d="M3 3l18 18M3 21L21 3"/></svg></span><div class="int-card__m"><b>Segment</b><span>Data pipeline</span></div></div><p>Route all your product events through Segment into Pulse.</p><div class="int-card__foot"><span class="st" style="color:var(--faint)">Not connected</span><button class="btn-sm">Connect</button></div></div>
+          <div class="int-card"><div class="int-card__top"><span class="int-card__g" style="background:rgba(255,100,10,.12)"><svg viewBox="0 0 24 24" fill="#FF640A"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm1 14.5l-5-3 5-3v6z"/></svg></span><div class="int-card__m"><b>Zapier</b><span>Workflow automation</span></div></div><p>Connect Pulse to 5,000+ apps with no-code Zap workflows.</p><div class="int-card__foot"><span class="st" style="color:var(--faint)">Not connected</span><button class="btn-sm">Connect</button></div></div>
+        </div>
+      </div>
+    </div><!-- /p-integrations -->
+
+    <!-- ===== PAGE: ACTIVITY ===== -->
+    <div class="page" id="p-activity">
+      <div class="ph">
+        <div class="ph__l"><h2>Activity</h2><p>Live event stream across all workspaces.</p></div>
+        <div class="chips" id="act-chips">
+          <button class="chip on" data-act="all">All</button>
+          <button class="chip" data-act="payment">Payments</button>
+          <button class="chip" data-act="user">Users</button>
+          <button class="chip" data-act="system">System</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="feed" id="act-feed">
+          <div class="feed__i" data-type="payment"><span class="feed__ic" style="color:var(--g1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span><div class="feed__b"><p><b>Sarah Chen</b> upgraded to <span class="hl">Pro plan</span> — $49/mo</p><div class="feed__t">2 minutes ago · Stripe</div></div></div>
+          <div class="feed__i" data-type="payment"><span class="feed__ic" style="color:var(--g2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span><div class="feed__b"><p>Payment of <span class="hl">$499.00</span> received from <b>Marcus Webb</b></p><div class="feed__t">14 minutes ago · Stripe</div></div></div>
+          <div class="feed__i" data-type="user"><span class="feed__ic" style="color:var(--g3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="3.5"/><path d="M5 21a7 7 0 0114 0"/></svg></span><div class="feed__b"><p><b>Elena Rodriguez</b> started a free trial</p><div class="feed__t">1 hour ago · Signup flow</div></div></div>
+          <div class="feed__i" data-type="system"><span class="feed__ic" style="color:var(--g4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg></span><div class="feed__b"><p>Milestone reached: <span class="hl">18,000 active users</span> 🎉</p><div class="feed__t">3 hours ago · System</div></div></div>
+          <div class="feed__i" data-type="payment"><span class="feed__ic" style="color:var(--bad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10.3 3.9l-8 14A2 2 0 004 21h16a2 2 0 001.7-3.1l-8-14a2 2 0 00-3.4 0zM12 9v4M12 17h.01"/></svg></span><div class="feed__b"><p>Payment from <b>Aisha Khan</b> <span style="color:var(--bad)">failed</span> — card declined</p><div class="feed__t">5 hours ago · Stripe</div></div></div>
+          <div class="feed__i" data-type="user"><span class="feed__ic" style="color:var(--g1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="3.5"/><path d="M5 21a7 7 0 0114 0"/></svg></span><div class="feed__b"><p><b>Tom Holloway</b> signed up via Product Hunt</p><div class="feed__t">6 hours ago · Signup flow</div></div></div>
+          <div class="feed__i" data-type="system"><span class="feed__ic" style="color:var(--g2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><circle cx="17" cy="17" r="4"/></svg></span><div class="feed__b"><p>Stripe integration synced <span class="hl">284 transactions</span> from last 30 days</p><div class="feed__t">8 hours ago · Integration</div></div></div>
+          <div class="feed__i" data-type="payment"><span class="feed__ic" style="color:var(--g3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span><div class="feed__b"><p><b>Priya Nair</b> renewed Enterprise plan — <span class="hl">$499.00</span></p><div class="feed__t">Yesterday · Stripe</div></div></div>
+          <div class="feed__i" data-type="user"><span class="feed__ic" style="color:var(--warn)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0111 0"/></svg></span><div class="feed__b"><p><b>Carlos Diaz</b> churned from Pro — <span style="color:var(--bad)">cancellation reason: too expensive</span></p><div class="feed__t">Yesterday · Cancellation</div></div></div>
+          <div class="feed__i" data-type="system"><span class="feed__ic" style="color:var(--g1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 4h16v16H4zM8 2v2M16 2v2M4 10h16"/></svg></span><div class="feed__b"><p>Scheduled report <span class="hl">Revenue Summary</span> sent to wan.alvaro09@gmail.com</p><div class="feed__t">2 days ago · Reports</div></div></div>
+          <div class="feed__i" data-type="user"><span class="feed__ic" style="color:var(--g4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="3.5"/><path d="M5 21a7 7 0 0114 0"/></svg></span><div class="feed__b"><p><b>Leila Morse</b> invited 2 team members to Pro workspace</p><div class="feed__t">2 days ago · Workspace</div></div></div>
+          <div class="feed__i" data-type="payment"><span class="feed__ic" style="color:var(--g2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span><div class="feed__b"><p>Batch payout of <span class="hl">$12,400</span> processed to Stripe Connect</p><div class="feed__t">3 days ago · Stripe</div></div></div>
+        </div>
+      </div>
+    </div><!-- /p-activity -->
+
+    <!-- ===== PAGE: SETTINGS ===== -->
+    <div class="page" id="p-settings">
+      <div class="ph"><div class="ph__l"><h2>Settings</h2><p>Manage your account and workspace preferences.</p></div></div>
+      <div class="set-sec">
+        <h3>Profile</h3>
+        <div class="sub">Your personal information and display preferences.</div>
+        <div class="av-row">
+          <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=120&h=120&fit=crop&crop=faces&auto=format" alt="" />
+          <div class="av-m"><b>Alvaro W.</b><span>Workspace admin · Acme Inc.</span><br><button class="btn-sm" style="margin-top:8px">Upload photo</button></div>
+        </div>
+        <div class="set-grid">
+          <div class="sf"><label>Display Name</label><input value="Alvaro W." /></div>
+          <div class="sf"><label>Email Address</label><input value="alvaro@acme.io" /></div>
+          <div class="sf"><label>Role</label><select><option>Admin</option><option>Editor</option><option>Viewer</option></select></div>
+          <div class="sf"><label>Timezone</label><select><option>UTC+7 — Jakarta</option><option>UTC+8 — Singapore</option><option>UTC+0 — London</option><option>UTC−5 — New York</option></select></div>
+        </div>
+        <button class="btn-grad" style="font-size:.82rem;padding:9px 20px" id="save-profile">Save changes</button>
+      </div>
+      <div class="set-sec">
+        <h3>Notifications</h3>
+        <div class="sub">Choose which events trigger email or in-app alerts.</div>
+        <div class="tgl-row"><div class="tm"><b>Payment received</b><span>Send an alert when any subscription payment succeeds</span></div><label class="tgl"><input type="checkbox" checked /><span class="tgl__s"></span></label></div>
+        <div class="tgl-row"><div class="tm"><b>Payment failed</b><span>Alert on failed or declined payment attempts</span></div><label class="tgl"><input type="checkbox" checked /><span class="tgl__s"></span></label></div>
+        <div class="tgl-row"><div class="tm"><b>New signup</b><span>Notify when a new user creates an account</span></div><label class="tgl"><input type="checkbox" /><span class="tgl__s"></span></label></div>
+        <div class="tgl-row"><div class="tm"><b>Churn alert</b><span>Alert when a customer cancels their subscription</span></div><label class="tgl"><input type="checkbox" checked /><span class="tgl__s"></span></label></div>
+        <div class="tgl-row"><div class="tm"><b>Weekly digest</b><span>Receive a weekly revenue summary every Monday</span></div><label class="tgl"><input type="checkbox" checked /><span class="tgl__s"></span></label></div>
+        <div class="tgl-row"><div class="tm"><b>Milestone alerts</b><span>Celebrate key metric milestones (MRR, users, etc.)</span></div><label class="tgl"><input type="checkbox" checked /><span class="tgl__s"></span></label></div>
+      </div>
+      <div class="set-sec danger">
+        <h3>Danger Zone</h3>
+        <div class="sub">Irreversible actions — proceed with caution.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+          <div><b style="font-size:.88rem;font-weight:600;display:block">Delete workspace</b><span style="font-size:.74rem;color:var(--muted)">Permanently delete Acme Inc. and all its data. This cannot be undone.</span></div>
+          <button class="btn-danger">Delete workspace</button>
+        </div>
+      </div>
+    </div><!-- /p-settings -->
+
+    <!-- ===== PAGE: HELP ===== -->
+    <div class="page" id="p-help">
+      <div class="ph"><div class="ph__l"><h2>Help &amp; Docs</h2><p>Guides, tutorials, and API references.</p></div></div>
+      <label class="inl-search" style="max-width:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="Search documentation…" style="width:100%" /></label>
+      <div class="doc-grid">
+        <div class="doc-cat"><span class="doc-cat__ic" style="color:var(--g1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg></span><div><b>Getting Started</b><span>Set up your workspace, invite team, configure your first dashboard in under 10 minutes.</span></div></div>
+        <div class="doc-cat"><span class="doc-cat__ic" style="color:var(--g2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span><div><b>Billing &amp; Plans</b><span>Understand your invoice, upgrade or downgrade, manage seats, and billing contacts.</span></div></div>
+        <div class="doc-cat"><span class="doc-cat__ic" style="color:var(--g3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><circle cx="17" cy="17" r="4"/></svg></span><div><b>Integrations</b><span>Step-by-step connection guides for Stripe, Slack, GitHub, HubSpot, and 50+ others.</span></div></div>
+        <div class="doc-cat"><span class="doc-cat__ic" style="color:var(--g4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span><div><b>API &amp; Webhooks</b><span>REST API reference, webhook event schema, authentication, and rate limits.</span></div></div>
+      </div>
+      <div class="card">
+        <div class="card__h"><div><h3>Popular Articles</h3><div class="sub">Most-read this month</div></div></div>
+        <div style="margin-top:6px">
+          <div class="art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg><span class="art-title">How to connect Stripe and start tracking MRR</span><time>5 min read</time></div>
+          <div class="art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg><span class="art-title">Setting up churn alerts and cancellation workflows</span><time>4 min read</time></div>
+          <div class="art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg><span class="art-title">Understanding your Revenue Overview chart</span><time>3 min read</time></div>
+          <div class="art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg><span class="art-title">Creating scheduled reports and email digests</span><time>6 min read</time></div>
+          <div class="art"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg><span class="art-title">API authentication and your first REST request</span><time>8 min read</time></div>
+        </div>
+      </div>
+      <div class="card" style="background:linear-gradient(120deg,rgba(52,211,153,.08),rgba(129,140,248,.08));border-color:rgba(52,211,153,.2)">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+          <div><b style="font-family:var(--f-disp);font-size:1rem;font-weight:600;display:block">Still need help?</b><span style="font-size:.82rem;color:var(--muted)">Our support team replies within 2 hours on business days.</span></div>
+          <button class="btn-grad" style="font-size:.82rem;padding:9px 18px">Contact Support</button>
+        </div>
+      </div>
+    </div><!-- /p-help -->
+
+    <!-- toast notification -->
+    <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg><span id="toast-msg">Changes saved</span></div>
 
     <footer class="f">
       <span>© 2026 Pulse Analytics · v2.4.0</span>
@@ -524,6 +981,53 @@
   var sb=document.querySelector('[data-sb]'), scrim=document.querySelector('[data-scrim]');
   document.querySelector('[data-menu]').addEventListener('click',function(){sb.classList.add('open');scrim.classList.add('show');});
   scrim.addEventListener('click',function(){sb.classList.remove('open');scrim.classList.remove('show');});
+
+  /* ---- toast helper ---- */
+  function showToast(msg){
+    var t=document.getElementById('toast'), m=document.getElementById('toast-msg');
+    m.textContent=msg||'Done'; t.classList.add('show');
+    setTimeout(function(){t.classList.remove('show');},2800);
+  }
+
+  /* ---- nav page switching ---- */
+  var pageMap={
+    dashboard:{title:'Dashboard',crumb:'Overview'},
+    analytics:{title:'Analytics',crumb:'Analytics'},
+    revenue:{title:'Revenue',crumb:'Revenue'},
+    customers:{title:'Customers',crumb:'CRM'},
+    reports:{title:'Reports',crumb:'Workspace · Reports'},
+    funnels:{title:'Funnels',crumb:'Workspace · Funnels'},
+    integrations:{title:'Integrations',crumb:'Workspace · Integrations'},
+    activity:{title:'Activity',crumb:'Live Activity'},
+    settings:{title:'Settings',crumb:'Account · Settings'},
+    help:{title:'Help & Docs',crumb:'Account · Help'}
+  };
+  var analyticsChartDrawn=false, heatmapDrawn=false;
+  document.querySelectorAll('[data-nav]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var key=a.dataset.nav;
+      document.querySelectorAll('[data-nav]').forEach(function(x){x.classList.remove('active');});
+      a.classList.add('active');
+      document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+      var pg=document.getElementById('p-'+key);
+      if(pg){pg.classList.add('active');}
+      var pm=pageMap[key]||{title:key,crumb:key};
+      document.querySelector('.tb__title h1').textContent=pm.title;
+      document.querySelector('.tb__title .crumb b').textContent='/ '+pm.crumb;
+      // close mobile
+      sb.classList.remove('open'); scrim.classList.remove('show');
+      // lazy draw analytics chart + heatmap
+      if(key==='analytics'){
+        if(!analyticsChartDrawn){drawAnalyticsChart();analyticsChartDrawn=true;}
+        if(!heatmapDrawn){drawHeatmap();heatmapDrawn=true;}
+      }
+      // re-observe bars on newly visible page
+      pg.querySelectorAll('[data-bar]').forEach(function(e){
+        var w=e.dataset.bar;
+        setTimeout(function(){e.style.width=w+'%';},80);
+      });
+    });
+  });
 
   /* ---- live clocks ---- */
   function pad(n){return(n<10?'0':'')+n;}
@@ -676,6 +1180,100 @@
 
   /* draw charts on load */
   drawChart('rev'); drawDonut();
+
+  /* ---- analytics user growth chart ---- */
+  function drawAnalyticsChart(){
+    var asvg=document.getElementById('achart'); if(!asvg) return;
+    var data=[820,940,1080,1240,1380,1520,1710,1940,2180,2460,2740,3120];
+    var CW=720,CH=220,PAD=24;
+    var min=Math.min.apply(null,data),max=Math.max.apply(null,data),rng=max-min;
+    var pts=data.map(function(v,i){return[PAD+i*((CW-PAD*2)/(data.length-1)),CH-PAD-((v-min)/rng)*(CH-PAD*2)];});
+    var d=smoothPath(pts);
+    var area=d+' L'+pts[pts.length-1][0]+','+(CH-PAD)+' L'+pts[0][0]+','+(CH-PAD)+' Z';
+    var grid=''; for(var g=0;g<=3;g++){var y=PAD+g*((CH-PAD*2)/3);grid+='<line x1="0" y1="'+y+'" x2="'+CW+'" y2="'+y+'" stroke="rgba(255,255,255,.04)" stroke-width="1"/>';}
+    var months2=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var labels=''; pts.forEach(function(p,i){if(i%2===0)labels+='<text x="'+p[0]+'" y="'+(CH+4)+'" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.3)" font-family="Inter,sans-serif">'+months2[i]+'</text>';});
+    asvg.innerHTML='<defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity=".32"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></linearGradient><linearGradient id="al" x1="0" y1="0" x2="720" y2="0"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>'
+      +grid+labels
+      +'<path d="'+area+'" fill="url(#ag)"/>'
+      +'<path d="'+d+'" fill="none" stroke="url(#al)" stroke-width="2.5" stroke-linecap="round" class="acline"/>';
+    var ln=asvg.querySelector('.acline');
+    if(ln&&!R){var L=ln.getTotalLength();ln.style.strokeDasharray=L;ln.style.strokeDashoffset=L;ln.getBoundingClientRect();ln.style.transition='stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1)';ln.style.strokeDashoffset=0;}
+  }
+
+  /* ---- heatmap ---- */
+  function drawHeatmap(){
+    var c=document.getElementById('heatmap'); if(!c) return;
+    var days=7,hours=24,html='';
+    var heat=[[.1,.2,.1,.1,.2,.3,.4,.5,.7,.9,.8,.7,.6,.8,.9,.8,.7,.6,.5,.4,.3,.2,.1,.1],
+               [.1,.1,.2,.1,.2,.4,.6,.8,.9,1,.9,.8,.7,.9,1,.9,.8,.7,.6,.5,.3,.2,.1,.1],
+               [.1,.2,.1,.1,.3,.5,.7,.9,1,.9,.8,.9,.8,.9,.9,.8,.7,.6,.5,.4,.3,.2,.1,.1],
+               [.1,.1,.1,.1,.3,.5,.7,.8,.9,.9,.8,.7,.7,.8,.9,.8,.7,.6,.5,.3,.2,.1,.1,.1],
+               [.1,.2,.1,.1,.3,.4,.6,.8,.9,.9,.8,.7,.6,.8,.9,.8,.6,.5,.4,.3,.2,.1,.1,.1],
+               [.1,.1,.1,.1,.1,.2,.3,.4,.5,.4,.4,.3,.3,.4,.4,.3,.3,.2,.2,.2,.1,.1,.1,.1],
+               [.1,.1,.1,.1,.1,.1,.2,.2,.3,.3,.2,.2,.2,.2,.2,.2,.2,.1,.1,.1,.1,.1,.1,.1]];
+    var colors=['rgba(52,211,153,','rgba(34,211,238,','rgba(129,140,248,'];
+    for(var d=0;d<days;d++){
+      for(var h=0;h<hours;h++){
+        var v=heat[d][h]||0.05;
+        var ci=v>0.6?0:v>0.3?1:2;
+        html+='<div class="hc" title="'+['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][d]+' '+h+':00 · '+(Math.round(v*180))+' sessions" style="background:'+colors[ci]+v*0.9+')"></div>';
+      }
+    }
+    c.innerHTML=html;
+    // hour labels
+    var lw=document.getElementById('hmap-labels'); if(!lw) return;
+    var lh=''; for(var i=0;i<24;i+=4)lh+='<span style="flex:'+(i===0?'0 0 calc(4*100%/24)':'4');
+    lw.innerHTML='';
+    [0,4,8,12,16,20].forEach(function(h){var s=document.createElement('span');s.textContent=h+'h';s.style.flex='4';lw.appendChild(s);});
+  }
+
+  /* ---- customer search + filter ---- */
+  var custSearch=document.getElementById('cust-search');
+  var custTbody=document.getElementById('cust-tbody');
+  function filterCustomers(){
+    var q=(custSearch?custSearch.value:'').toLowerCase();
+    var f=document.querySelector('[data-cfilter].on');
+    var filt=f?f.dataset.cfilter:'all';
+    if(!custTbody) return;
+    custTbody.querySelectorAll('tr').forEach(function(r){
+      var txt=r.textContent.toLowerCase();
+      var st=r.dataset.status||'';
+      var show=(filt==='all'||st===filt)&&(!q||txt.indexOf(q)>-1);
+      r.style.display=show?'':'none';
+    });
+  }
+  document.querySelectorAll('[data-cfilter]').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('[data-cfilter]').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); filterCustomers();
+    });
+  });
+  if(custSearch) custSearch.addEventListener('input',filterCustomers);
+
+  /* ---- activity filter ---- */
+  document.querySelectorAll('[data-act]').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('[data-act]').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      var f=b.dataset.act;
+      var feed=document.getElementById('act-feed'); if(!feed) return;
+      feed.querySelectorAll('.feed__i').forEach(function(i){
+        i.style.display=(f==='all'||i.dataset.type===f)?'':'none';
+      });
+    });
+  });
+
+  /* ---- settings save ---- */
+  var saveBtn=document.getElementById('save-profile');
+  if(saveBtn) saveBtn.addEventListener('click',function(){showToast('Profile saved successfully');});
+  document.querySelectorAll('.btn-danger').forEach(function(b){
+    b.addEventListener('click',function(){showToast('For demo purposes, no data was deleted.');});
+  });
+  document.querySelectorAll('.btn-sm').forEach(function(b){
+    if(b.textContent.indexOf('↓')>-1) b.addEventListener('click',function(){showToast('Report download started…');});
+    if(b.textContent==='Connect') b.addEventListener('click',function(){showToast('Opening connection wizard…');});
+  });
 })();
 </script>
 </body>
