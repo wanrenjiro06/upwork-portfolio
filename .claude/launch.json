@@ -18,6 +18,18 @@
       "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
       "runtimeArgs": ["-m", "http.server", "3002", "--directory", "C:\\UpWork\\Websites Portfolio\\FashionApparel Store"],
       "port": 3002
+    },
+    {
+      "name": "nexvolt",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3003", "--directory", "C:\\UpWork\\Websites Portfolio\\Nexvolt"],
+      "port": 3003
+    },
+    {
+      "name": "sales-funnel",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3004", "--directory", "C:\\UpWork\\Websites Portfolio\\SalesFunnel"],
+      "port": 3004
     }
   ]
 }

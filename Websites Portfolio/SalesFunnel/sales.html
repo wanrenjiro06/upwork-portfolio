@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConversionOS — Build Funnels That Turn Traffic Into Revenue</title>
+  <meta name="description" content="The complete course + templates for building high-converting sales funnels. Enroll today." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .offer-strip { background: var(--grad); color: #0A0711; text-align: center; font-size: 0.85rem; padding: 11px 16px; font-weight: 600; font-family: var(--font-mono); letter-spacing: 0.04em; position: relative; z-index: 3; }
+    .hero-sales { padding: 70px 0 40px; text-align: center; }
+    .hero-sales h1 { font-size: clamp(2.5rem, 5.6vw, 4.4rem); max-width: 900px; margin: 20px auto 0; }
+    .hero-sales .sub { max-width: 600px; margin: 24px auto 0; font-size: 1.18rem; color: var(--muted); }
+    .hero-sales .cta-row { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero-sales .micro { margin-top: 18px; font-size: 0.85rem; color: var(--faint); font-family: var(--font-mono); letter-spacing: 0.04em; }
+    .mock { max-width: 920px; margin: 52px auto 0; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-2); background: var(--solid); box-shadow: 0 40px 100px rgba(0,0,0,0.55); position: relative; }
+    .mock::before { content:""; position:absolute; inset:0; padding:1px; border-radius:inherit; background:var(--grad); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:.4; pointer-events:none; }
+    .mock__bar { display: flex; gap: 7px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+    .mock__bar i { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,0.14); display: block; }
+    .mock__body { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; padding: 34px; text-align: left; }
+    .mock__body .l h4 { font-size: 1.5rem; }
+    .mock__body .l p { color: var(--muted); margin: 10px 0 18px; font-size: .95rem; }
+    .mock__pill { height: 40px; border-radius: 10px; background: var(--grad); width: 62%; box-shadow: 0 8px 24px rgba(124,76,196,0.4); }
+    .mock__r { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius); display: grid; gap: 10px; padding: 20px; align-content: start; }
+    .mock__r span { height: 12px; border-radius: 6px; background: rgba(255,255,255,0.10); }
+    .mock__r span:nth-child(2){ width: 80%; } .mock__r span:nth-child(3){ width: 90%; } .mock__r span:nth-child(4){ width: 65%; }
+    .mock__r .g { background: var(--grad-soft); height: 56px; border-radius: 10px; }
+    .incl { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 860px; margin: 0 auto; }
+    .incl__item { display: flex; gap: 14px; align-items: flex-start; background: rgba(255,255,255,0.045); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
+    .incl__item .tick { margin-top: 3px; }
+    .incl__item b { display: block; font-family: var(--font-display); font-size: 1.05rem; }
+    .incl__item p { color: var(--muted); font-size: 0.92rem; margin-top: 4px; }
+    .toggle-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 30px; font-weight: 600; color: var(--faint); }
+    .switch { width: 56px; height: 30px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border-2); cursor: pointer; position: relative; padding: 0; }
+    .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--grad); transition: transform .3s var(--ease); }
+    .switch.on::after { transform: translateX(26px); }
+    .toggle-row .active { color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="aurora"><span class="aurora__blob b1"></span><span class="aurora__blob b2"></span><span class="aurora__blob b3"></span><span class="aurora__blob b4"></span></div>
+  <div class="grain"></div>
+
+  <div class="offer-strip">Launch pricing ends soon — save $300 on lifetime access · blueprint sent to <span data-greet-email>your inbox</span></div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="brand"><span class="brand__mark">C</span> ConversionOS</a>
+      <nav class="nav__links">
+        <a href="#curriculum">Curriculum</a>
+        <a href="#proof">Results</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav__cta">
+        <a href="#pricing" class="btn btn--light">Enroll now <span class="arrow">↗</span></a>
+      </div>
+      <button class="nav__toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-sales">
+    <div class="wrap">
+      <span class="kicker"><span class="gd"></span> [ The complete funnel system ]</span>
+      <h1>Build funnels that turn <span class="grad-text">traffic into revenue.</span></h1>
+      <p class="sub">ConversionOS is the page-by-page course, template library, and tracking system that takes you from "nice-looking page" to "predictable sales machine."</p>
+      <div class="cta-row">
+        <a href="#pricing" class="btn btn--grad btn--lg">Enroll today — $197 <span class="arrow">↗</span></a>
+        <a href="#curriculum" class="btn btn--ghost btn--lg">See what's inside</a>
+      </div>
+      <p class="micro">★ 4.9/5 from 1,200+ students · 30-day money-back guarantee</p>
+
+      <div class="mock reveal">
+        <div class="mock__bar"><i></i><i></i><i></i></div>
+        <div class="mock__body">
+          <div class="l">
+            <h4>Module 04 — The Checkout That Closes</h4>
+            <p>Reduce friction, stack the proof, and frame the price so saying yes feels obvious.</p>
+            <div class="mock__pill"></div>
+          </div>
+          <div class="mock__r"><span></span><span></span><span></span><span></span><div class="g"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat reveal"><div class="stat__num" data-count="6">0</div><div class="stat__label">Core modules</div></div>
+        <div class="stat reveal"><div class="stat__num" data-count="40" data-suffix="+">0</div><div class="stat__label">Templates &amp; swipe files</div></div>
+        <div class="stat reveal"><div class="stat__num" data-count="1200" data-suffix="+">0</div><div class="stat__label">Students enrolled</div></div>
+        <div class="stat reveal"><div class="stat__num" data-count="4.9">0</div><div class="stat__label">Average rating</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="section" id="curriculum">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker"><span class="gd"></span> What's inside</span>
+        <h2>Everything you need to build &amp; ship a <span class="grad-text">funnel</span></h2>
+        <p>Six focused modules. No filler. Each one ends with a template you drop straight into your own funnel.</p>
+      </div>
+      <div class="incl">
+        <div class="incl__item reveal"><span class="tick">✓</span><div><b>01 · Funnel Strategy &amp; Offer</b><p>Map the journey and shape an offer people actually want to buy.</p></div></div>
+        <div class="incl__item reveal"><span class="tick">✓</span><div><b>02 · The Lead-Magnet Page</b><p>Opt-in pages that convert cold traffic into a list you own.</p></div></div>
+        <div class="incl__item reveal"><span class="tick">✓</span><div><b>03 · The Sales Page Framework</b><p>Hook, story, proof, and offer in the order that sells.</p></div></div>
+        <div class="incl__item reveal"><span class="tick">✓</span><div><b>04 · The Checkout That Closes</b><p>Order bumps, guarantees, and friction-free buy flows.</p></div></div>
+        <div class="incl__item reveal"><span class="tick">✓</span><div><b>05 · Upsells &amp; Order Bumps</b><p>Increase order value without being pushy or spammy.</p></div></div>
+        <div class="incl__item reveal"><span class="tick">✓</span><div><b>06 · Track, Test &amp; Optimize</b><p>Find the leak with simple metrics and fix what matters.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker"><span class="gd"></span> Why ConversionOS</span>
+        <h2>A full-stack funnel solution</h2>
+      </div>
+      <div class="cards">
+        <div class="card reveal"><div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div><h3>Templates, not theory</h3><p>Every lesson hands you a copy-paste template — pages, emails, and checklists ready to ship.</p></div>
+        <div class="card reveal"><div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v14h16"/><path d="M7 14l4-4 3 3 5-6"/></svg></div><h3>Built on real data</h3><p>The frameworks come from funnels that moved $30M+ — not blog-post guesswork.</p></div>
+        <div class="card reveal"><div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"/></svg></div><h3>Ship in a weekend</h3><p>Follow the build order and launch a complete funnel in days, not months.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="proof">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker"><span class="gd"></span> Student results</span>
+        <h2>What students say after enrolling</h2>
+      </div>
+      <div class="quotes">
+        <div class="quote reveal"><div class="quote__stars">★★★★★</div><p>"I'd taken three other 'funnel' courses. This is the only one that actually showed me the pages, in order, with templates. Launched in a weekend."</p><div class="quote__who"><div class="avatar">JT</div><div><b>Jonah Tan</b><span>SaaS Founder</span></div></div></div>
+        <div class="quote reveal"><div class="quote__stars">★★★★★</div><p>"Module 5 doubled my average order value with a single order bump. The course paid for itself on day one."</p><div class="quote__who"><div class="avatar">EP</div><div><b>Elise Park</b><span>Course Creator</span></div></div></div>
+        <div class="quote reveal"><div class="quote__stars">★★★★★</div><p>"We use the tracking sheet across every client funnel now. It turned 'I think it's working' into 'here's exactly what's working.'"</p><div class="quote__who"><div class="avatar">DR</div><div><b>Dan Rivera</b><span>Agency Owner</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker"><span class="gd"></span> Enroll today</span>
+        <h2>Simple pricing, <span class="grad-text">lifetime access</span></h2>
+        <p>One payment. Every module, template, and future update — yours forever.</p>
+      </div>
+
+      <div class="toggle-row reveal">
+        <span class="active" id="lbl-once">One-time</span>
+        <button class="switch" data-plan-toggle aria-label="Toggle plan"></button>
+        <span id="lbl-monthly">3-month plan</span>
+      </div>
+
+      <div class="price-card reveal">
+        <span class="badge badge--grad"><svg class="ico-inline" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg> Best value</span>
+        <h3 style="margin-top:16px;">ConversionOS — Complete</h3>
+        <div class="price-amt">
+          <span class="now">$<span data-price-now data-once="197" data-monthly="79">197</span></span>
+          <span class="was">$497</span>
+          <span class="save">Save $300</span>
+        </div>
+        <p style="color:var(--faint); font-size:0.9rem;" data-price-note>one-time payment, lifetime access</p>
+        <ul class="price-list">
+          <li><span class="tick">✓</span> All 6 modules + lifetime updates</li>
+          <li><span class="tick">✓</span> 40+ templates, swipe files &amp; checklists</li>
+          <li><span class="tick">✓</span> The funnel tracking spreadsheet</li>
+          <li><span class="tick">✓</span> Private student community access</li>
+          <li><span class="tick">✓</span> 30-day money-back guarantee</li>
+        </ul>
+        <a href="upsell.html" class="btn btn--grad btn--block btn--lg">Enroll now &amp; get instant access <span class="arrow">↗</span></a>
+        <p class="guarantee">Secure checkout · 30-day refund · cancel anytime</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker"><span class="gd"></span> Questions we get</span>
+        <h2>Before you enroll</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item reveal"><button class="faq__q">Do I need a big audience or paid ads to start? <span class="ico">+</span></button><div class="faq__a"><p>No. The framework works whether you get traffic from ads, content, email, or referrals. We focus on converting the traffic you already have.</p></div></div>
+        <div class="faq__item reveal"><button class="faq__q">What if I'm not technical? <span class="ico">+</span></button><div class="faq__a"><p>Every lesson is tool-agnostic and template-driven. If you can edit a document, you can build these pages on whatever platform you already use.</p></div></div>
+        <div class="faq__item reveal"><button class="faq__q">How long until I see results? <span class="ico">+</span></button><div class="faq__a"><p>Most students ship their first funnel within a week. Conversion improvements depend on your offer and traffic, but the leaks the course fixes are the most common ones.</p></div></div>
+        <div class="faq__item reveal"><button class="faq__q">Is there really a refund? <span class="ico">+</span></button><div class="faq__a"><p>Yes — 30 days, no questions asked. Go through the material, build your funnel, and if it isn't for you, email us for a full refund.</p></div></div>
+        <div class="faq__item reveal"><button class="faq__q">Will the templates fit my niche? <span class="ico">+</span></button><div class="faq__a"><p>The templates are structural, not niche-specific. Coaches, SaaS, e-commerce, and agencies all use the same underlying funnel logic — you just drop in your offer.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner reveal">
+    <div class="wrap">
+      <h2>Stop guessing. <span class="grad-text">Start converting.</span></h2>
+      <p>Join 1,200+ founders and creators building funnels that actually sell — with lifetime access for one payment.</p>
+      <a href="upsell.html" class="btn btn--light btn--lg">Enroll in ConversionOS <span class="arrow">↗</span></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="brand"><span class="brand__mark">C</span> ConversionOS</a>
+          <p>The funnel system for growth-focused founders, creators, and agencies.</p>
+        </div>
+        <div><h4>Product</h4><ul><li><a href="#curriculum">Curriculum</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#proof">Results</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Case studies</a></li><li><a href="#">Contact</a></li></ul></div>
+        <div><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Refunds</a></li></ul></div>
+      </div>
+      <div class="footer__bar">
+        <span>© <span data-year>2026</span> ConversionOS — All rights reserved</span>
+        <span>Portfolio demo · not a live product</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    (function(){
+      var sw = document.querySelector('[data-plan-toggle]');
+      var once = document.getElementById('lbl-once');
+      var monthly = document.getElementById('lbl-monthly');
+      if(sw){ sw.addEventListener('click', function(){
+        var on = sw.classList.contains('on');
+        once.classList.toggle('active', !on);
+        monthly.classList.toggle('active', on);
+      });}
+    })();
+  </script>
+</body>
+</html>

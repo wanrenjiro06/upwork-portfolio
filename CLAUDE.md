@@ -586,3 +586,176 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
 3. If no after 3 days → Buy connects, apply to other quality jobs
 4. Focus on 40 hrs/week, daily commits, weekly Monday progress reports
 5. Build reputation through this contract (22+ weeks of visible, steady work)
+
+---
+
+## Portfolio Management Workflow
+
+**Repository:** `upwork-portfolio` (GitHub, master branch)
+
+This is your central portfolio repo tracking all shareable website projects. Every portfolio item lives here, with preview servers configured in `launch.json` for local testing.
+
+### Portfolio Structure
+
+```
+C:\UpWork\Websites Portfolio\
+├── Quillo (AI Writing SaaS landing page)
+│   ├── index.html (1,365 lines, animated SaaS landing page)
+│   └── Netlify URL: https://quillo-ai-writer.netlify.app/
+│
+├── Creative Agency Portfolio (Meridian)
+│   ├── index.html (animated creative portfolio)
+│   └── Netlify URL: https://meridian-creative.netlify.app/
+│
+├── FashionApparel Store (Lumira)
+│   ├── index.html (e-commerce with filters & cart)
+│   └── Netlify URL: https://lumira-apparel.netlify.app/
+│
+├── Nexvolt (Analytics automation SaaS)
+│   ├── index.html (premium animated landing page)
+│   └── Netlify URL: (to be deployed)
+│
+├── SalesFunnel (ConversionOS — funnel course)
+│   ├── index.html      (Page 1: Lead Magnet opt-in)
+│   ├── sales.html      (Page 2: Sales Page — pricing toggle, FAQ)
+│   ├── upsell.html     (Page 3: Order Bump / one-time offer)
+│   ├── thankyou.html   (Page 4: Confirmation — receipt math)
+│   ├── styles.css      (shared design system)
+│   ├── script.js       (form carry-through, accordion, count-up)
+│   └── Netlify URL: (to be deployed)
+│   NOTE: 4-page funnel, "FLUX" design system (unique, NOT a
+│   template copy): animated aurora mesh (magenta→violet→indigo
+│   →cyan), film-grain, Bricolage Grotesque + JetBrains Mono type,
+│   mono [ 01 — ... ] kickers, animated gradient headlines.
+│   
+│   SIGNATURE FEATURE: "funnel-thread" spine
+│   - Gradient line runs top→bottom center
+│   - Nodes (01/02/03) sit ON the line at card top-center
+│   - Cards are opaque so line only shows in gaps (clean connection)
+│   - Cards narrow as you descend: 01 (100%) → 02 (86%) → 03 (72%)
+│   - Visual metaphor: "each step narrows the journey"
+│   
+│   DESIGN UPDATES (fixed):
+│   - Replaced all emoji with clean SVG icons (stroke style)
+│   - Features: target, staircase, shield-check
+│   - Why section: grid, line-chart, bolt
+│   - Badges: star, lock
+│   - Removed decorative emoji from strips
+│   - Professional, coherent visual language
+│   
+│   EMAIL CARRY-THROUGH: sessionStorage via Page 1 → Page 2+ flow.
+│   ORDER BUMP MATH: $197 + $37 = $234 (verified on thank-you).
+│   
+│   PERF LEARNINGS:
+│   - Heavy blur + many backdrop-filters + scale() keyframes → renderer
+│     wedge (screenshot timeouts). Fixes: translate-only drift, limit
+│     backdrop-filter to nav/optin/pricing, self-halting rAF, prefers
+│     -reduced-motion support.
+│   - Browser CSS cache can cause stale styles. Solution: restart the
+│     preview server to force fresh renderer + clean CSS load.
+│
+└── [Future pieces: Blog/CMS, Dashboard, etc.]
+```
+
+### How to Build a New Portfolio Item
+
+**Step 1: Create Folder & File**
+```bash
+cd "C:\UpWork\Websites Portfolio"
+mkdir "FolderName"          # Every first letter capital (e.g., SalesFunnel, BlogTemplate)
+cd "FolderName"
+# Create index.html with complete self-contained code (inline styles + scripts)
+```
+
+**Step 2: Add Preview Server to launch.json**
+
+Edit `C:\UpWork\.claude\launch.json` and add a new configuration:
+```json
+{
+  "name": "kebab-case-name",
+  "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+  "runtimeArgs": ["-m", "http.server", "PORT", "--directory", "FULL_PATH_TO_FOLDER"],
+  "port": PORT
+}
+```
+
+**Example (for Sales Funnel):**
+```json
+{
+  "name": "sales-funnel",
+  "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+  "runtimeArgs": ["-m", "http.server", "3004", "--directory", "C:\\UpWork\\Websites Portfolio\\SalesFunnel"],
+  "port": 3004
+}
+```
+
+**Ports already used:**
+- 3000: Quillo (AI Writing Assistant)
+- 3001: Meridian (Creative Agency Portfolio)
+- 3002: Lumira (FashionApparel Store)
+- 3003: Nexvolt (Analytics SaaS)
+- 3004+: Available for new items
+
+**Step 3: Test Locally**
+
+```bash
+# In Claude Code, click the Server icon and select the preview server name
+# Or press F1 and type "Preview: Start Server"
+# Then open http://localhost:PORT to verify
+```
+
+**Step 4: Deploy to Netlify**
+
+```bash
+# Install Netlify CLI (one-time)
+npm install -g netlify-cli
+
+# Login to Netlify
+netlify login
+
+# Deploy the folder
+cd "C:\UpWork\Websites Portfolio\FolderName"
+netlify deploy --prod
+
+# Copy the live URL → add to Upwork portfolio item
+```
+
+**Step 5: Add to Upwork Portfolio**
+
+1. Go to https://www.upwork.com/freelancers/settings/portfolio
+2. Click "Add portfolio item"
+3. Paste the Netlify URL
+4. Add title, description, skills, and your role
+5. Publish
+
+### Quick Reference: Preview Server Ports
+
+| Portfolio Item | Folder Name | Port | Launch.json Entry |
+|---|---|---|---|
+| Quillo | AI Writing Assistant | 3000 | ai-writing-assistant ✅ |
+| Meridian | Creative Agency Portfolio | 3001 | creative-agency ✅ |
+| Lumira | FashionApparel Store | 3002 | fashion-store ✅ |
+| Nexvolt | Nexvolt | 3003 | nexvolt ✅ |
+| ConversionOS (Sales Funnel) | SalesFunnel | 3004 | sales-funnel ✅ |
+| Blog/CMS | BlogTemplate | 3005 | blog-template (to add) |
+| Dashboard | Dashboard | 3006 | dashboard (to add) |
+
+### Workflow When Building New Portfolio Pieces
+
+1. **Plan** — Decide what to build (Sales Funnel, Blog, Dashboard, etc.)
+2. **Code** — Build in `C:\UpWork\Websites Portfolio\[FolderName]\index.html`
+3. **Configure** — Add preview server to `launch.json`
+4. **Test** — Preview locally via Claude Code server
+5. **Deploy** — Push to Netlify via CLI
+6. **Portfolio** — Add live URL to Upwork portfolio section
+7. **Git** — Commit to master branch: `git add . && git commit -m "Add [Name] portfolio item"`
+8. **Done** — Item now live and searchable on Upwork
+
+### Important Notes
+
+- **Every portfolio item = 1 self-contained HTML file** (inline CSS + JS, only external imports = Google Fonts / Netlify API if needed)
+- **No framework complexity** — Vanilla HTML/CSS/JavaScript only (easier to maintain, faster to load)
+- **Netlify = free hosting** — Deploy as many as you want
+- **Git master = source of truth** — Always commit working portfolio code
+- **One item per folder** — Keeps organization clean
+- **Responsive design** — Test on mobile (375px), tablet (768px), desktop (1024px+)
