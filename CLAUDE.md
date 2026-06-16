@@ -937,6 +937,170 @@ justifies maximum effort, layer these on top of the toolkit above:
   it by tying the 3D object's shader uniforms (distortion, color, rotation) to scroll
   progress so the visual literally tells the story.
 
+---
+
+## PEAK TECHNIQUES — The Absolute Best of the Best in Web Design
+
+These are the world-class techniques used by studios that win Awwwards SOTD, FWA, and
+work for Apple/Nike/Google. No trade-off thinking — pure capability reference.
+
+### #1 WORLD PEAK — SDF Ray Marching (GLSL Fragment Shaders)
+The single most advanced visual technique in web design. Used by: Active Theory, Resn,
+Unit9, Inigo Quilez (shadertoy.com author). Renders infinite 3D detail with ZERO geometry
+— every pixel is computed by solving a ray-distance equation in the GPU fragment shader.
+Can produce: volumetric fog, subsurface scattering, soft shadows, ambient occlusion,
+infinite procedural worlds — all from pure math, no 3D models needed.
+
+```glsl
+// SDF Ray Marching — core loop in fragment shader
+float map(vec3 p) {
+  return length(p) - 1.0; // sphere SDF — distance to surface
+}
+vec3 rayMarch(vec3 ro, vec3 rd) {
+  float t = 0.0;
+  for(int i=0; i<100; i++) {
+    vec3 p = ro + rd * t;
+    float d = map(p);           // how far to nearest surface
+    if(d < 0.001) break;        // hit
+    t += d;                     // march forward
+    if(t > 100.0) break;        // miss
+  }
+  return ro + rd * t;
+}
+```
+**Domain warping** (fbm noise warped by fbm) creates organic, fluid, biological patterns.
+**Reaction-diffusion** simulated on GPU ping-pong FBO creates living, growing patterns.
+**Implementation:** raw WebGL or Three.js ShaderMaterial on a fullscreen quad.
+
+---
+
+### TIER 2 — WebGPU Compute Shaders (WGSL)
+Next generation beyond WebGL. Runs physics simulations, fluid dynamics (Navier-Stokes),
+million-particle systems, ML inference, all on GPU compute — not just rendering.
+Chrome 113+ only (2024). The future standard that replaces WebGL.
+
+```wgsl
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) id: vec3u) {
+  var p = particles[id.x];
+  p.velocity += gravity * uniforms.dt;
+  p.position += p.velocity * uniforms.dt;
+  particles[id.x] = p;
+}
+```
+**Use for:** million-particle fluid systems, GPU cloth/rope physics, in-browser ML,
+real-time audio DSP, procedural terrain generation at scale.
+
+---
+
+### TIER 3 — Advanced CSS (Zero-JS Techniques at Peak Level)
+- **CSS Scroll-Driven Animations** (`animation-timeline: scroll()`) — full parallax,
+  progress bars, reveal animations with ZERO JavaScript. Pure CSS, GPU-accelerated.
+- **CSS Houdini Paint API** — register custom `paint()` worklets, draw arbitrary Canvas
+  graphics as CSS backgrounds/borders. Animatable via @property. Fully GPU-composited.
+- **@property typed custom properties** — animate gradient angles, colors, numeric values
+  smoothly. Example: animated conic-gradient spinning via `@property --angle`.
+- **CSS `has()` + container queries** — fully responsive component logic without JS.
+- **View Transitions API** — native cross-page/SPA morphing animations (Chrome 111+).
+  Elements with matching `view-transition-name` morph between pages automatically.
+- **`color-mix()` + `oklch()`** — perceptually uniform color mixing, impossible with hex.
+
+---
+
+### TIER 4 — GSAP (Professional Motion Library)
+The industry standard for professional animation. Used on 90% of award-winning sites.
+- **GSAP ScrollTrigger** — scrub any animation to scroll position with pixel precision
+- **GSAP MorphSVG** — morph between any two SVG paths (impossible in pure CSS)
+- **GSAP SplitText** — split text into chars/words/lines with stagger control
+- **GSAP Flip** — animate layout changes with WAAPI-backed position interpolation
+- **Theatre.js** — keyframe timeline editor embedded in code, used in production films/games
+CDN: `https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js`
+
+---
+
+### TIER 5 — WebGL Advanced Techniques (Beyond Basic Three.js)
+- **Framebuffer ping-pong (FBO)** — GPU texture reads/writes for simulation (fluid, smoke,
+  reaction-diffusion). Each frame reads last frame's texture, writes new state.
+- **PBR lighting (Physically Based Rendering)** — metalness/roughness model that matches
+  real-world light behavior. Three.js MeshStandardMaterial uses this.
+- **Post-processing passes** — bloom, chromatic aberration, film grain, depth of field,
+  SSAO (screen-space ambient occlusion) as full-screen shader passes after main render.
+- **Instanced mesh rendering** — render 100,000+ identical objects in one draw call.
+- **GPU particle systems** — particle position/velocity stored in textures, updated on GPU.
+- **Three.js custom ShaderMaterial** — full GLSL control over vertex + fragment stages.
+
+---
+
+### TIER 6 — In-Browser AI / ML
+- **Transformers.js** — run Whisper (speech), BERT (NLP), small LLMs entirely in browser.
+  No server. Fully private. CDN: `https://cdn.jsdelivr.net/npm/@xenova/transformers`
+- **MediaPipe** — real-time body pose, hand tracking, face landmarks at 60fps on mobile.
+  Use case: cursor follows user's hand, hover effects react to face position.
+- **ONNX Runtime Web + WebGPU backend** — quantized diffusion models client-side.
+- **TensorFlow.js** — full ML model training + inference in browser, WebGL/WebGPU backend.
+- **WebNN API** — native browser hardware-accelerated neural network API (emerging standard).
+
+---
+
+### TIER 7 — WebAssembly (Near-Native Speed)
+- **Rust → WASM (wasm-pack)** — image codecs, physics engines, encryption, audio DSP
+  at near-native speed in the browser. 10-100× faster than JavaScript for compute tasks.
+- **WASM SIMD** — vectorized math, 4× throughput for signal processing / ML kernels.
+- **WASM threads + SharedArrayBuffer** — true multi-core parallelism in the browser tab.
+- **Use case:** real-time video processing, ZIP/PDF generation, game physics, synths.
+
+---
+
+### TIER 8 — Advanced Web Platform APIs
+- **WebRTC** — P2P video/audio/data, full video calling with no media server.
+- **WebTransport (QUIC)** — ultra-low-latency bidirectional streaming, better than WS for games.
+- **Web Audio API** — synthesizers, real-time DSP, spatial 3D audio, FFT visualization.
+- **WebXR** — AR/VR in browser, hand tracking, spatial anchors (use ONLY for spatial projects).
+- **File System Access API** — read/write local files directly (desktop app replacement).
+- **Web Bluetooth** — connect to BLE devices from the browser.
+- **Screen Wake Lock** — prevent screen sleep during video/presentation.
+
+---
+
+### ADVANCED CSS TECHNIQUE REFERENCE (copy-paste patterns)
+
+```css
+/* CSS Scroll-Driven Animation — zero JS parallax */
+@keyframes parallax { from { transform: translateY(0); } to { transform: translateY(-200px); } }
+.hero { animation: parallax linear; animation-timeline: scroll(); animation-range: 0 50vh; }
+
+/* @property — animatable gradient angle */
+@property --angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.card { background: conic-gradient(from var(--angle), #7c3aed, #06b6d4); transition: --angle 600ms; }
+.card:hover { --angle: 360deg; }
+
+/* View Transition API — morph elements between pages */
+.hero-img { view-transition-name: hero; }
+/* In CSS: */ ::view-transition-old(hero) { animation: fade-out 0.3s; }
+            ::view-transition-new(hero) { animation: fade-in 0.3s; }
+
+/* CSS Houdini Paint Worklet */
+CSS.paintWorklet.addModule('noise-paint.js');
+.card { background: paint(noise); }
+
+/* container queries — component-level responsive */
+@container (min-width: 400px) { .card { grid-template-columns: 1fr 1fr; } }
+```
+
+---
+
+### REFERENCE: Award-Winning Studio Techniques (What Actually Wins Awwwards)
+1. **SDF ray marching** — #1 differentiator, no other technique looks like it
+2. **GSAP + ScrollTrigger** — smooth, scrubbed narrative animations
+3. **Custom GLSL shaders on 3D objects** — morphing, distortion, color grading
+4. **Reaction-diffusion / Turing patterns** on GPU FBO — organic, living visuals
+5. **Physics simulations** — cloth, fluid, rope that reacts to mouse
+6. **Kinetic typography at extreme scale** — full-viewport text that animates on scroll
+7. **Noise-driven procedural color** — no flat colors, always fbm/simplex-driven gradients
+8. **Micro-interaction density** — every hover, click, focus has a spring-physics response
+9. **Zero lorem ipsum** — real invented brand copy makes the design feel real
+10. **prefers-reduced-motion respect** — accessibility signals professionalism
+
 **WHEN NOT TO REACH FOR THESE (be honest with the user, don't gold-plate):**
 - **AR/VR (WebXR)** — WRONG tool for a marketing/landing page. Needs a headset or AR
   phone to experience, shows NOTHING in a portfolio screenshot, huge complexity for
