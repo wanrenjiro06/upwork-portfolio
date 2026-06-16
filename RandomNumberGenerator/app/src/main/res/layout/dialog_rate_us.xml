@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical"
+    android:paddingStart="22dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="22dp"
+    android:paddingBottom="22dp">
+
+    <!-- Close (X) top-right -->
+    <ImageButton
+        android:id="@+id/ivClose"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="end"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/close"
+        android:padding="4dp"
+        android:src="@drawable/ic_close" />
+
+    <!-- Title text -->
+    <TextView
+        android:id="@+id/tvRateTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="@string/rate_title"
+        android:textColor="@color/text_dark"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Subtitle text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="@string/rate_subtitle"
+        android:textColor="@color/text_gray"
+        android:textSize="14sp" />
+
+    <!-- "Thank You" celebration animation (self-contained, no binary GIF) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/star1"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_star" />
+
+        <ImageView
+            android:id="@+id/star2"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="top"
+            android:src="@drawable/ic_star" />
+
+        <ImageView
+            android:id="@+id/star3"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/ic_star" />
+
+        <ImageView
+            android:id="@+id/star4"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="top"
+            android:src="@drawable/ic_star" />
+
+        <ImageView
+            android:id="@+id/star5"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_star" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvThankYou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif-black"
+        android:letterSpacing="0.04"
+        android:rotation="-6"
+        android:shadowColor="#33000000"
+        android:shadowDx="0"
+        android:shadowDy="3"
+        android:shadowRadius="4"
+        android:text="@string/rate_thank_you"
+        android:textColor="@color/ty_magenta"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <!-- Rate button (sends to Google Play / in-app review).
+         AppCompatButton (not Button) so our gold drawable isn't overridden by
+         MaterialButton's background tint under the MaterialComponents theme. -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_gold"
+        android:text="@string/rate_button"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

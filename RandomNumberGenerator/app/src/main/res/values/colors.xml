@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF1A1A1A</color>
+
+    <!-- Red theme (Random Number screen) -->
+    <color name="red_primary">#FFE53935</color>
+    <color name="red_dark">#FFB71C1C</color>
+    <color name="red_light">#FFFF6F60</color>
+
+    <!-- Yellow number boxes -->
+    <color name="yellow_box">#FFFFD54F</color>
+    <color name="yellow_bright">#FFFFC107</color>
+    <color name="yellow_dark">#FFFFA000</color>
+
+    <!-- Dialog -->
+    <color name="dialog_bg">#FFFFFFFF</color>
+    <color name="text_dark">#FF222222</color>
+    <color name="text_gray">#FF666666</color>
+    <color name="close_gray">#FF9E9E9E</color>
+    <color name="gold_button">#FFFFA726</color>
+    <color name="gold_button_dark">#FFF57C00</color>
+
+    <!-- Thank You animation accents -->
+    <color name="ty_magenta">#FFE91E63</color>
+    <color name="ty_violet">#FF7C4DFF</color>
+    <color name="ty_cyan">#FF00BCD4</color>
+    <color name="ty_orange">#FFFF7043</color>
+    <color name="star_yellow">#FFFFD54F</color>
+
+    <color name="scrim">#99000000</color>
+</resources>

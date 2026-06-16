@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Random Number</string>
+
+    <!-- WebView -->
+    <string name="loading">Loading…</string>
+
+    <!-- No internet dialog -->
+    <string name="no_internet_title">No Internet Connection</string>
+    <string name="no_internet_message">Please check your internet connection and try again.</string>
+    <string name="retry">Retry</string>
+    <string name="exit">Exit</string>
+
+    <!-- RateUs dialog -->
+    <string name="rate_title">Support us by giving 5 stars and writing your review</string>
+    <string name="rate_subtitle">Tell others what you think about this app</string>
+    <string name="rate_thank_you">THANK YOU!</string>
+    <string name="rate_button">Rate on Google Play</string>
+    <string name="close">Close</string>
+
+    <!-- Random Number screen -->
+    <string name="random_number">Random Number</string>
+    <string name="share">Share</string>
+    <string name="label_6_digits">6 DIGITS</string>
+    <string name="label_3_digits">3 DIGITS</string>
+    <string name="label_2_digits">2 DIGITS</string>
+    <string name="random_again">RANDOM AGAIN</string>
+</resources>

@@ -349,6 +349,37 @@ Show that you know the answer — but don't explain it in detail. If you spell o
 
 Prove you know it. Don't teach it.
 
+### Timeline Language Rules
+- Always add "likely faster" after timeline commitments. Example: "3–4 days, likely faster."
+- Never say "Your X-week estimate can be cut to Y days" — it sounds condescending and implies the client is wrong. Say it positively: "This will take 3–4 days — the stack is straightforward and I've built all the pieces before."
+- Client saying "2–3 weeks, could be shorter" = they're non-technical and uncertain. Don't correct them; just state your faster timeline as a confident fact.
+
+### Portfolio Links in Proposals
+- Never include GitHub links in proposal screening answers — use portfolio website URLs only.
+- Use: quillo-ai-writer.netlify.app, lumira-apparel.netlify.app, meridian-creative.netlify.app
+
+---
+
+## Advanced Screening Signals
+
+### Client Quality Signals
+- **Avg spend per hire** = total spent ÷ hires. If < $15/hire → client doesn't actually pay contractors, skip.
+- **Hire rate %** — if < 20%, client mostly browses without hiring. Skip unless other signals are very strong.
+- **"Last viewed X days ago" + already interviewing 3** = stale job, skip.
+- **Avg hourly rate paid (actual)** on client profile = what they really pay. Ignore posted range; actual tells the truth.
+- **Interviewing count** — if already interviewing 3+, you're late and odds are bad. Skip.
+
+### Keyword Findings (what works on Upwork search)
+- ✅ **"React developer"** — good results, active jobs
+- ✅ **"Next.js developer"** — solid niche results
+- ✅ **"Stripe"** — good payment integration jobs
+- ✅ **"Supabase"** — good backend/auth jobs
+- ✅ **"full stack developer"** — broad but works
+- ❌ **"shadcn"** — doesn't exist on Upwork search
+- ❌ **"Clerk"** — returns office/admin clerk jobs, not the auth library
+- ❌ **"landing page"** — returns marketing/SEO/copywriting jobs, not dev jobs
+- ❌ **"Vercel"** alone — too niche, few results
+
 ---
 
 ## Working Style Rules
@@ -413,31 +444,42 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
 
 ---
 
-## Current Job Status (as of 2026-06-14)
+## Current Job Status (as of 2026-06-16)
 
 ### Active Proposals
-1. **React Native Live-Streaming & Short-Video App**
-   - Client: Professional startup building live-streaming platform
-   - Budget: $50/hr, 40 hrs/week, estimated 22–24 weeks
-   - Total: ~$44–48K
-   - Status: ✅ Proposal submitted (21 connects spent), waiting for response
-   - Proposal includes: Auth, short-video feed, live streaming (Mux), IAP (StoreKit 2 + Google Play Billing), App Store/Play submission
-   - Design: Client provides specs, or you propose standard mobile-first design
-   - Timeline: 22–24 weeks conservative estimate. Realistically 12–16 weeks with no scope creep, could be 4–8 weeks aggressive coding
-   - Next: Wait 3–5 days for client response; if no response, send friendly follow-up
+1. **DataPivot — Site Revamp** (Egypt client)
+   - Budget: $200 fixed
+   - Status: ✅ Submitted, waiting for response
+   - Folder: `C:\UpWork\DataPivot-SiteRevamp\PROPOSAL.md`
 
-2. **React Native Refer & Earn + Payment Gateway Integration**
-   - Client: Mobile app company with existing app
-   - Budget: $1,800 fixed-price (proposed, client's original: $110)
-   - Status: ✅ Proposal submitted (1 connect spent), waiting for response
-   - Scope: Refer & Earn module, Razorpay integration, PhonePe integration, 4-5 UI screens, testing, App Store/Play Store deployment
-   - Timeline: 8 days standard, 6 days if Day 1 assets provided immediately
-   - Payment: 2 milestones - $300 upfront (June 12), $1,500 on delivery (June 19)
-   - Next: Wait for client counter-offer or acceptance
+2. **Android Developer — Usage-Time Feasibility Prototype** (Canada)
+   - Budget: $500 fixed
+   - Client: Payment verified + phone verified, member since Jun 11, 2026
+   - Status: ✅ Submitted (11 connects), waiting for response
+   - Scope: Kotlin prototype using UsageStatsManager + UsageEvents API, APK + source + findings summary
+   - Key tech: PACKAGE_USAGE_STATS special permission, queryEvents() ACTIVITY_RESUMED/PAUSED, AppOpsManager.checkOpNoThrow(), ACTION_USAGE_ACCESS_SETTINGS Intent
+   - Folder: `C:\UpWork\AndroidUsageTime-Prototype\PROPOSAL.md`
+
+3. **Next.js Web Application Developer** (Australia, Sydney)
+   - Budget: $180 fixed
+   - Client: Payment verified + phone verified, member since Jun 16, 2026 (new)
+   - Status: ✅ Submitted (9 connects), waiting for response
+   - Scope: Next.js + Supabase Auth (email/password + Google OAuth) + Stripe Checkout + Claude API credits + dashboard, deploy to Vercel
+   - Folder: `C:\UpWork\NextJS-Claude-Stripe-App\PROPOSAL.md`
+
+4. **Senior Next.js Developer — AI-Powered Web Apps** (Pakistan)
+   - Budget: ~$500 fixed (estimated)
+   - Status: ✅ Submitted, waiting for response
+   - Cover letter hook: "I build exactly this stack — Next.js App Router with TypeScript, Tailwind CSS, SSR/SSG for SEO, MongoDB, and Claude API for AI features."
+
+### Expensify Bounties (GitHub)
+- All 20 open Help Wanted issues were already assigned when checked — bounties get grabbed within hours of posting
+- Posted proposals on: #93448, #91846, #93568 — waiting for Melvin Bot assignment
+- **Rule:** Always check `gh issue list --repo Expensify/App --label "Help Wanted"` first. If assigned → skip, don't write proposal.
 
 ### Connect Status
-- Current: 14 connects left (after Refer & Earn proposal)
-- Strategy: Looking at new portfolio-building opportunities
+- Current: ~32 connects remaining (as of 2026-06-16)
+- Strategy: Be selective — only apply when screening signals are strong
 
 ### Portfolio Websites (Web Design Showcase)
 **3 live design portfolio pieces deployed to Netlify:**
@@ -588,35 +630,28 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
 - Budget 1–2 weeks for review cycles
 
 ### Next Steps When New Session Starts
-1. Check Upwork messages — waiting on responses to 2 proposals (React/Next.js $30 fix + Booking Platform $2,500)
-2. Buy 100 connects ($15) before applying to anything new — currently at 0
-3. If React Native $44K client responded → start development (Sonnet main, Opus for hard problems)
-4. Next portfolio piece to build: Restaurant/Food ordering page (need Framer inspo screenshot first)
-5. Deploy Estate + Pulse to Netlify → add both to Upwork portfolio
-6. Keep applying: target 2-3 more proposals per week, clear-scope jobs only
+1. Check Upwork messages — waiting on responses to 4 active proposals (DataPivot $200, Android UsageTime $500, Next.js Australia $180, Senior Next.js Pakistan ~$500)
+2. Message Random Number Generator client — APK is ready to deliver
+3. Deploy Estate + Pulse to Netlify → add both to Upwork portfolio
+4. Next portfolio piece: Restaurant/Food ordering page (need Framer inspo screenshot first)
+5. Keep applying: search "React developer" sorted by newest, 7–9am is best timing for fresh jobs
+6. Check Expensify bounties: `gh issue list --repo Expensify/App --label "Help Wanted"` — only post if NOT yet assigned
 
-### Active Proposals (as of 2026-06-15)
-1. **React.js / Next.js Small Fix** — $30 fixed, 1-2 hours
-   - Client: US, 5.0 stars/190 reviews, 91% hire rate, payment verified
-   - Folder: `C:\UpWork\React-NextJS-Small-Fix\PROPOSAL.md`
-   - Status: Submitted, waiting
-
-2. **Full-Stack React + Node.js — Booking Platform** — $2,500 fixed
-   - Client: Australia, new account (Jun 4, 2026), payment verified
-   - Scope: Fix silent Stripe webhook drop + clean up repo + add email/SMS/AI integrations
-   - Cover letter starts with "deploy" (their filter word — critical)
-   - Folder: `C:\UpWork\FullStack-ReactNode-Booking\PROPOSAL.md`
-   - Status: Submitted, waiting
-   - Long-term: rebuild booking flow next quarter after first task
-
-### Jobs Screened & Rejected (2026-06-15)
-- **Mobile App for Play** ($15-30/hr) → SKIP: payment not verified, brand-new client, vague scope
+### Jobs Screened & Rejected (2026-06-16)
+- **Saudi Stock Market GitHub** ($30) → SKIP: 13% hire rate (175 jobs, 22 hires), $24.60 avg spend per hire, already interviewing 3, last viewed 2 days ago
+- **Electron Publishing** ($10-20/hr) → CANCELLED: user cancelled proposal
+- **Kingdom ID Stripe** ($250) → CANCELLED: user cancelled proposal
+- **WordPress Mobile-Friendly** ($30) → CANCELLED: user cancelled proposal
+- **Website Developer Shelby County DSA** ($400) → SKIP: 20-50 proposals already, too much competition
+- **Mobile App for Play** ($15-30/hr) → SKIP: payment not verified, vague scope
 - **High Converting Paywall** ($75) → SKIP: design work (UI/UX portfolio required, we have none)
-- **AI Full-Stack MERN Bug Fixes** ($15 fixed) → SKIP: $9.71 avg spend per hire, vague scope, poverty wages
+- **AI Full-Stack MERN Bug Fixes** ($15 fixed) → SKIP: $9.71 avg spend per hire, poverty wages
 
-### Connects
-- 100 connects = $15 (Freelancer Plus) — buy before applying to anything
-- React/Next.js job = 11 connects · Booking Platform = 15 connects
+### Previous Active Proposals (2026-06-14 to 06-15 — still waiting)
+- **React.js / Next.js Small Fix** — $30 fixed · US, 5.0★/190 reviews · `C:\UpWork\React-NextJS-Small-Fix\PROPOSAL.md`
+- **Full-Stack React + Node.js — Booking Platform** — $2,500 fixed · Australia · filter word: "deploy" · `C:\UpWork\FullStack-ReactNode-Booking\PROPOSAL.md`
+- **React Native Live-Streaming App** — $50/hr × 22–24 weeks (~$44–48K) · Submitted, waiting
+- **React Native Refer & Earn + Payment Gateway** — $1,800 fixed · Submitted, waiting
 
 ---
 
