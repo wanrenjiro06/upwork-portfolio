@@ -632,7 +632,8 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
 ### Next Steps When New Session Starts
 1. Check Upwork messages — waiting on responses to 4 active proposals (DataPivot $200, Android UsageTime $500, Next.js Australia $180, Senior Next.js Pakistan ~$500)
 2. Message Random Number Generator client — APK is ready to deliver
-3. Deploy Estate + Pulse to Netlify → add both to Upwork portfolio
+3. ✅ Estate deployed: https://estate-landing.netlify.app/ — add to Upwork portfolio
+   - Deploy Pulse to Netlify → add to Upwork portfolio
 4. Next portfolio piece: Restaurant/Food ordering page (need Framer inspo screenshot first)
 5. Keep applying: search "React developer" sorted by newest, 7–9am is best timing for fresh jobs
 6. Check Expensify bounties: `gh issue list --repo Expensify/App --label "Help Wanted"` — only post if NOT yet assigned
@@ -725,7 +726,7 @@ C:\UpWork\Websites Portfolio\
 │   ├── styles.css      (monochrome editorial design system)
 │   ├── script.js       (nav, reveal, FAQ, booking-form validation)
 │   ├── hero.mp4        (background video for hero section, 0.87 MB)
-│   └── Netlify URL: (to be deployed)
+│   └── Netlify URL: https://estate-landing.netlify.app/
 │   NOTE: Editorial monochrome aesthetic (VERDANT-inspired —
 │   black/white/warm-gray, huge condensed Archivo wordmark, stats
 │   band, full-bleed showcases, dark statement sections, marquee).
@@ -876,6 +877,67 @@ netlify deploy --prod
 6. **Portfolio** — Add live URL to Upwork portfolio section
 7. **Git** — Commit to master branch: `git add . && git commit -m "Add [Name] portfolio item"`
 8. **Done** — Item now live and searchable on Upwork
+
+### High-Quality Design Techniques (Make Portfolio Pieces NON-Generic)
+
+These separate a premium, hireable portfolio piece from a generic template clone.
+Layer several on top of any build — they signal real front-end skill and justify
+higher rates. Use Opus + high thinking for these flagship builds (complex animation
+math — scroll-progress, magnetic physics, canvas particles). Don't be cheap on
+flagship pieces.
+
+**Signature "scroll-locked narrative" effect** (user specifically wants this):
+- Viewport FREEZES (position: sticky / pinned section) while content animates through
+  3–5 "chapters" as the user scrolls. The page doesn't move; the content transforms in
+  place (like Apple iPhone product pages). Driven by scroll progress (sticky wrapper +
+  scroll listener mapped to a 0→1 progress value).
+
+**Effect toolkit (mix & match, don't use ALL at once):**
+1. **Scroll-locked narrative** — pinned section, content morphs by scroll progress
+2. **Grain / film-noise overlay** — SVG feTurbulence at low opacity → tactile premium feel
+3. **Magnetic buttons** — pull toward cursor on hover, spring back on leave
+4. **Kinetic typography** — split headline into spans, staggered weight/scale/y on reveal
+5. **SVG line-draw** — diagrams draw themselves via stroke-dashoffset on scroll into view
+6. **Glassmorphism cards** — frosted backdrop-blur; LIMIT count (perf)
+7. **Particle / mesh background** — subtle dots reacting to mouse; keep count low
+8. **Conic / radial glow orbs** — large blurred gradient orbs, TRANSLATE-only drift
+9. **Custom cursor** — dot + trailing ring that scales on interactive hover
+
+**PERF GUARDRAILS (learned hard — see SalesFunnel notes):** Heavy blur + many
+backdrop-filters + scale() keyframes → renderer wedge / screenshot timeouts. Fixes:
+translate-only drift (NEVER animate scale on big blurred elements), limit backdrop-filter
+to a few elements, self-halting rAF, ALWAYS add prefers-reduced-motion that disables the
+heavy stuff. Restart preview server if CSS looks stale (browser cache).
+
+**Reference build:** Axion (AI Workflow Automation, port 3008) — built from Xtract Framer
+template DNA (purple/black, glowing orb hero) but turned original with scroll-locked
+narrative, grain overlay, magnetic buttons, kinetic type, SVG line-draw, particle mesh.
+
+**ELITE TIER (push a flagship piece from "great" to "top 1%"):** When a client/piece
+justifies maximum effort, layer these on top of the toolkit above:
+- **Real 3D / WebGL (Three.js)** — replace CSS orbs/mockups with an actual GLSL shader
+  object (distortion sphere, particle field) that reacts to mouse + morphs through scroll
+  chapters. THE single biggest "this dev is real" upgrade. Costs one CDN dependency
+  (breaks strict self-contained rule — acceptable for flagship pieces; pin the version).
+- **Physics-based micro-animations** — spring/inertia/momentum instead of CSS easing.
+  Magnetic buttons that spring back, orb with rotational momentum, elastic card lifts.
+  Subtle but makes everything *feel* expensive. Can hand-roll a tiny spring (lerp toward
+  target with velocity) — no library needed.
+- **Scroll-triggered storytelling** — already covered by scroll-locked narrative; deepen
+  it by tying the 3D object's shader uniforms (distortion, color, rotation) to scroll
+  progress so the visual literally tells the story.
+
+**WHEN NOT TO REACH FOR THESE (be honest with the user, don't gold-plate):**
+- **AR/VR (WebXR)** — WRONG tool for a marketing/landing page. Needs a headset or AR
+  phone to experience, shows NOTHING in a portfolio screenshot, huge complexity for
+  near-zero conversion value. Only use when the project genuinely warrants it (3D product
+  viewer, real-estate walkthrough, spatial demo). Tell the client this instead of building
+  a gimmick.
+- **WebGL perf guardrails (MANDATORY when using Three.js):** pause the render loop when
+  the canvas is off-screen (IntersectionObserver), cap `renderer.setPixelRatio(Math.min(
+  devicePixelRatio, 2))`, dispose geometry/material on teardown, and ALWAYS provide a
+  `prefers-reduced-motion` + WebGL-unavailable fallback to the lightweight CSS orb. WebGL
+  can wedge the renderer (same class of bug as the heavy-blur warning above).
 
 ### Important Notes
 

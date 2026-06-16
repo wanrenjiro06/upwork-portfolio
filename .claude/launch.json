@@ -42,6 +42,12 @@
       "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
       "runtimeArgs": ["-m", "http.server", "3006", "--directory", "C:\\UpWork\\Websites Portfolio\\SaasDashboard"],
       "port": 3006
+    },
+    {
+      "name": "axion",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3008", "--directory", "C:\\UpWork\\Websites Portfolio\\Axion"],
+      "port": 3008
     }
   ]
 }
