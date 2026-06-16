@@ -356,7 +356,7 @@ Prove you know it. Don't teach it.
 
 ### Portfolio Links in Proposals
 - Never include GitHub links in proposal screening answers — use portfolio website URLs only.
-- Use: quillo-ai-writer.netlify.app, lumira-apparel.netlify.app, meridian-creative.netlify.app
+- Use: quillo-ai-writer.netlify.app, lumira-apparel.netlify.app, meridian-creative.netlify.app, estate-landing.netlify.app, useaxion.netlify.app
 
 ---
 
@@ -780,6 +780,15 @@ C:\UpWork\Websites Portfolio\
 │   settings save toast, analytics chart + heatmap lazy-draw on first
 │   visit, download/connect button toasts. No console errors.
 │
+├── Axion (AI Workflow Automation landing page)
+│   ├── index.html      (self-contained: inline CSS + JS + Three.js CDN)
+│   └── Netlify URL: https://useaxion.netlify.app/
+│   NOTE: FLAGSHIP elite-tier portfolio piece. Three.js WebGL GLSL shader orb,
+│   scroll-locked narrative (4 chapters), physics spring micro-animations,
+│   cursor-spotlight cards, 3D tilt panels, magnetic buttons, intro preloader,
+│   scroll progress bar, kinetic typography, SVG line-draw, particle mesh canvas.
+│   Built from Xtract Framer template DNA (purple/black, glowing orb hero).
+│
 └── [Future pieces: Restaurant/Food ordering, Blog/CMS, etc.]
 ```
 
@@ -865,6 +874,7 @@ netlify deploy --prod
 | ConversionOS (Sales Funnel) | SalesFunnel | 3004 | sales-funnel ✅ |
 | Estate (Real Estate landing) | RealEstate | 3005 | real-estate ✅ |
 | Pulse (SaaS Dashboard) | SaasDashboard | 3006 | saas-dashboard ✅ |
+| Axion (AI Workflow Automation) | Axion | 3008 | axion ✅ |
 | Blog/CMS | BlogTemplate | 3007 | blog-template (to add) |
 
 ### Workflow When Building New Portfolio Pieces
