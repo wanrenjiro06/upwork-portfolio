@@ -789,6 +789,13 @@ C:\UpWork\Websites Portfolio\
 │   scroll progress bar, kinetic typography, SVG line-draw, particle mesh canvas.
 │   Built from Xtract Framer template DNA (purple/black, glowing orb hero).
 │
+├── Salt & Ember (Bespoke Catering landing page)
+│   ├── index.html      (self-contained: inline CSS + JS)
+│   └── Netlify URL: https://salt-and-ember-catering.netlify.app/
+│   NOTE: Premium editorial catering brand. Warm parchment palette (--bg #F4EEE1),
+│   Fraunces serif + DM Sans + JetBrains Mono type system. Showcases: hospitality
+│   industry web design, editorial layout, warm luxury aesthetic.
+│
 └── [Future pieces: Restaurant/Food ordering, Blog/CMS, etc.]
 ```
 
@@ -875,6 +882,7 @@ netlify deploy --prod
 | Estate (Real Estate landing) | RealEstate | 3005 | real-estate ✅ |
 | Pulse (SaaS Dashboard) | SaasDashboard | 3006 | saas-dashboard ✅ |
 | Axion (AI Workflow Automation) | Axion | 3008 | axion ✅ |
+| Salt & Ember (Catering) | Catering | 3009 | catering ✅ |
 | Blog/CMS | BlogTemplate | 3007 | blog-template (to add) |
 
 ### Workflow When Building New Portfolio Pieces

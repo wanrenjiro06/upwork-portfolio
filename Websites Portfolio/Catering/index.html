@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salt &amp; Ember — Bespoke Catering House</title>
+<meta name="description" content="Salt & Ember — a seasonal, ingredient-led catering house for weddings, residences and private tables. London · Lisbon · New York.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #F4EEE1;
+    --paper:     #FBF8F0;
+    --ink:       #1A1410;
+    --ink-soft:  #5A4F45;
+    --ink-faint: #8A7E70;
+    --rust:      #C0563A;
+    --rust-deep: #A8472E;
+    --olive:     #6B7144;
+    --line:      rgba(26,20,16,.16);
+    --line-soft: rgba(26,20,16,.09);
+    --dark:      #17120E;
+    --dark-soft: #221B15;
+
+    --serif: 'Fraunces', Georgia, serif;
+    --sans:  'DM Sans', system-ui, sans-serif;
+    --mono:  'JetBrains Mono', monospace;
+
+    --ease: cubic-bezier(.22,.61,.36,1);
+    --spring: cubic-bezier(.34,1.56,.64,1);
+    --pad: clamp(1.25rem, 5vw, 5.5rem);
+    --maxw: 1280px;
+  }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--rust); color: #fff; }
+
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Grain overlay ---------- */
+  .grain {
+    position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+    opacity: .035; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Shared layout ---------- */
+  .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .section-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-top: 1px solid var(--line);
+    padding-top: 1.1rem; margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    gap: 1rem;
+  }
+  .section-head .kicker:last-child { color: var(--ink-faint); text-align: right; }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.02; letter-spacing: -.01em; }
+
+  .display {
+    font-size: clamp(2.6rem, 8vw, 6rem);
+    font-weight: 500;
+  }
+  .display em, .em { font-style: italic; color: var(--rust); font-weight: 500; }
+
+  section { padding-block: clamp(3.5rem, 9vw, 8rem); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+    padding: .95rem 1.5rem; border-radius: 100px; border: 1px solid var(--ink);
+    cursor: pointer; background: none; color: var(--ink);
+    transition: background .4s var(--ease), color .4s var(--ease), transform .5s var(--spring);
+    will-change: transform;
+  }
+  .btn .arr { transition: transform .4s var(--ease); }
+  .btn:hover .arr { transform: translateX(4px); }
+  .btn--fill { background: var(--ink); color: var(--bg); }
+  .btn--fill:hover { background: var(--rust); border-color: var(--rust); }
+  .btn--ghost:hover { background: var(--ink); color: var(--bg); }
+  .btn--rust { background: var(--rust); border-color: var(--rust); color: #fff; }
+  .btn--rust:hover { background: var(--rust-deep); border-color: var(--rust-deep); }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; }
+  .reveal.d3 { transition-delay: .24s; } .reveal.d4 { transition-delay: .32s; }
+
+  /* Clip-path image reveal */
+  .img-reveal { position: relative; overflow: hidden; }
+  .img-reveal img { clip-path: inset(100% 0 0 0); transform: scale(1.15); transition: clip-path 1.2s var(--ease), transform 1.6s var(--ease); }
+  .img-reveal.in img { clip-path: inset(0 0 0 0); transform: scale(1); }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem var(--pad);
+    transition: background .5s var(--ease), padding .5s var(--ease), border-color .5s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  nav.solid {
+    background: rgba(244,238,225,.86); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft); padding-block: .85rem;
+  }
+  .logo { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: -.02em; }
+  .logo span { color: var(--rust); }
+  .nav-links { display: flex; gap: 1.9rem; }
+  .nav-links a {
+    font-family: var(--mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-soft); position: relative; padding-block: .2rem;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--rust);
+    transition: width .4s var(--ease);
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-right { display: flex; align-items: center; gap: 1.4rem; }
+  .nav-est { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; color: var(--ink-faint); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .nav-toggle span { width: 24px; height: 1.5px; background: var(--ink); transition: .3s; }
+
+  /* ---------- HERO ---------- */
+  .hero { padding-top: clamp(7rem, 14vw, 11rem); }
+  .hero-top {
+    display: flex; justify-content: space-between; border-top: 1px solid var(--line);
+    padding-top: 1rem; margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: end; }
+  .hero h1 { font-size: clamp(3.2rem, 11vw, 8.5rem); line-height: .92; letter-spacing: -.025em; }
+  .hero-meta { display: flex; gap: clamp(1.5rem, 4vw, 3rem); margin-top: 2rem; max-width: 460px; }
+  .hero-meta .col { flex: 1; }
+  .hero-meta .lbl { font-family: var(--mono); font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; color: var(--rust); display: block; margin-bottom: .55rem; }
+  .hero-meta p { font-size: .82rem; color: var(--ink-soft); font-style: italic; font-family: var(--serif); line-height: 1.5; }
+  .hero-cta { display: flex; gap: .7rem; margin-top: 2.2rem; flex-wrap: wrap; }
+  .hero-visual { position: relative; }
+  .hero-visual .frame { border: 1px solid var(--line); padding: .5rem; aspect-ratio: 4/4.4; }
+  .hero-visual .frame > div { width: 100%; height: 100%; }
+  .hero-inset {
+    position: absolute; bottom: -1.2rem; right: -.6rem; width: 42%; aspect-ratio: 1/1;
+    border: 1px solid var(--line); padding: .4rem; background: var(--bg);
+  }
+  .hero-inset .tag { font-family: var(--mono); font-size: .56rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); padding: .35rem .1rem 0; }
+  .hero-inset .ph { aspect-ratio: 1/.78; }
+
+  /* Hero kinetic words */
+  .kin { display: inline-block; overflow: hidden; vertical-align: top; }
+  .kin > span { display: inline-block; transform: translateY(110%); transition: transform 1s var(--ease); }
+  .hero.loaded .kin > span { transform: translateY(0); }
+  .hero.loaded .kin:nth-child(2) > span { transition-delay: .12s; }
+  .hero.loaded .kin:nth-child(3) > span { transition-delay: .24s; }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee { border-block: 1px solid var(--line); padding-block: 1.5rem; overflow: hidden; white-space: nowrap; }
+  .marquee-track { display: inline-flex; align-items: center; gap: 2.5rem; animation: scroll 26s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-track span { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 500; }
+  .marquee-track .dot { color: var(--rust); font-size: 1rem; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .about-img { border: 1px solid var(--line); padding: .5rem; aspect-ratio: 3/3.6; }
+  .about-img > div { width: 100%; height: 100%; }
+  .about-body h2 { font-size: clamp(1.7rem, 3.4vw, 2.7rem); line-height: 1.12; margin-bottom: 1.5rem; }
+  .about-body p { color: var(--ink-soft); max-width: 52ch; margin-bottom: 2.5rem; }
+  .stats { display: flex; gap: clamp(1.5rem, 5vw, 4rem); border-top: 1px solid var(--line); padding-top: 1.8rem; }
+  .stat .num { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 500; line-height: 1; }
+  .stat .num .u { color: var(--rust); }
+  .stat .lbl { font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin-top: .5rem; }
+
+  /* ---------- SERVICES ---------- */
+  .svc-row {
+    display: grid; grid-template-columns: 40px 1fr 1.4fr auto auto; gap: clamp(1rem,3vw,2.5rem); align-items: center;
+    padding: 1.8rem 0; border-top: 1px solid var(--line); cursor: pointer;
+    transition: padding-left .4s var(--ease), background .4s var(--ease);
+  }
+  .svc-row:last-child { border-bottom: 1px solid var(--line); }
+  .svc-row:hover { padding-left: 1rem; }
+  .svc-num { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); }
+  .svc-name { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2.1rem); font-weight: 500; transition: color .4s var(--ease); }
+  .svc-row:hover .svc-name { color: var(--rust); }
+  .svc-desc { color: var(--ink-soft); font-size: .9rem; max-width: 42ch; }
+  .svc-tag { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+  .svc-arr {
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
+    display: grid; place-items: center; transition: transform .5s var(--spring), background .4s var(--ease), color .4s var(--ease), border-color .4s;
+  }
+  .svc-row:hover .svc-arr { background: var(--ink); color: var(--bg); border-color: var(--ink); transform: rotate(-45deg); }
+
+  /* ---------- MENU ---------- */
+  .menu-intro { max-width: 46ch; color: var(--ink-soft); font-family: var(--serif); font-style: italic; font-size: 1.05rem; margin-bottom: 2.5rem; }
+  .menu-tabs { display: flex; gap: 1.6rem; border-bottom: 1px solid var(--line); margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .menu-tab {
+    font-family: var(--serif); font-size: 1.15rem; padding-bottom: 1rem; cursor: pointer; color: var(--ink-faint);
+    position: relative; transition: color .3s var(--ease); background: none; border: none;
+  }
+  .menu-tab::after { content:''; position: absolute; left: 0; bottom: -1px; width: 0; height: 2px; background: var(--rust); transition: width .4s var(--ease); }
+  .menu-tab.active { color: var(--rust); } .menu-tab.active::after { width: 100%; }
+  .menu-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .menu-list { min-height: 360px; }
+  .dish { display: grid; grid-template-columns: 30px 1fr auto; gap: 1.2rem; padding: 1.3rem 0; border-top: 1px solid var(--line-soft); }
+  .dish:first-child { border-top: none; }
+  .dish-num { font-family: var(--mono); font-size: .7rem; color: var(--rust); padding-top: .3rem; }
+  .dish-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 500; margin-bottom: .35rem; }
+  .dish-desc { font-size: .82rem; color: var(--ink-soft); max-width: 40ch; }
+  .dish-diet { display: inline-flex; gap: .35rem; margin-top: .6rem; }
+  .dish-diet span { font-family: var(--mono); font-size: .54rem; letter-spacing: .06em; border: 1px solid var(--line); padding: .15rem .4rem; color: var(--ink-faint); }
+  .dish-price { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); white-space: nowrap; padding-top: .3rem; }
+  .menu-visual { position: sticky; top: 100px; border: 1px solid var(--line); padding: .5rem; aspect-ratio: 3/3.4; }
+  .menu-visual > div { width: 100%; height: 100%; transition: opacity .5s var(--ease); }
+  .menu-list-inner { animation: fadeup .55s var(--ease); }
+  @keyframes fadeup { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 1rem; }
+  .gallery-grid .g { overflow: hidden; }
+  .gallery-grid .g > div, .gallery-grid .g img { width: 100%; height: 100%; transition: transform 1s var(--ease); }
+  .gallery-grid .g:hover img { transform: scale(1.06); }
+  .g1 { grid-column: span 1; grid-row: span 2; }
+  .g2 { grid-column: span 2; grid-row: span 1; }
+  .g3 { grid-column: span 1; grid-row: span 2; }
+  .g4 { grid-column: span 1; grid-row: span 1; }
+  .g5 { grid-column: span 1; grid-row: span 1; }
+  .g6 { grid-column: span 2; grid-row: span 1; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .tst-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .tst-left h2 { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.05; margin-bottom: 1.5rem; }
+  .tst-left p { color: var(--ink-soft); margin-bottom: 2rem; max-width: 32ch; }
+  .tst-card { display: grid; grid-template-columns: 1fr 150px; gap: 0; border: 1px solid var(--line); background: var(--paper); margin-bottom: 1rem; }
+  .tst-card .body { padding: 1.6rem 1.7rem; }
+  .tst-card .who { font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: .9rem; }
+  .tst-card .quote { font-family: var(--serif); font-size: 1.02rem; line-height: 1.45; margin-bottom: 1.1rem; }
+  .tst-card .meta { font-family: var(--mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; }
+  .tst-card .meta .ev { color: var(--rust); display: block; margin-bottom: .25rem; }
+  .tst-card .meta .loc { color: var(--ink-faint); }
+  .tst-card .pic { overflow: hidden; }
+
+  /* ---------- PROCESS ---------- */
+  .proc-step { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; border: 1px solid var(--line); background: var(--paper); margin-bottom: 1rem; }
+  .proc-step.rev { direction: rtl; }
+  .proc-step.rev > * { direction: ltr; }
+  .proc-pic { aspect-ratio: 4/2.8; overflow: hidden; }
+  .proc-text { padding: clamp(1.5rem, 4vw, 3rem); }
+  .proc-text .step-lbl { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rust); margin-bottom: 1rem; }
+  .proc-text h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: .9rem; }
+  .proc-text p { color: var(--ink-soft); font-size: .92rem; max-width: 36ch; }
+
+  /* ---------- PACKAGES ---------- */
+  .pkg-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: clamp(2rem,5vw,3.5rem); }
+  .pkg-head h2 { font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1; }
+  .pkg-head p { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; color: var(--ink-faint); max-width: 30ch; text-align: right; }
+  .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); }
+  .pkg { padding: clamp(1.6rem, 3vw, 2.4rem); border-right: 1px solid var(--line); background: var(--paper); transition: transform .5s var(--ease); }
+  .pkg:last-child { border-right: none; }
+  .pkg--dark { background: var(--dark); color: var(--bg); }
+  .pkg-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+  .pkg-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 500; }
+  .pkg-badge { font-family: var(--mono); font-size: .56rem; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .55rem; border: 1px solid currentColor; color: var(--ink-faint); border-radius: 3px; }
+  .pkg--dark .pkg-badge { background: var(--rust); border-color: var(--rust); color: #fff; }
+  .pkg-price { font-family: var(--serif); font-size: 2.6rem; font-weight: 500; line-height: 1; }
+  .pkg-unit { font-family: var(--mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); margin: .6rem 0 1.6rem; }
+  .pkg--dark .pkg-unit { color: rgba(255,255,255,.5); }
+  .pkg-feat { list-style: none; margin-bottom: 2rem; }
+  .pkg-feat li { display: flex; gap: .7rem; font-size: .85rem; padding: .55rem 0; border-top: 1px solid var(--line-soft); color: var(--ink-soft); }
+  .pkg--dark .pkg-feat li { border-color: rgba(255,255,255,.12); color: rgba(255,255,255,.78); }
+  .pkg-feat li .plus { color: var(--rust); }
+  .pkg .btn { width: 100%; justify-content: center; }
+  .pkg--dark .btn { border-color: rgba(255,255,255,.4); color: var(--bg); }
+  .pkg--dark .btn:hover { background: var(--rust); border-color: var(--rust); }
+
+  /* ---------- TEAM ---------- */
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.2rem, 3vw, 2rem); }
+  .member .pic { aspect-ratio: 3/3.4; overflow: hidden; border: 1px solid var(--line); margin-bottom: 1.2rem; }
+  .member .pic img { transition: transform 1s var(--ease), filter .6s; filter: saturate(.92); }
+  .member:hover .pic img { transform: scale(1.04); filter: saturate(1); }
+  .member .role { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rust); margin-bottom: .5rem; }
+  .member .name { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; margin-bottom: .6rem; }
+  .member p { font-size: .84rem; color: var(--ink-soft); max-width: 32ch; margin-bottom: 1rem; }
+  .member .socials { display: flex; gap: .8rem; }
+  .member .socials a { width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; transition: .3s; }
+  .member .socials a:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .member .socials svg { width: 13px; height: 13px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .faq-left h2 { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1; margin-bottom: 1.3rem; }
+  .faq-left p { color: var(--ink-soft); font-size: .9rem; max-width: 30ch; }
+  .faq-left a { color: var(--rust); border-bottom: 1px solid var(--rust); }
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; cursor: pointer; font-family: var(--serif); font-size: 1.2rem; gap: 1rem; }
+  .faq-q .ic { font-family: var(--mono); font-size: 1.2rem; color: var(--rust); transition: transform .4s var(--ease); flex-shrink: 0; }
+  .faq-item.open .faq-q .ic { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .5s var(--ease); }
+  .faq-a p { padding-bottom: 1.5rem; color: var(--ink-soft); font-size: .9rem; max-width: 56ch; }
+
+  /* ---------- CONTACT ---------- */
+  .contact { background: var(--dark); color: var(--bg); }
+  .contact .section-head { border-color: rgba(255,255,255,.18); }
+  .contact .section-head .kicker { color: rgba(255,255,255,.5); }
+  .contact-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .contact-left h2 { font-size: clamp(2.6rem, 7vw, 5rem); line-height: .98; margin-bottom: 1.5rem; }
+  .contact-left h2 em { color: var(--rust); font-style: italic; }
+  .contact-left .lead { color: rgba(255,255,255,.7); max-width: 32ch; font-size: .92rem; margin-bottom: 2.5rem; }
+  .contact-stats { border-top: 1px solid rgba(255,255,255,.15); }
+  .contact-stats .row { display: flex; justify-content: space-between; padding: .9rem 0; border-bottom: 1px solid rgba(255,255,255,.1); font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; }
+  .contact-stats .row .k { color: rgba(255,255,255,.5); }
+  .form { background: var(--dark-soft); border: 1px solid rgba(255,255,255,.12); padding: clamp(1.5rem, 3vw, 2.5rem); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 1.2rem; }
+  .field { display: flex; flex-direction: column; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: .6rem; }
+  .field input, .field select, .field textarea {
+    background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,.22);
+    padding: .55rem 0; color: var(--bg); font-family: var(--sans); font-size: .92rem; outline: none;
+    transition: border-color .3s; border-radius: 0;
+  }
+  .field textarea { resize: vertical; min-height: 70px; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--rust); }
+  .field select option { background: var(--dark); }
+  .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,.3); }
+  .field.err input, .field.err select, .field.err textarea { border-color: #e07a5f; }
+  .form .btn { margin-top: 1.6rem; width: 100%; justify-content: center; }
+  .form-success { text-align: center; padding: 2.5rem 1rem; }
+  .form-success .ok { width: 54px; height: 54px; border-radius: 50%; background: var(--rust); display: grid; place-items: center; margin: 0 auto 1.3rem; }
+  .form-success h3 { font-size: 1.7rem; margin-bottom: .7rem; color: var(--bg); }
+  .form-success p { color: rgba(255,255,255,.65); font-size: .9rem; }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: var(--bg); padding-top: clamp(3rem,7vw,6rem); }
+  .footer-word { font-family: var(--serif); font-size: clamp(3.5rem, 18vw, 16rem); font-weight: 500; line-height: .85; letter-spacing: -.03em; text-align: center; padding-block: clamp(1rem,4vw,3rem); }
+  .footer-word em { font-style: italic; color: var(--rust); }
+  .footer-cols { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 2rem; border-top: 1px solid var(--line); padding-top: 2.5rem; }
+  .footer-cols .logo { font-size: 1.4rem; }
+  .footer-cols h4 { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 1.1rem; }
+  .footer-cols ul { list-style: none; }
+  .footer-cols li { padding: .3rem 0; font-size: .85rem; color: var(--ink-soft); }
+  .footer-cols a:hover { color: var(--rust); }
+  .footer-bottom { display: flex; justify-content: space-between; border-top: 1px solid var(--line); margin-top: 2.5rem; padding-block: 1.5rem 2.5rem; font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; color: var(--ink-faint); flex-wrap: wrap; gap: .5rem; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px) {
+    .hero-grid, .about-grid, .menu-grid, .tst-grid, .faq-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 480px; margin-top: 1.5rem; }
+    .menu-visual { position: static; aspect-ratio: 16/9; }
+    .proc-step, .proc-step.rev { grid-template-columns: 1fr; direction: ltr; }
+    .pkg-grid { grid-template-columns: 1fr; }
+    .pkg { border-right: none; border-bottom: 1px solid var(--line); }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .footer-cols { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .g1,.g2,.g3,.g4,.g5,.g6 { grid-column: span 1; grid-row: span 1; }
+    .g2 { grid-column: span 2; }
+  }
+  @media (max-width: 680px) {
+    .nav-links, .nav-est { display: none; }
+    .nav-right .btn { display: none; }
+    .nav-toggle { display: flex; }
+    .svc-row { grid-template-columns: 30px 1fr auto; }
+    .svc-desc, .svc-tag { display: none; }
+    .hero-meta { flex-direction: column; }
+    .form-grid { grid-template-columns: 1fr; }
+    .tst-card { grid-template-columns: 1fr; }
+    .tst-card .pic { height: 160px; }
+    .team-grid { grid-template-columns: 1fr; }
+    .footer-cols { grid-template-columns: 1fr; }
+    .pkg-head { flex-direction: column; align-items: flex-start; }
+    .pkg-head p { text-align: left; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    .marquee-track { animation: none; }
+    .reveal { opacity: 1; transform: none; }
+    .img-reveal img { clip-path: none; transform: none; }
+    .kin > span { transform: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <a href="#top" class="logo">Salt<span>&amp;</span>Ember</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-est">Est. 2014</span>
+    <a href="#contact" class="btn btn--fill magnetic">Request a Quote <span class="arr">&rarr;</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero wrap" id="top">
+  <div class="hero-top">
+    <span class="kicker">Bespoke Catering House</span>
+    <span class="kicker">London · Lisbon · New York</span>
+  </div>
+  <div class="hero-grid">
+    <div>
+      <h1>
+        <span class="kin"><span>Food</span></span> <span class="kin"><span>worth</span></span><br>
+        <span class="kin"><span class="em" style="font-style:italic">remembering.</span></span>
+      </h1>
+      <div class="hero-meta">
+        <div class="col">
+          <span class="lbl">— Craft</span>
+          <p>A seasonal, ingredient-led kitchen for weddings, residences and private tables.</p>
+        </div>
+        <div class="col">
+          <span class="lbl">— Notes</span>
+          <p>Two Michelin alumni. Whole-animal, zero-waste, forage-forward.</p>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn--fill magnetic">Request a Quote <span class="arr">&rarr;</span></a>
+        <a href="#menu" class="btn btn--ghost">View Menus <span class="arr">&rarr;</span></a>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="frame">
+        <div class="img-reveal"><img alt="Elegant candlelit dining terrace set for an evening event" loading="eager"
+          src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=80"
+          onerror="this.onerror=null;this.src='https://loremflickr.com/900/1000/dining,terrace,event?lock=11'"></div>
+      </div>
+      <div class="hero-inset">
+        <div class="img-reveal ph"><img alt="Hands setting a table for a private dinner" loading="lazy"
+          src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?auto=format&fit=crop&w=500&q=80"
+          onerror="this.onerror=null;this.src='https://loremflickr.com/500/400/table,setting?lock=12'"></div>
+        <div class="tag">Spring Menu &rsquo;26</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marquee">
+    <span>Weddings</span><span class="dot">&#10022;</span><span>Private Dining</span><span class="dot">&bull;</span><span>Corporate</span><span class="dot">&#10022;</span><span>Film &amp; Press</span><span class="dot">&bull;</span><span>Residencies</span><span class="dot">&#10022;</span>
+    <span>Weddings</span><span class="dot">&#10022;</span><span>Private Dining</span><span class="dot">&bull;</span><span>Corporate</span><span class="dot">&#10022;</span><span>Film &amp; Press</span><span class="dot">&bull;</span><span>Residencies</span><span class="dot">&#10022;</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">About</span>
+    <span class="kicker">A Catering House</span>
+  </div>
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <div class="img-reveal"><img alt="Chef cooking over an open wood-fired flame in the kitchen" loading="lazy"
+        src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=700&q=80"
+        onerror="this.onerror=null;this.src='https://loremflickr.com/700/840/chef,flame,kitchen?lock=21'"></div>
+    </div>
+    <div class="about-body reveal d1">
+      <span class="kicker" style="color:var(--rust)">— Our Philosophy</span>
+      <h2 style="margin-top:1rem">We believe a meal is a <span class="em">conversation</span> — between grower and guest, season and room, heat and hand.</h2>
+      <p>Salt &amp; Ember began as a sixteen-seat supper club above a flower market. A decade on, we are a team of thirty — chefs, stylists, sommeliers and service staff — cooking for weddings, studios, boardrooms and families across three cities.</p>
+      <div class="stats">
+        <div class="stat"><div class="num" data-count="12" data-suffix="y"><span class="u"></span></div><div class="lbl">Years Cooking</div></div>
+        <div class="stat"><div class="num" data-count="30" data-suffix="+"></div><div class="lbl">Team Members</div></div>
+        <div class="stat"><div class="num" data-count="842"></div><div class="lbl">Events &amp; Weddings</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">Services</span>
+    <span class="kicker">Ways We Can Deliver</span>
+  </div>
+  <h2 class="display reveal" style="margin-bottom:2.5rem">What we do, when you<br><span class="em">need a room fed.</span></h2>
+  <div class="svc-list">
+    <a href="#contact" class="svc-row reveal">
+      <span class="svc-num">01</span>
+      <span class="svc-name">Weddings</span>
+      <span class="svc-desc">Full-service catering for 40&ndash;400. Tastings, menu design, bar, service staff and styling — handled end to end.</span>
+      <span class="svc-tag">Full-Service · Multi-Day</span>
+      <span class="svc-arr">&rarr;</span>
+    </a>
+    <a href="#contact" class="svc-row reveal">
+      <span class="svc-num">02</span>
+      <span class="svc-name">Private Dining</span>
+      <span class="svc-desc">Chef&rsquo;s tables, birthdays, anniversaries. Intimate dinners at your home, from eight guests to sixty.</span>
+      <span class="svc-tag">Chef At Home</span>
+      <span class="svc-arr">&rarr;</span>
+    </a>
+    <a href="#contact" class="svc-row reveal">
+      <span class="svc-num">03</span>
+      <span class="svc-name">Corporate</span>
+      <span class="svc-desc">Boards, offsites, product launches and long-table lunches. We cook for brands that care about the details.</span>
+      <span class="svc-tag">Offsites · Launches</span>
+      <span class="svc-arr">&rarr;</span>
+    </a>
+    <a href="#contact" class="svc-row reveal">
+      <span class="svc-num">04</span>
+      <span class="svc-name">Film &amp; Press</span>
+      <span class="svc-desc">Food styling, on-set catering and editorial plates for shoots, campaigns and magazine features.</span>
+      <span class="svc-tag">Styling · On-Set</span>
+      <span class="svc-arr">&rarr;</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section id="menu" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">Menu</span>
+    <span class="kicker">Spring &rsquo;26</span>
+  </div>
+  <h2 class="display reveal" style="margin-bottom:1.5rem">Menus people <span class="em">remember.</span></h2>
+  <p class="menu-intro reveal d1">No two events taste the same. What you see here is a glimpse of what&rsquo;s possible — your menu is built from scratch, shaped by the season and the story you want to tell.</p>
+  <div class="menu-tabs reveal d1" id="menuTabs">
+    <button class="menu-tab active" data-cat="canapes">Canapés</button>
+    <button class="menu-tab" data-cat="first">First Courses</button>
+    <button class="menu-tab" data-cat="mains">Mains</button>
+    <button class="menu-tab" data-cat="desserts">Desserts</button>
+    <button class="menu-tab" data-cat="wine">Wine Pairing</button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-list reveal" id="menuList"></div>
+    <div class="menu-visual reveal d1">
+      <div class="img-reveal" id="menuVisual"><img id="menuImg" alt="Plated dish" loading="lazy"
+        src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=700&q=80"
+        onerror="this.onerror=null;this.src='https://loremflickr.com/700/780/scallop,canape?lock=31'"></div>
+    </div>
+  </div>
+  <div style="margin-top:2.5rem" class="reveal"><a href="#contact" class="btn btn--fill magnetic">Request a Quote <span class="arr">&rarr;</span></a></div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">Gallery</span>
+    <span class="kicker">Selected Work, 2023&ndash;2026</span>
+  </div>
+  <h2 class="display reveal" style="margin-bottom:2.5rem">Rooms we&rsquo;ve <span class="em">fed.</span></h2>
+  <div class="gallery-grid">
+    <div class="g g1 img-reveal reveal"><img alt="Long candlelit wedding table with florals" loading="lazy" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/600/800/wedding,table,candles?lock=41'"></div>
+    <div class="g g2 img-reveal reveal d1"><img alt="Chef plating a fine dining dish with tweezers" loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/900/450/chef,plating?lock=42'"></div>
+    <div class="g g3 img-reveal reveal d2"><img alt="Round dinner table set with flowers and candles" loading="lazy" src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/600/800/dinner,flowers,table?lock=43'"></div>
+    <div class="g g4 img-reveal reveal"><img alt="Plated main course on ceramic plate" loading="lazy" src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=500&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/500/400/plated,maincourse?lock=44'"></div>
+    <div class="g g5 img-reveal reveal d1"><img alt="Champagne coupes filled for a toast" loading="lazy" src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=500&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/500/400/champagne,glasses?lock=45'"></div>
+    <div class="g g6 img-reveal reveal d2"><img alt="Moody candlelit private dining room" loading="lazy" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/900/450/restaurant,interior,candlelit?lock=46'"></div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="testimonials" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">Kind Words</span>
+    <span class="kicker">From Our Guests</span>
+  </div>
+  <div class="tst-grid">
+    <div class="tst-left reveal">
+      <h2>Told by those<br>at the <span class="em">table.</span></h2>
+      <p>Every event leaves an impression. Here&rsquo;s what our guests remember most.</p>
+      <a href="#contact" class="btn btn--fill magnetic">Request a Quote <span class="arr">&rarr;</span></a>
+    </div>
+    <div>
+      <div class="tst-card reveal">
+        <div class="body">
+          <div class="who">Oliver &amp; Camille</div>
+          <p class="quote">Impeccable from start to finish. Salt &amp; Ember brought a quiet luxury and effortless hospitality to our wedding celebration.</p>
+          <div class="meta"><span class="ev">Wedding Celebration</span><span class="loc">Oxfordshire</span></div>
+        </div>
+        <div class="pic img-reveal"><img alt="Wedding reception table" loading="lazy" src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=400&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/300/300/wedding,reception,table?lock=51'"></div>
+      </div>
+      <div class="tst-card reveal d1">
+        <div class="body">
+          <div class="who">Rachel K.</div>
+          <p class="quote">Every course was outstanding — creative, seasonal and perfectly balanced. Our guests are still talking about it.</p>
+          <div class="meta"><span class="ev">Milestone Birthday</span><span class="loc">Clapham, London</span></div>
+        </div>
+        <div class="pic img-reveal"><img alt="Plated seasonal dish" loading="lazy" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/300/300/plated,gourmet,dish?lock=52'"></div>
+      </div>
+      <div class="tst-card reveal d2">
+        <div class="body">
+          <div class="who">James &amp; Sofia T.</div>
+          <p class="quote">We handed them a blank canvas and they returned something memorable. The food was extraordinary — every detail considered, nothing overdone.</p>
+          <div class="meta"><span class="ev">Corporate Dinner</span><span class="loc">Marylebone, London</span></div>
+        </div>
+        <div class="pic img-reveal"><img alt="Candlelit dinner table setting" loading="lazy" src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=400&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/300/300/candle,dinner,table?lock=53'"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">Process</span>
+    <span class="kicker">From Hello To Dessert</span>
+  </div>
+  <h2 class="display reveal" style="margin-bottom:2.5rem">How it <span class="em">works.</span></h2>
+
+  <div class="proc-step reveal">
+    <div class="proc-pic img-reveal"><img alt="Event planning notebook and colour palette flatlay" loading="lazy" src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/800/560/notebook,planning,desk?lock=61'"></div>
+    <div class="proc-text">
+      <div class="step-lbl">Step 01 · Hello</div>
+      <h3>Brief</h3>
+      <p>A short form, then a call. We learn the shape of your event — the guests, the room, the season, the feeling you&rsquo;re chasing.</p>
+    </div>
+  </div>
+
+  <div class="proc-step rev reveal">
+    <div class="proc-pic img-reveal"><img alt="Chef designing a plated menu" loading="lazy" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/800/560/chef,plating,menu?lock=62'"></div>
+    <div class="proc-text">
+      <div class="step-lbl">Step 02 · Design</div>
+      <h3>Menu</h3>
+      <p>We write a menu against your brief and budget. Two rounds of revision included. Wine, bar and styling drawn up alongside.</p>
+    </div>
+  </div>
+
+  <div class="proc-step reveal">
+    <div class="proc-pic img-reveal"><img alt="Private tasting dinner with wine" loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/800/560/wine,tasting,dinner?lock=63'"></div>
+    <div class="proc-text">
+      <div class="step-lbl">Step 03 · Taste</div>
+      <h3>Tasting</h3>
+      <p>A private tasting at the studio for weddings and large events. We refine, swap and adjust until every plate feels right.</p>
+    </div>
+  </div>
+
+  <div class="proc-step rev reveal">
+    <div class="proc-pic img-reveal"><img alt="Catering team setting up an event" loading="lazy" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/800/560/catering,event,service?lock=64'"></div>
+    <div class="proc-text">
+      <div class="step-lbl">Step 04 · Cook</div>
+      <h3>The Day</h3>
+      <p>We arrive hours before service. Our team handles kitchen, front-of-house, bar and pack-down. You greet your guests.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PACKAGES ============ -->
+<section id="packages" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">Packages</span>
+    <span class="kicker">A Guide, Not A Rulebook</span>
+  </div>
+  <div class="pkg-head">
+    <h2 class="reveal">Packages, from<br><span class="em">intimate to grand.</span></h2>
+    <p class="reveal d1">Prices are per guest, exclusive of VAT and service. Bespoke menus always available.</p>
+  </div>
+  <div class="pkg-grid reveal">
+    <div class="pkg">
+      <div class="pkg-top"><span class="pkg-name">Gather</span><span class="pkg-badge">Small</span></div>
+      <div class="pkg-price">&euro;95</div>
+      <div class="pkg-unit">Per Guest · From 10 Guests</div>
+      <ul class="pkg-feat">
+        <li><span class="plus">+</span> Three-course seasonal menu</li>
+        <li><span class="plus">+</span> On-site chef &amp; service staff</li>
+        <li><span class="plus">+</span> Canapé arrival reception</li>
+        <li><span class="plus">+</span> Curated wine pairing list</li>
+        <li><span class="plus">+</span> Full kitchen setup &amp; clear-down</li>
+      </ul>
+      <a href="#contact" class="btn btn--ghost">Request a Quote <span class="arr">&rarr;</span></a>
+    </div>
+    <div class="pkg pkg--dark">
+      <div class="pkg-top"><span class="pkg-name">Celebrate</span><span class="pkg-badge">Most Booked</span></div>
+      <div class="pkg-price">&euro;185</div>
+      <div class="pkg-unit">Per Guest · From 30 Guests</div>
+      <ul class="pkg-feat">
+        <li><span class="plus">+</span> Five-course menu with canapé reception</li>
+        <li><span class="plus">+</span> Full front-of-house service team</li>
+        <li><span class="plus">+</span> Pre-event menu tasting &amp; consultation</li>
+        <li><span class="plus">+</span> Bar programme &amp; wine service</li>
+        <li><span class="plus">+</span> Linen, tableware &amp; table styling</li>
+        <li><span class="plus">+</span> Dedicated event coordinator</li>
+      </ul>
+      <a href="#contact" class="btn">Request a Quote <span class="arr">&rarr;</span></a>
+    </div>
+    <div class="pkg">
+      <div class="pkg-top"><span class="pkg-name">Grand</span><span class="pkg-badge">Large</span></div>
+      <div class="pkg-price">POA</div>
+      <div class="pkg-unit">Weddings · 100+ Guests</div>
+      <ul class="pkg-feat">
+        <li><span class="plus">+</span> Full-day event catering</li>
+        <li><span class="plus">+</span> Arrival canapés, feast &amp; late-night menu</li>
+        <li><span class="plus">+</span> Complete bar &amp; sommelier service</li>
+        <li><span class="plus">+</span> Equipment, kitchen build &amp; logistics</li>
+        <li><span class="plus">+</span> Service team of 15&ndash;40</li>
+      </ul>
+      <a href="#contact" class="btn btn--ghost">Request a Quote <span class="arr">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section id="team" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">Team</span>
+    <span class="kicker">The People Who Cook</span>
+  </div>
+  <h2 class="display reveal" style="margin-bottom:2.5rem">The kitchen, <span class="em">briefly.</span></h2>
+  <div class="team-grid">
+    <div class="member reveal">
+      <div class="pic img-reveal"><img alt="Séverine Arnaud, founder and head chef" loading="lazy" src="https://images.unsplash.com/photo-1583394293214-28a5b0a3a3a3?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/600/680/chef,portrait,woman?lock=71'"></div>
+      <div class="role">Founder / Head Chef</div>
+      <div class="name">Séverine Arnaud</div>
+      <p>Built Salt &amp; Ember from a supper club. Leads menu direction across every event.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8.5a5 5 0 0 0 4 2v-3a4 4 0 0 1-3-1.5V14a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v3.1a2.5 2.5 0 1 0 1.6 2.3V2h2v.5a4 4 0 0 0 .9 4z"/></svg></a>
+      </div>
+    </div>
+    <div class="member reveal d1">
+      <div class="pic img-reveal"><img alt="Josh Okafor, founder and head chef" loading="lazy" src="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/600/680/chef,portrait,man?lock=72'"></div>
+      <div class="role">Founder / Head Chef</div>
+      <div class="name">Josh Okafor</div>
+      <p>Ex-Lyle&rsquo;s and The Clove Club. Leads the wedding and large-event kitchen brigade.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8.5a5 5 0 0 0 4 2v-3a4 4 0 0 1-3-1.5V14a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v3.1a2.5 2.5 0 1 0 1.6 2.3V2h2v.5a4 4 0 0 0 .9 4z"/></svg></a>
+      </div>
+    </div>
+    <div class="member reveal d2">
+      <div class="pic img-reveal"><img alt="Mira Lindqvist, head sommelier" loading="lazy" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://loremflickr.com/600/680/sommelier,wine,portrait?lock=73'"></div>
+      <div class="role">Head Sommelier</div>
+      <div class="name">Mira Lindqvist</div>
+      <p>Natural &amp; low-intervention specialist. Builds the pairings, bar programmes and cellar.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.5-.4-5.1a2.6 2.6 0 0 0-1.8-1.8C19.1 4.7 12 4.7 12 4.7s-7.1 0-8.8.4A2.6 2.6 0 0 0 1.4 6.9C1 8.5 1 12 1 12s0 3.5.4 5.1a2.6 2.6 0 0 0 1.8 1.8c1.7.4 8.8.4 8.8.4s7.1 0 8.8-.4a2.6 2.6 0 0 0 1.8-1.8C23 15.5 23 12 23 12zM9.7 15.3V8.7l6 3.3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="wrap">
+  <div class="section-head reveal">
+    <span class="kicker">FAQ</span>
+    <span class="kicker">Questions We Answer Often</span>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-left reveal">
+      <h2>Before<br>you <span class="em">ask.</span></h2>
+      <p>Can&rsquo;t find what you&rsquo;re looking for? Email <a href="#contact">hello@saltandember.co</a> — we reply within one working day.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">How far in advance should we book? <span class="ic">+</span></div>
+        <div class="faq-a"><p>For weddings and large events, three to nine months is ideal. For private dinners and smaller gatherings, two to four weeks is usually enough. We do take on last-minute events when the calendar allows — just ask.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do you travel? <span class="ic">+</span></div>
+        <div class="faq-a"><p>Yes. We&rsquo;re based across London, Lisbon and New York and regularly cater destination weddings and residencies. Travel and logistics are quoted transparently inside your proposal.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Can you accommodate dietary needs? <span class="ic">+</span></div>
+        <div class="faq-a"><p>Always. Vegan, vegetarian, gluten-free, halal, kosher-style and allergy-specific menus are part of how we work — never an afterthought. Every menu is built around your guest list.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What&rsquo;s included in the quote? <span class="ic">+</span></div>
+        <div class="faq-a"><p>Food, service staff, kitchen setup and clear-down are standard. Bar, wine, tableware, linen, styling and equipment hire can all be added — itemised clearly so you decide what you need.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do you offer tastings? <span class="ic">+</span></div>
+        <div class="faq-a"><p>Yes — a private tasting at our studio is included for weddings and large events. For smaller bookings, tastings can be arranged for a small fee that&rsquo;s credited back when you confirm.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">How do payments work? <span class="ic">+</span></div>
+        <div class="faq-a"><p>A deposit secures your date, with the balance due two weeks before the event. We accept bank transfer and card. Everything is laid out in your written proposal before anything is signed.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Contact Us</span>
+      <span class="kicker">Reply Within 24 Hours</span>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <h2>Request<br>a <em>quote.</em></h2>
+        <p class="lead">Tell us a little about your event and we&rsquo;ll come back within one working day with availability, a sample menu, and a budget range.</p>
+        <div class="contact-stats">
+          <div class="row"><span class="k">Response Time</span><span>&lt; 24 Hours</span></div>
+          <div class="row"><span class="k">Minimum Event</span><span>8 Guests</span></div>
+          <div class="row"><span class="k">Booking Window</span><span>Up to Dec &rsquo;27</span></div>
+          <div class="row"><span class="k">Enquiries / Week</span><span>42</span></div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <form class="form" id="quoteForm" novalidate>
+          <div class="form-grid">
+            <div class="field"><label>Full Name</label><input type="text" name="name" placeholder="Jane Smith" required></div>
+            <div class="field"><label>Email</label><input type="email" name="email" placeholder="example@example.com" required></div>
+            <div class="field"><label>Event Type</label>
+              <select name="type" required>
+                <option value="">Select…</option>
+                <option>Wedding</option><option>Private Dining</option><option>Corporate</option><option>Film &amp; Press</option><option>Other</option>
+              </select>
+            </div>
+            <div class="field"><label>Approx. Guests</label><input type="number" name="guests" placeholder="e.g. 80" min="1"></div>
+            <div class="field"><label>Date</label><input type="date" name="date"></div>
+            <div class="field"><label>Location</label><input type="text" name="location" placeholder="City / venue"></div>
+            <div class="field full"><label>Tell Us More Details</label><textarea name="details" placeholder="The style, the vibe, anything we should know…"></textarea></div>
+          </div>
+          <button type="submit" class="btn btn--rust">Submit <span class="arr">&rarr;</span></button>
+        </form>
+        <div class="form-success" id="formSuccess" style="display:none">
+          <div class="ok"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg></div>
+          <h3>Thank you.</h3>
+          <p>Your enquiry is in. We&rsquo;ll be in touch within one working day with availability and a sample menu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-word reveal">Salt &amp; <em>Ember.</em></div>
+    <div class="footer-cols">
+      <div>
+        <a href="#top" class="logo">Salt<span style="color:var(--rust)">&amp;</span>Ember</a>
+        <p style="color:var(--ink-soft);font-size:.82rem;margin-top:1rem;max-width:24ch">A seasonal, ingredient-led catering house for the moments that matter.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Weddings</a></li>
+          <li><a href="#services">Private Dining</a></li>
+          <li><a href="#services">Corporate</a></li>
+          <li><a href="#services">Film &amp; Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#menu">Menus</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>12 Columbia Road</li>
+          <li>London E2 7RG</li>
+          <li><a href="#contact">hello@saltandember.co</a></li>
+          <li>+44 20 7946 0000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Salt &amp; Ember — Bespoke Catering House</span>
+      <span>London · Lisbon · New York</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Hero kinetic load ---- */
+  var hero = document.querySelector('.hero');
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ hero.classList.add('loaded'); }); });
+
+  /* ---- Nav scroll state ---- */
+  var nav = document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('solid', window.scrollY > 40); }
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---- Reveal on scroll ---- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal, .img-reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---- Stat counters ---- */
+  var counted = false;
+  var statSec = document.querySelector('.stats');
+  if (statSec){
+    var sio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && !counted){
+          counted = true;
+          document.querySelectorAll('.num[data-count]').forEach(function(el){
+            var target = +el.getAttribute('data-count');
+            var suffix = el.getAttribute('data-suffix') || '';
+            var dur = 1400, start = null;
+            function tick(ts){
+              if (!start) start = ts;
+              var p = Math.min((ts - start)/dur, 1);
+              var eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = Math.round(eased * target) + suffix;
+              if (p < 1) requestAnimationFrame(tick);
+            }
+            if (reduce){ el.textContent = target + suffix; } else { requestAnimationFrame(tick); }
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+    sio.observe(statSec);
+  }
+
+  /* ---- Menu data + tabs ---- */
+  var MENU = {
+    canapes: { img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=700&q=80', fb: 'https://loremflickr.com/700/780/scallop,canape?lock=31', items: [
+      ['Hokkaido scallop, yuzu kosho, rye','Pan-seared scallop on toasted rye crisp with fermented yuzu butter and dill oil.','€8 / pc',['GF']],
+      ['Whipped ricotta, fig, aged balsamic','House-whipped ricotta on grilled crostini, fresh fig, a drop of 12-year balsamic.','€5 / pc',['V']],
+      ['Smoked salmon, crème fraîche, cucumber','Hand-sliced smoked salmon on blini with dill crème fraîche and paper-thin cucumber.','€6 / pc',['GF']],
+      ['Beef tartare, cornichon, sourdough crisp','Finely chopped dry-aged beef, shallot, capers and egg yolk on a sourdough wafer.','€9 / pc',[]],
+      ['Roasted courgette, labneh, za\'atar','Char-grilled courgette on whipped labneh, toasted za\'atar and pomegranate molasses.','€5 / pc',['V','GF']]
+    ]},
+    first: { img: 'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=700&q=80', fb: 'https://loremflickr.com/700/780/soup,starter,plated?lock=32', items: [
+      ['Heritage tomato, stracciatella, basil','Sun-ripened heritage tomatoes, torn stracciatella, basil oil and toasted pine nuts.','Course',['V','GF']],
+      ['Hand-rolled pici, brown butter, sage','Fresh pici pasta tossed in nutty brown butter, crisp sage and aged pecorino.','Course',['V']],
+      ['Cured sea bream, blood orange, fennel','Citrus-cured bream with shaved fennel, blood orange and a green peppercorn dressing.','Course',['GF']],
+      ['Charred leek, romesco, hazelnut','Slow-charred leeks over smoky romesco, toasted hazelnuts and aged sherry vinegar.','Course',['V','GF']]
+    ]},
+    mains: { img: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=700&q=80', fb: 'https://loremflickr.com/700/780/steak,maincourse,plated?lock=33', items: [
+      ['Dry-aged sirloin, bone marrow, watercress','35-day sirloin, roasted bone-marrow butter, watercress and triple-cooked potato.','Course',['GF']],
+      ['Cornish cod, brown shrimp, samphire','Roasted cod loin, brown-shrimp beurre noisette, samphire and new-season potatoes.','Course',['GF']],
+      ['Wild mushroom wellington, madeira','Forest mushroom duxelles in golden pastry, madeira jus and truffled mash.','Course',['V']],
+      ['Slow lamb shoulder, anchovy, rosemary','Twelve-hour lamb shoulder, anchovy-rosemary crust, salsa verde and white beans.','Course',['GF']]
+    ]},
+    desserts: { img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=80', fb: 'https://loremflickr.com/700/780/dessert,cake,plated?lock=34', items: [
+      ['Dark chocolate délice, sea salt, olive oil','Silken 70% chocolate délice, Maldon salt, cold-pressed olive oil and cocoa tuile.','Course',['V','GF']],
+      ['Roasted fig, honey mascarpone, walnut','Warm roasted figs, honeyed mascarpone, candied walnut and thyme.','Course',['V','GF']],
+      ['Lemon tart, torched meringue, basil','Sharp lemon curd in crisp pastry, torched Italian meringue and basil sugar.','Course',['V']],
+      ['Vanilla panna cotta, rhubarb, pistachio','Jersey-cream panna cotta, poached rhubarb and toasted pistachio crumb.','Course',['V','GF']]
+    ]},
+    wine: { img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=700&q=80', fb: 'https://loremflickr.com/700/780/wine,glass,cellar?lock=35', items: [
+      ['Champagne, Blanc de Blancs NV','Crisp, mineral and fine-beaded — our standard arrival pour for receptions.','Pairing',[]],
+      ['Sancerre, Loire Valley','Bright, flinty Sauvignon Blanc — sits beautifully with canapés and seafood.','Pairing',[]],
+      ['Barolo, Piedmont','Structured Nebbiolo with rose and tar — built for the sirloin and lamb.','Pairing',[]],
+      ['Natural orange, Georgia','Skin-contact and textural — our sommelier\'s pick for the adventurous table.','Pairing',[]],
+      ['Non-alcoholic: verjus & elderflower spritz','House-made, dry and aromatic — a serious pour for guests off the wine.','Pairing',['V']]
+    ]}
+  };
+
+  var menuList = document.getElementById('menuList');
+  var menuImg  = document.getElementById('menuImg');
+  function renderMenu(cat){
+    var data = MENU[cat];
+    var html = '<div class="menu-list-inner">';
+    data.items.forEach(function(it, i){
+      var diet = it[3].map(function(d){ return '<span>'+d+'</span>'; }).join('');
+      html += '<div class="dish">'
+        + '<span class="dish-num">'+String(i+1).padStart(2,'0')+'</span>'
+        + '<div><div class="dish-name">'+it[0]+'</div><div class="dish-desc">'+it[1]+'</div>'
+        + (diet ? '<div class="dish-diet">'+diet+'</div>' : '') + '</div>'
+        + '<span class="dish-price">'+it[2]+'</span></div>';
+    });
+    html += '</div>';
+    menuList.innerHTML = html;
+    menuImg.style.opacity = '0';
+    setTimeout(function(){
+      menuImg.onerror = function(){ this.onerror=null; this.src=data.fb; };
+      menuImg.src = data.img;
+      menuImg.style.opacity = '1';
+    }, 180);
+  }
+  renderMenu('canapes');
+  document.getElementById('menuTabs').addEventListener('click', function(e){
+    var btn = e.target.closest('.menu-tab');
+    if (!btn) return;
+    document.querySelectorAll('.menu-tab').forEach(function(t){ t.classList.remove('active'); });
+    btn.classList.add('active');
+    renderMenu(btn.getAttribute('data-cat'));
+  });
+
+  /* ---- FAQ accordion ---- */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(o){ o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = null; });
+      if (!open){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+
+  /* ---- Magnetic buttons ---- */
+  if (!reduce && window.matchMedia('(hover: hover)').matches){
+    document.querySelectorAll('.magnetic').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width/2;
+        var y = e.clientY - r.top - r.height/2;
+        btn.style.transition = 'transform .15s linear';
+        btn.style.transform = 'translate(' + x*0.25 + 'px,' + y*0.35 + 'px)';
+      });
+      btn.addEventListener('mouseleave', function(){
+        btn.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1)';
+        btn.style.transform = 'translate(0,0)';
+      });
+    });
+  }
+
+  /* ---- Contact form ---- */
+  var form = document.getElementById('quoteForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = true;
+    form.querySelectorAll('[required]').forEach(function(f){
+      var bad = !f.value.trim() || (f.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value));
+      f.closest('.field').classList.toggle('err', bad);
+      if (bad) ok = false;
+    });
+    if (!ok) return;
+    form.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+  form.querySelectorAll('input,select,textarea').forEach(function(f){
+    f.addEventListener('input', function(){ f.closest('.field').classList.remove('err'); });
+  });
+
+  /* ---- Mobile nav toggle (smooth scroll to sections) ---- */
+  var toggle = document.getElementById('navToggle');
+  if (toggle){
+    toggle.addEventListener('click', function(){
+      document.querySelector('#contact').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
+})();
+</script>
+</body>
+</html>
