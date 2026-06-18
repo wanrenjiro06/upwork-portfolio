@@ -444,7 +444,23 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
 
 ---
 
-## Current Job Status (as of 2026-06-16)
+## Current Job Status (as of 2026-06-18)
+
+### Active Contracts
+1. **Asim Hirji (Plutis) — Kotlin UI Developer / POS Gamification** 🟢 HIRED
+   - Budget: $100 fixed (Milestone 1, Active & Funded)
+   - Contract started: Jun 18, 2026
+   - Client: Bahrain, Plutis POS company
+   - Scope: POS customer-facing display gamification animations in Kotlin/Android:
+     - ✅ Spin the Wheel — DONE (`C:\UpWork\KotlinSpinWheel-Asim\`, deployed web demo: https://spin-and-win-demo.netlify.app)
+     - 🔲 Birthday Animations
+     - 🔲 Slot Machine Lever
+     - 🔲 Shell Game / Pick the Cup
+   - Colors: white, blue, black (design freedom around those)
+   - Pending: client to confirm screen resolution/aspect ratio of customer display
+   - Architecture: custom Kotlin `View` per game, pre-rendered Bitmap face, `Choreographer` loop, `spinTo(index)` server-chosen result pattern
+   - Folder: `C:\UpWork\KotlinSpinWheel-Asim\`
+   - **Next step:** Build birthday animations first (easiest), then slot machine, then shell game. Use Opus 4.8 + high effort for each build.
 
 ### Active Proposals
 1. **DataPivot — Site Revamp** (Egypt client)
@@ -630,8 +646,8 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
 - Budget 1–2 weeks for review cycles
 
 ### Next Steps When New Session Starts
-1. Check Upwork messages — waiting on responses to 4 active proposals (DataPivot $200, Android UsageTime $500, Next.js Australia $180, Senior Next.js Pakistan ~$500)
-2. Message Random Number Generator client — APK is ready to deliver
+1. **Asim Hirji job (ACTIVE $100):** Build birthday animations → slot machine → shell game. Use Opus 4.8 + high effort. Wait for screen resolution reply first.
+2. Check Upwork messages — waiting on responses to 4 active proposals (DataPivot $200, Android UsageTime $500, Next.js Australia $180, Senior Next.js Pakistan ~$500)
 3. ✅ Estate deployed: https://estate-landing.netlify.app/ — add to Upwork portfolio
    - Deploy Pulse to Netlify → add to Upwork portfolio
 4. Next portfolio piece: Restaurant/Food ordering page (need Framer inspo screenshot first)
