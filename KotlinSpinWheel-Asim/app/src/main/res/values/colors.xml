@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ink">#0A0D1F</color>
+    <color name="ink2">#141A38</color>
+    <color name="gold">#FFD45E</color>
+    <color name="goldDeep">#C9962B</color>
+    <color name="textLight">#F4F6FF</color>
+    <color name="textDim">#9AA3C7</color>
+</resources>
