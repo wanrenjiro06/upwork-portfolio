@@ -48,6 +48,18 @@
       "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
       "runtimeArgs": ["-m", "http.server", "3008", "--directory", "C:\\UpWork\\Websites Portfolio\\Axion"],
       "port": 3008
+    },
+    {
+      "name": "catering",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3009", "--directory", "C:\\UpWork\\Websites Portfolio\\Catering"],
+      "port": 3009
+    },
+    {
+      "name": "spin-wheel",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3010", "--directory", "C:\\UpWork\\Websites Portfolio\\SpinWheel"],
+      "port": 3010
     }
   ]
 }
