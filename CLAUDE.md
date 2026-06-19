@@ -452,15 +452,19 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
    - Contract started: Jun 18, 2026
    - Client: Bahrain, Plutis POS company
    - Scope: POS customer-facing display gamification animations in Kotlin/Android:
-     - ✅ Spin the Wheel — DONE (`C:\UpWork\KotlinSpinWheel-Asim\`, deployed web demo: https://spin-and-win-demo.netlify.app)
-     - 🔲 Birthday Animations
-     - 🔲 Slot Machine Lever
-     - 🔲 Shell Game / Pick the Cup
+     - ✅ Spin the Wheel — DONE (`C:\UpWork\KotlinSpinWheel-Asim\`, deployed web demo: https://spin-and-win-demo.netlify.app). MainActivity switched to LANDSCAPE (was portrait) on 2026-06-19 to match the customer display.
+     - ✅ Birthday Animations — DONE + DEPLOYED: https://birthday-pos-demo.netlify.app (native `BirthdayCelebrationView.kt` + `BirthdayAudio.kt` + `BirthdayActivity`; web demo `KotlinSpinWheel-Asim\web-demo-birthday\index.html`, preview port 3011). Cake+candles+balloons+confetti+sparkles, "Happy Birthday {name}" → tap to blow out → "Make a wish" + confetti → relit loop. Flames anchored on candle tops.
+     - ✅ Slot Machine — DONE + DEPLOYED: https://lucky-spin-slots-demo.netlify.app (native `SlotMachineView.kt` + `SlotAudio.kt` + `SlotActivity`; web demo `KotlinSpinWheel-Asim\web-demo-slot\index.html`, preview port 3012). 3 reels, 6 symbols (7/star/BAR/cherry/bell/diamond), pull-lever, staggered reel stops with tick+clunk, gold payline, chase lights, win = 3 match → confetti + fanfare + prize. Deterministic `spinTo([s0,s1,s2])` lands server-chosen symbols. Landscape.
+     - ✅ Shell Game (Find the Ball) — DONE + DEPLOYED: https://find-the-ball-demo.netlify.app (native `ShellGameView.kt` + `ShellAudio.kt` + `ShellActivity`; web demo `KotlinSpinWheel-Asim\web-demo-shell\index.html`, preview port 3013). 3 cups, reveal → shuffle (speeding swaps) → customer taps a cup → lift reveal → win confetti+fanfare / lose. Controlled outcome: `newRound(shouldWin, prize)` rigs the reveal to the server decision (customer always picks). Landscape.
+   - 🎉 ALL 4 GAMES DONE (2026-06-19). All native Kotlin custom Views (the deliverable); web demos are design previews. APK builds clean with 4 launcher icons. ✅ DEVICE-TESTED on Samsung SM-S721B (S24 FE), all 4 in landscape via adb install + screencap. Verified Spin spin / Birthday flames / Slot reels+win / Shell pick+reveal (win & lose). Fixed an Android-only bug: a shared `Paint`'s sub-255 alpha (set for a highlight) was bleeding into later shader fills → made the shell ball brown, slot tiles gray, balloons faint. Fix: reset `paint.alpha = 255` before each opaque fill in SlotMachineView/BirthdayCelebrationView/ShellGameView. (Web demos never had this — canvas-specific to Android Paint.)
    - Colors: white, blue, black (design freedom around those)
-   - Pending: client to confirm screen resolution/aspect ratio of customer display
-   - Architecture: custom Kotlin `View` per game, pre-rendered Bitmap face, `Choreographer` loop, `spinTo(index)` server-chosen result pattern
+   - Orientation: LANDSCAPE for ALL games (client confirmed Android customer display is landscape)
+   - Architecture: custom Kotlin `View` per game, pre-rendered Bitmap sprites, `Choreographer` loop, server-chosen-result pattern (`spinTo`)
    - Folder: `C:\UpWork\KotlinSpinWheel-Asim\`
-   - **Next step:** Build birthday animations first (easiest), then slot machine, then shell game. Use Opus 4.8 + high effort for each build.
+   - ✅ BUNDLED into one app: `HomeActivity` + `activity_home.xml` = single landscape launcher ("POS Games") with a tile per game; the 4 game activities are now non-launcher (exported=false), opened from the menu. Verified on device (tile → game launches).
+   - ✅ MADE MODULAR (Asim asked: modular speed/options + easy-to-edit styling). Added `GameStyle.kt` (central brand palette + global `speedFactor` applied to all 4). Each View has a `CONFIG` block of public vars: wheel (`spinDurationMs`, `extraSpins`, `segments`); slot (`symbols`, `reelBaseDurationMs`, `reelStaggerMs`, `demoWinChance`); birthday (`candleCount`, tier colours, `balloonColors`, `kickerText`, `titleText`); shell (`cupColor`, `shuffleCount`, `swapDurationMs`, `demoWinChance`, `prizes`). All additive (defaults = old constants), builds clean. Config refactor NOT re-device-tested (phone disconnected) but defaults unchanged so render path identical.
+   - ✅ DELIVERED (2026-06-19): packaged `POS-Games-delivery.zip` (source project + APK + README, ~5MB) and submitted via Upwork "Submit work for payment" for Milestone 1 ($100). Asim's "small comments" turned out to BE his two questions (modular? styling editable?) — both already answered/implemented. Awaiting his approval/payment.
+   - **Next step (new session):** Wait on Asim's approval. If he requests changes, they'll likely be quick config edits (GameStyle.speedFactor / palette, per-game CONFIG vars). Re-device-test on phone when reconnected (it dropped off adb after the bundle test). Deliverable zips/APK are gitignored — rebuild with `./gradlew :app:assembleDebug` and re-zip from source if needed.
 
 ### Active Proposals
 1. **DataPivot — Site Revamp** (Egypt client)

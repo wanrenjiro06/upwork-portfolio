@@ -7,15 +7,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpinWheel">
 
+        <!-- Single launcher: the games menu -->
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Games (opened from the menu) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/main_name"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".BirthdayActivity"
+            android:exported="false"
+            android:label="@string/birthday_name"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".SlotActivity"
+            android:exported="false"
+            android:label="@string/slot_name"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".ShellActivity"
+            android:exported="false"
+            android:label="@string/shell_name"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

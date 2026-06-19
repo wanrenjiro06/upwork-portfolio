@@ -6,4 +6,6 @@
     <color name="goldDeep">#C9962B</color>
     <color name="textLight">#F4F6FF</color>
     <color name="textDim">#9AA3C7</color>
+    <color name="birthdayBg">#060912</color>
+    <color name="blue">#3FA7E0</color>
 </resources>

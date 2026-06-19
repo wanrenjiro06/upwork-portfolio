@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Spin &amp; Win</string>
+    <string name="app_name">POS Games</string>
+    <string name="main_name">Spin &amp; Win</string>
+    <string name="birthday_name">POS Birthday</string>
+    <string name="slot_name">Lucky Spin Slots</string>
+    <string name="shell_name">Find the Ball</string>
 </resources>

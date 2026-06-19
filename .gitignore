@@ -50,3 +50,13 @@ build/
 # Sensitive
 *.psd
 .claude/settings.local.json
+
+# Local Netlify folder
+.netlify
+
+# POS Games deliverable artifacts (regenerable from source + gradle)
+POS-Games-delivery.zip
+POS-Games-source.zip
+POS-Games.apk
+# Device test screenshots (diagnostic)
+_devshots/

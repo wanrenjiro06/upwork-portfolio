@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Lucky Spin Slots — POS Customer Display Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue:      #3FA7E0;
+    --blue-deep: #1E63B0;
+    --blue-lite: #82D2FF;
+    --indigo:    #5A6BD8;
+    --gold:      #FFD45E;
+    --gold-deep: #C9962B;
+    --ink:       #060912;
+    --text:      #F4F6FF;
+    --text-dim:  #9AA8CF;
+    --font-head: 'Fredoka', system-ui, sans-serif;
+    --font-body: 'Outfit', system-ui, sans-serif;
+  }
+
+  html, body {
+    height: 100%; overflow: hidden; background: var(--ink); color: var(--text);
+    font-family: var(--font-body); -webkit-font-smoothing: antialiased;
+    user-select: none; -webkit-tap-highlight-color: transparent;
+  }
+
+  #stage { position: fixed; inset: 0;
+    background: radial-gradient(130% 100% at 50% 0%, #16224d 0%, #0c1330 44%, #060912 100%); }
+
+  #scene { position: absolute; inset: 0; display: block; }
+
+  .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .4; pointer-events: none; will-change: transform; }
+  .orb.a { width: 520px; height: 520px; background: #25559e; top: -160px; left: -120px; animation: drift1 20s ease-in-out infinite; }
+  .orb.b { width: 460px; height: 460px; background: #4a3f9c; bottom: -180px; right: -120px; animation: drift2 24s ease-in-out infinite; }
+  @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(46px,34px)} }
+  @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,-30px)} }
+
+  /* ---- Header ---- */
+  #head { position: absolute; z-index: 4; top: clamp(14px, 4vh, 40px); left: 0; right: 0; text-align: center; padding: 0 24px; pointer-events: none; }
+  .kicker { font-weight: 600; font-size: clamp(11px, 1.4vw, 14px); letter-spacing: .34em; text-transform: uppercase; color: var(--blue-lite); opacity: .92; }
+  h1 { font-family: var(--font-head); font-weight: 700; font-size: clamp(28px, 5.6vw, 60px); line-height: 1; margin-top: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, var(--blue-lite) 58%, var(--blue) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 40px rgba(130,210,255,.2); }
+
+  /* ---- Win banner ---- */
+  #banner { position: absolute; z-index: 5; left: 50%; top: 50%; transform: translate(-50%,-50%) scale(.7);
+    width: min(86vw, 460px); padding: 22px 28px 26px; text-align: center; border-radius: 24px;
+    background: linear-gradient(180deg, rgba(28,40,80,.96), rgba(12,18,40,.97));
+    border: 1px solid rgba(130,210,255,.4);
+    box-shadow: 0 30px 90px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08), 0 0 70px rgba(130,210,255,.16);
+    opacity: 0; pointer-events: none; transition: opacity .4s ease, transform .5s cubic-bezier(.2,1.3,.4,1); }
+  #banner.show { opacity: 1; transform: translate(-50%,-50%) scale(1); pointer-events: auto; }
+  #banner .won { font-weight: 600; letter-spacing: .26em; text-transform: uppercase; font-size: 12px; color: var(--gold); margin-bottom: 8px; }
+  #banner .prize { font-family: var(--font-head); font-weight: 700; font-size: clamp(26px, 6vw, 44px); line-height: 1.04; margin-bottom: 16px; color: #fff; }
+  #banner button { font-family: var(--font-body); font-weight: 700; font-size: 15px; color: #07223f;
+    background: linear-gradient(180deg, var(--blue-lite), var(--blue) 56%, var(--blue-deep));
+    border: none; border-radius: 13px; padding: 12px 28px; cursor: pointer;
+    box-shadow: 0 10px 26px rgba(63,167,224,.34), inset 0 1px 0 rgba(255,255,255,.5); transition: transform .12s ease; }
+  #banner button:active { transform: scale(.96); }
+
+  /* ---- Footer ---- */
+  footer { position: absolute; z-index: 6; left: 0; right: 0; bottom: clamp(12px, 3vh, 28px);
+    display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; padding: 0 18px; }
+  .hint { display: flex; align-items: center; gap: 9px; color: var(--text-dim); font-size: 13.5px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); animation: blink 1.6s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+  .sep { width: 1px; height: 16px; background: rgba(255,255,255,.14); }
+  .btn { font-family: var(--font-body); font-weight: 700; font-size: 14px; color: #2a1d00;
+    background: linear-gradient(180deg, #FFE9A8, var(--gold) 55%, var(--gold-deep));
+    border: none; border-radius: 11px; padding: 10px 26px; cursor: pointer;
+    box-shadow: 0 8px 22px rgba(255,201,64,.32), inset 0 1px 0 rgba(255,255,255,.55); transition: transform .12s ease, box-shadow .2s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0) scale(.97); }
+  .btn[disabled] { opacity: .5; cursor: default; transform: none; }
+  .ghost { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: var(--text-dim);
+    border-radius: 10px; padding: 8px 13px; font-size: 13px; font-family: var(--font-body); cursor: pointer; transition: all .18s ease; }
+  .ghost:hover { color: var(--text); border-color: rgba(130,210,255,.4); }
+
+  @media (prefers-reduced-motion: reduce) { .orb { animation: none; } }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div class="orb a"></div>
+    <div class="orb b"></div>
+
+    <canvas id="scene"></canvas>
+
+    <div id="head">
+      <div class="kicker">Thanks for your order</div>
+      <h1>Lucky Spin Slots</h1>
+    </div>
+
+    <div id="banner">
+      <div class="won">🎉 Winner</div>
+      <div class="prize" id="prizeText">Free Drink</div>
+      <button id="againBtn">Spin Again</button>
+    </div>
+
+    <footer>
+      <div class="hint"><span class="dot"></span> Pull the lever to spin</div>
+      <div class="sep"></div>
+      <button class="btn" id="spinBtn">Spin</button>
+      <button class="ghost" id="muteBtn">🔊 Sound on</button>
+    </footer>
+  </div>
+
+<script>
+(() => {
+  'use strict';
+
+  // ============================================================
+  //  Lucky Spin Slots — POS customer-display slot machine
+  //  Self-contained: canvas-drawn cabinet, reels, symbols, lever,
+  //  lights, confetti; procedurally-synthesized audio (no assets).
+  //
+  //  PERFORMANCE MODEL (mirrors the Spin & Win pre-rendered face):
+  //    The cabinet and every symbol TILE are pre-rendered once to
+  //    offscreen canvases. Each frame only blits the visible symbol
+  //    tiles per reel + draws the cheap live bits (lever, lights,
+  //    confetti). No per-frame gradient allocation in the loop.
+  //
+  //  PRODUCTION HOOK (mirrors spinTo):
+  //    The back office decides the outcome (odds, stock, per-customer
+  //    rules). Call:
+  //        slots.spinTo([s0, s1, s2])   // land these symbol indices on the payline
+  //        slots.onResult = (symbols, isWin, prize) => { ... }
+  //    Use spin() (random, demo-weighted) only for the kiosk demo.
+  // ============================================================
+
+  const TWO_PI = Math.PI * 2;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Symbols ----
+  // Same cyclic order on every reel. 3 matching on the payline = win.
+  const SYMBOLS = [
+    { key: 'seven',   color: '#E94B5A', prize: 'JACKPOT — Free Drink' },
+    { key: 'star',    color: '#FFD45E', prize: 'Free Cookie' },
+    { key: 'bar',     color: '#3FA7E0', prize: '10% Off Today' },
+    { key: 'cherry',  color: '#E94B5A', prize: 'Free Topping' },
+    { key: 'bell',    color: '#F2A03D', prize: 'Free Upgrade' },
+    { key: 'diamond', color: '#22D3EE', prize: '20% Off Today' },
+  ];
+  const N = SYMBOLS.length;
+  const REELS = 3;
+
+  const canvas = document.getElementById('scene');
+  const ctx = canvas.getContext('2d');
+  let dpr = 1, cw = 0, ch = 0, U = 0;
+
+  // ---- Layout (recomputed on resize) ----
+  let lay = null;
+  let cabinetSprite = null;
+  const symbolSprites = [];          // index -> offscreen tile canvas
+
+  function newCanvas(w, h) { const c = document.createElement('canvas'); c.width = Math.max(1, Math.ceil(w)); c.height = Math.max(1, Math.ceil(h)); return c; }
+  function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+  function shade(hex, amt) { const n=parseInt(hex.slice(1),16); let r=(n>>16)+amt,g=((n>>8)&255)+amt,b=(n&255)+amt;
+    r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));
+    return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1); }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cw = window.innerWidth; ch = window.innerHeight;
+    canvas.width = Math.floor(cw*dpr); canvas.height = Math.floor(ch*dpr);
+    canvas.style.width = cw+'px'; canvas.style.height = ch+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    U = Math.min(cw, ch);
+    layout();
+    buildSprites();
+  }
+
+  function layout() {
+    // Cabinet centered; lever to its right. Sized off the shorter axis so it
+    // fits landscape POS displays without clipping. Positioned below the header
+    // and above the footer so the crown/lever never overlap the page chrome.
+    const headEl = document.getElementById('head');
+    const footEl = document.querySelector('footer');
+    const headBottom = headEl ? headEl.getBoundingClientRect().bottom : ch * 0.14;
+    const footTop = footEl ? footEl.getBoundingClientRect().top : ch * 0.92;
+
+    const cabH = Math.min(ch * 0.58, U * 0.85, (footTop - headBottom) - U * 0.16);
+    const cabW = Math.min(cw * 0.58, cabH * 1.25);
+    const cabX = (cw - cabW) / 2 - U * 0.045;   // nudge left to leave room for lever
+    const crownOverhang = cabH * 0.2 * 0.45;
+    const avail = footTop - headBottom;
+    const cabY = headBottom + crownOverhang + (avail - crownOverhang - cabH) * 0.5;
+
+    const pad = cabW * 0.07;
+    const winX = cabX + pad;
+    const winY = cabY + cabH * 0.30;
+    const winW = cabW - pad * 2;
+    const winH = cabH * 0.50;
+    const reelGap = winW * 0.035;
+    const reelW = (winW - reelGap * (REELS - 1)) / REELS;
+    const cellH = winH / 3;
+
+    lay = { cabX, cabY, cabW, cabH, winX, winY, winW, winH, reelGap, reelW, cellH,
+      paylineY: winY + winH / 2,
+      leverPivotX: cabX + cabW + U * 0.055,
+      leverPivotY: cabY + cabH * 0.62,
+      leverLen: cabH * 0.30,
+    };
+  }
+
+  // ============================================================
+  //  Sprites
+  // ============================================================
+  function buildSprites() {
+    buildCabinet();
+    symbolSprites.length = 0;
+    for (let i = 0; i < N; i++) symbolSprites[i] = buildSymbolTile(i);
+  }
+
+  function buildCabinet() {
+    cabinetSprite = newCanvas(cw * dpr, ch * dpr);
+    const c = cabinetSprite.getContext('2d');
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const { cabX, cabY, cabW, cabH, winX, winY, winW, winH } = lay;
+
+    // drop shadow
+    const sh = c.createRadialGradient(cabX+cabW/2, cabY+cabH*0.6, 0, cabX+cabW/2, cabY+cabH*0.6, cabW*0.7);
+    sh.addColorStop(0,'rgba(0,0,0,0.45)'); sh.addColorStop(1,'rgba(0,0,0,0)');
+    c.fillStyle = sh; c.fillRect(cabX-cabW*0.2, cabY-cabH*0.05, cabW*1.4, cabH*1.2);
+
+    // body
+    rr(c, cabX, cabY, cabW, cabH, cabW*0.06);
+    const bg = c.createLinearGradient(cabX, cabY, cabX, cabY+cabH);
+    bg.addColorStop(0, '#27407e'); bg.addColorStop(0.5, '#1b2a57'); bg.addColorStop(1, '#111a38');
+    c.fillStyle = bg; c.fill();
+    // gold trim
+    c.lineWidth = Math.max(2, cabW*0.012);
+    const tg = c.createLinearGradient(cabX, cabY, cabX+cabW, cabY+cabH);
+    tg.addColorStop(0,'#FFE9A8'); tg.addColorStop(0.5,'#C9962B'); tg.addColorStop(1,'#8A651A');
+    c.strokeStyle = tg; rr(c, cabX, cabY, cabW, cabH, cabW*0.06); c.stroke();
+
+    // top crown plate
+    const crownH = cabH*0.2;
+    rr(c, cabX+cabW*0.16, cabY-crownH*0.45, cabW*0.68, crownH, crownH*0.4);
+    const cg = c.createLinearGradient(0, cabY-crownH*0.45, 0, cabY+crownH*0.55);
+    cg.addColorStop(0,'#FFE9A8'); cg.addColorStop(1,'#C9962B');
+    c.fillStyle = cg; c.fill();
+    c.fillStyle = '#2a1d00'; c.textAlign='center'; c.textBaseline='middle';
+    c.font = `700 ${crownH*0.4}px 'Fredoka', sans-serif`;
+    c.fillText('★  JACKPOT  ★', cabX+cabW/2, cabY+crownH*0.05);
+
+    // reel window inset (dark)
+    rr(c, winX-winW*0.02, winY-winH*0.04, winW*1.04, winH*1.08, winW*0.03);
+    c.fillStyle = '#05070f'; c.fill();
+    c.lineWidth = Math.max(2, cabW*0.01); c.strokeStyle = '#0c1330'; c.stroke();
+
+    // reel separators
+    for (let i = 1; i < REELS; i++) {
+      const x = lay.winX + i*lay.reelW + (i-0.5)*lay.reelGap;
+      c.fillStyle = 'rgba(0,0,0,0.5)';
+      c.fillRect(x - lay.reelGap*0.5, winY-winH*0.04, lay.reelGap, winH*1.08);
+    }
+  }
+
+  // Build one symbol tile (background + icon) sized to a reel cell.
+  function buildSymbolTile(i) {
+    const W = lay.reelW, H = lay.cellH;
+    const cv = newCanvas(W*dpr, H*dpr);
+    const c = cv.getContext('2d');
+    c.setTransform(dpr,0,0,dpr,0,0);
+    const m = Math.min(W,H)*0.07;
+    // tile
+    rr(c, m, m, W-2*m, H-2*m, Math.min(W,H)*0.14);
+    const g = c.createLinearGradient(0, m, 0, H-m);
+    g.addColorStop(0,'#ffffff'); g.addColorStop(1,'#dfe7fb');
+    c.fillStyle = g; c.fill();
+    c.lineWidth = 2; c.strokeStyle = 'rgba(30,40,80,0.18)'; c.stroke();
+    // icon
+    const s = Math.min(W, H) * 0.56;
+    c.save(); c.translate(W/2, H/2);
+    drawIcon(c, SYMBOLS[i].key, s, SYMBOLS[i].color);
+    c.restore();
+    return cv;
+  }
+
+  // Draw a symbol icon centered at (0,0), overall size ~s.
+  function drawIcon(c, key, s, color) {
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (key === 'seven') {
+      c.font = `800 ${s*1.15}px 'Fredoka', sans-serif`;
+      c.textAlign='center'; c.textBaseline='middle';
+      c.fillStyle = shade(color,-30); c.fillText('7', 2, s*0.05+2);
+      c.fillStyle = color; c.fillText('7', 0, s*0.05);
+    } else if (key === 'bar') {
+      rr(c, -s*0.5, -s*0.22, s, s*0.44, s*0.1);
+      const g=c.createLinearGradient(0,-s*0.22,0,s*0.22); g.addColorStop(0,shade(color,30)); g.addColorStop(1,shade(color,-20));
+      c.fillStyle=g; c.fill();
+      c.fillStyle='#fff'; c.font=`800 ${s*0.3}px 'Outfit', sans-serif`; c.textAlign='center'; c.textBaseline='middle';
+      c.fillText('BAR', 0, s*0.01);
+    } else if (key === 'cherry') {
+      c.strokeStyle='#3FB6A8'; c.lineWidth=s*0.05;
+      c.beginPath(); c.moveTo(-s*0.18,s*0.14); c.quadraticCurveTo(s*0.02,-s*0.28,s*0.04,-s*0.34); c.stroke();
+      c.beginPath(); c.moveTo(s*0.2,s*0.16); c.quadraticCurveTo(s*0.06,-s*0.26,s*0.04,-s*0.34); c.stroke();
+      // leaf
+      c.fillStyle='#3FB6A8'; c.beginPath(); c.ellipse(s*0.16,-s*0.32,s*0.12,s*0.06,-0.6,0,TWO_PI); c.fill();
+      for (const cx of [[-s*0.18,s*0.26],[s*0.2,s*0.28]]) {
+        const g=c.createRadialGradient(cx[0]-s*0.05,cx[1]-s*0.05,s*0.02,cx[0],cx[1],s*0.2);
+        g.addColorStop(0,shade(color,40)); g.addColorStop(1,shade(color,-20));
+        c.fillStyle=g; c.beginPath(); c.arc(cx[0],cx[1],s*0.17,0,TWO_PI); c.fill();
+        c.fillStyle='rgba(255,255,255,0.5)'; c.beginPath(); c.arc(cx[0]-s*0.06,cx[1]-s*0.06,s*0.04,0,TWO_PI); c.fill();
+      }
+    } else if (key === 'bell') {
+      const g=c.createLinearGradient(0,-s*0.4,0,s*0.3); g.addColorStop(0,shade(color,45)); g.addColorStop(1,shade(color,-15));
+      c.fillStyle=g;
+      c.beginPath();
+      c.moveTo(0,-s*0.4);
+      c.bezierCurveTo(s*0.3,-s*0.36, s*0.34,s*0.1, s*0.4,s*0.24);
+      c.lineTo(-s*0.4,s*0.24);
+      c.bezierCurveTo(-s*0.34,s*0.1, -s*0.3,-s*0.36, 0,-s*0.4);
+      c.fill();
+      c.fillStyle=shade(color,-25); rr(c,-s*0.44,s*0.24,s*0.88,s*0.08,s*0.04); c.fill();
+      c.beginPath(); c.arc(0,s*0.38,s*0.07,0,TWO_PI); c.fillStyle=shade(color,-25); c.fill();
+      c.fillStyle='rgba(255,255,255,0.45)'; c.beginPath(); c.ellipse(-s*0.12,-s*0.1,s*0.05,s*0.16,0,0,TWO_PI); c.fill();
+    } else if (key === 'star') {
+      const g=c.createLinearGradient(0,-s*0.45,0,s*0.4); g.addColorStop(0,shade(color,40)); g.addColorStop(1,shade(color,-20));
+      c.fillStyle=g; star(c, 0,0, s*0.48, s*0.2, 5); c.fill();
+      c.fillStyle='rgba(255,255,255,0.4)'; star(c,0,-s*0.02,s*0.3,s*0.12,5); c.fill();
+    } else if (key === 'diamond') {
+      const g=c.createLinearGradient(0,-s*0.5,0,s*0.5); g.addColorStop(0,shade(color,40)); g.addColorStop(1,shade(color,-25));
+      c.fillStyle=g;
+      c.beginPath(); c.moveTo(0,-s*0.45); c.lineTo(s*0.42,-s*0.08); c.lineTo(0,s*0.45); c.lineTo(-s*0.42,-s*0.08); c.closePath(); c.fill();
+      c.strokeStyle='rgba(255,255,255,0.5)'; c.lineWidth=s*0.025;
+      c.beginPath(); c.moveTo(-s*0.42,-s*0.08); c.lineTo(s*0.42,-s*0.08);
+      c.moveTo(0,-s*0.45); c.lineTo(-s*0.18,-s*0.08); c.lineTo(0,s*0.45); c.moveTo(0,-s*0.45); c.lineTo(s*0.18,-s*0.08); c.stroke();
+      c.fillStyle='rgba(255,255,255,0.5)'; c.beginPath(); c.moveTo(0,-s*0.45); c.lineTo(s*0.12,-s*0.16); c.lineTo(-s*0.12,-s*0.16); c.closePath(); c.fill();
+    }
+  }
+  function star(c, cx, cy, R, r, n) {
+    c.beginPath();
+    for (let i = 0; i < n*2; i++) {
+      const ang = (i/(n*2))*TWO_PI - Math.PI/2;
+      const rad = i%2===0 ? R : r;
+      const x = cx + Math.cos(ang)*rad, y = cy + Math.sin(ang)*rad;
+      i===0 ? c.moveTo(x,y) : c.lineTo(x,y);
+    }
+    c.closePath();
+  }
+
+  // ============================================================
+  //  Reel state
+  // ============================================================
+  const reels = [];
+  for (let i = 0; i < REELS; i++) reels.push({ offset: Math.random()*N, spinning: false, start: 0, target: 0, t0: 0, dur: 0, lastTick: 0 });
+
+  let state = 'idle';          // idle | spinning | win
+  let leverT = 0, leverTarget = 0, leverVel = 0;
+  let confetti = [];
+  let frameFlash = 0;
+  let winInfo = null;
+
+  // ============================================================
+  //  Spin logic
+  // ============================================================
+  const easeOutQuart = t => 1 - Math.pow(1-t, 4);
+
+  function spinTo(result) {
+    if (state === 'spinning') return;
+    hideBanner();
+    state = 'spinning'; frameFlash = 0; winInfo = null;
+    audio();
+    const now = performance.now();
+    for (let i = 0; i < REELS; i++) {
+      const r = reels[i];
+      const base = Math.floor(r.offset);
+      const t = result[i];
+      let delta = ((t - (base % N)) % N + N) % N;        // forward steps to land on t
+      const fullSpins = 4 + i;                            // each reel spins a bit more
+      r.start = r.offset;
+      r.target = base + delta + fullSpins * N;
+      r.t0 = now;
+      r.dur = (prefersReduced ? 700 : 1700) + i * (prefersReduced ? 250 : 520);   // staggered stops
+      r.spinning = true;
+      r.lastTick = Math.floor(r.offset);
+    }
+    pendingResult = result.slice();
+  }
+  let pendingResult = null;
+
+  function spin() {
+    // Demo: weighted so wins feel rewarding (~38%).
+    let result;
+    if (Math.random() < 0.38) { const s = Math.floor(Math.random()*N); result = [s,s,s]; }
+    else {
+      result = [0,0,0].map(() => Math.floor(Math.random()*N));
+      if (result[0]===result[1] && result[1]===result[2]) result[2] = (result[2]+1)%N;  // avoid accidental jackpot
+    }
+    spinTo(result);
+  }
+
+  function pullLever() {
+    if (state === 'spinning') return;
+    leverTarget = 1;
+    if (soundEnabled) leverSfx();
+    setTimeout(() => { leverTarget = 0; spin(); }, 230);
+  }
+
+  // ============================================================
+  //  Audio (Web Audio — generated, no files)
+  // ============================================================
+  let actx = null, soundEnabled = true;
+  function audio() { if (!actx) { try { actx = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} } if (actx && actx.state==='suspended') actx.resume(); return actx; }
+  function blip(freq, dur, type, peak, t0) {
+    const a = audio(); if (!a) return;
+    const o=a.createOscillator(), g=a.createGain(); o.type=type||'square'; o.frequency.value=freq;
+    const t=t0||a.currentTime;
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(peak||0.08,t+0.004); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+dur+0.02);
+  }
+  function tick(speed) { if (!soundEnabled) return; blip(420 + Math.min(speed,1)*260, 0.04, 'square', 0.05); }
+  function clunk() { if (!soundEnabled) return; blip(150, 0.12, 'triangle', 0.16); blip(90, 0.16, 'sine', 0.12); }
+  function leverSfx() { const a=audio(); if(!a||!soundEnabled) return; blip(300,0.12,'sawtooth',0.06); blip(180,0.18,'sawtooth',0.05); }
+  function winFanfare() {
+    if (!soundEnabled) return; const a=audio(); if(!a) return;
+    [523.25,659.25,783.99,1046.5,1318.5].forEach((f,i)=>blip(f,0.5,'triangle',0.14,a.currentTime+i*0.1));
+  }
+
+  // ============================================================
+  //  Confetti
+  // ============================================================
+  const CONF = ['#82D2FF','#3FA7E0','#5A6BD8','#FFFFFF','#FFD45E','#22D3EE','#FF9BCF'];
+  function burst(amount) {
+    if (prefersReduced) return;
+    for (let s=0;s<2;s++){
+      const x = s===0 ? cw*0.05 : cw*0.95, y = ch*0.9;
+      for (let i=0;i<amount;i++){
+        const base = s===0 ? -Math.PI*0.32 : -Math.PI*0.68;
+        const ang = base + (Math.random()-0.5)*0.7, sp = U*(0.016+Math.random()*0.016);
+        confetti.push({ x,y, vx:Math.cos(ang)*sp, vy:Math.sin(ang)*sp, rot:Math.random()*TWO_PI, vr:(Math.random()-0.5)*0.5,
+          w:U*(0.009+Math.random()*0.01), h:U*(0.014+Math.random()*0.014), color:CONF[(Math.random()*CONF.length)|0], life:1, wob:Math.random()*TWO_PI });
+      }
+    }
+  }
+  function updateConfetti(dt) {
+    const g = U*0.00055;
+    for (const p of confetti) { p.vy+=g*dt*16.67; p.vx*=0.992; p.wob+=0.2*dt; p.x+=(p.vx+Math.sin(p.wob)*U*0.0016)*dt; p.y+=p.vy*dt; p.rot+=p.vr*dt; if (p.y>ch+50) p.life=0; }
+    if (confetti.length) confetti = confetti.filter(p=>p.life>0);
+  }
+
+  // ============================================================
+  //  Loop
+  // ============================================================
+  let lastT = 0;
+  function frame(now) {
+    let dt = (now-(lastT||now))/16.67; if (dt>3) dt=3; lastT = now;
+
+    // reels
+    if (state === 'spinning') {
+      let allStopped = true;
+      for (let i = 0; i < REELS; i++) {
+        const r = reels[i];
+        if (!r.spinning) continue;
+        allStopped = false;
+        const t = Math.min((now - r.t0)/r.dur, 1);
+        r.offset = r.start + (r.target - r.start) * easeOutQuart(t);
+        const fl = Math.floor(r.offset);
+        if (fl !== r.lastTick) { tick(1-t); r.lastTick = fl; }
+        if (t >= 1) { r.offset = ((r.target % N) + N) % N; r.spinning = false; clunk(); }
+      }
+      if (allStopped || reels.every(r=>!r.spinning)) onAllStopped();
+    }
+
+    // lever spring
+    leverVel += ((leverTarget - leverT) * 26 - leverVel * 9) * (dt/60);
+    leverT += leverVel * (dt/60);
+
+    if (frameFlash > 0) frameFlash -= dt*0.04;
+    if (confetti.length) updateConfetti(dt);
+
+    draw();
+    requestAnimationFrame(frame);
+  }
+
+  function onAllStopped() {
+    state = 'idle';
+    const syms = reels.map(r => Math.round(r.offset) % N);
+    const isWin = syms[0]===syms[1] && syms[1]===syms[2];
+    const prize = isWin ? SYMBOLS[syms[0]].prize : null;
+    if (isWin) { winInfo = { sym: syms[0] }; frameFlash = 1; burst(70); winFanfare(); showBanner(prize); }
+    if (onResultCb) onResultCb(syms, isWin, prize);
+  }
+
+  // ============================================================
+  //  Draw
+  // ============================================================
+  function draw() {
+    ctx.clearRect(0,0,cw,ch);
+    ctx.drawImage(cabinetSprite, 0,0, cw, ch);
+    drawReels();
+    drawPayline();
+    drawLights();
+    drawLever();
+    if (confetti.length) drawConfetti();
+  }
+
+  function drawReels() {
+    const { winX, winY, winW, winH, reelW, reelGap, cellH } = lay;
+    for (let i = 0; i < REELS; i++) {
+      const rx = winX + i*(reelW + reelGap);
+      ctx.save();
+      ctx.beginPath(); ctx.rect(rx, winY, reelW, winH); ctx.clip();
+      const r = reels[i];
+      const baseIndex = Math.floor(r.offset);
+      const frac = r.offset - baseIndex;
+      const centerY = winY + winH/2;
+      for (let row = -2; row <= 2; row++) {
+        const idx = (((baseIndex + row) % N) + N) % N;
+        const y = centerY + row*cellH - frac*cellH;
+        ctx.drawImage(symbolSprites[idx], rx, y - cellH/2, reelW, cellH);
+      }
+      ctx.restore();
+      // top/bottom shading inside the window for depth
+      const g1 = ctx.createLinearGradient(0, winY, 0, winY + cellH*0.9);
+      g1.addColorStop(0,'rgba(5,7,15,0.92)'); g1.addColorStop(1,'rgba(5,7,15,0)');
+      ctx.fillStyle = g1; ctx.fillRect(rx, winY, reelW, cellH*0.9);
+      const g2 = ctx.createLinearGradient(0, winY+winH-cellH*0.9, 0, winY+winH);
+      g2.addColorStop(0,'rgba(5,7,15,0)'); g2.addColorStop(1,'rgba(5,7,15,0.92)');
+      ctx.fillStyle = g2; ctx.fillRect(rx, winY+winH-cellH*0.9, reelW, cellH*0.9);
+    }
+  }
+
+  function drawPayline() {
+    const { winX, winW, paylineY } = lay;
+    const win = winInfo && frameFlash > 0;
+    ctx.save();
+    ctx.strokeStyle = win ? `rgba(255,212,94,${0.5+0.5*Math.abs(Math.sin(performance.now()/120))})` : 'rgba(255,212,94,0.55)';
+    ctx.lineWidth = Math.max(2, U*0.006);
+    ctx.beginPath(); ctx.moveTo(winX - U*0.01, paylineY); ctx.lineTo(winX + winW + U*0.01, paylineY); ctx.stroke();
+    // arrow markers
+    const a = U*0.018;
+    ctx.fillStyle = '#FFD45E';
+    for (const side of [winX - U*0.012, winX + winW + U*0.012]) {
+      const dir = side < winX ? 1 : -1;
+      ctx.beginPath(); ctx.moveTo(side, paylineY); ctx.lineTo(side - dir*a, paylineY - a*0.6); ctx.lineTo(side - dir*a, paylineY + a*0.6); ctx.closePath(); ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawLights() {
+    const { cabX, cabY, cabW, cabH } = lay;
+    const n = 18;
+    const now = performance.now();
+    const r = Math.max(3, cabW*0.012);
+    for (let i = 0; i < n; i++) {
+      // run lights around the top arc of the cabinet
+      const f = i/(n-1);
+      const x = cabX + cabW*0.1 + f*cabW*0.8;
+      const y = cabY + cabH*0.02 + Math.sin(f*Math.PI)*(-cabH*0.02);
+      const lit = state==='spinning'
+        ? (Math.floor(now/80)+i)%2===0
+        : winInfo && frameFlash>0 ? (Math.floor(now/100)+i)%2===0
+        : Math.sin(now/600 - i*0.5) > 0.3;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, TWO_PI);
+      ctx.fillStyle = lit ? '#FFF6D8' : '#5b4a1e';
+      if (lit) { ctx.shadowColor='#FFE79A'; ctx.shadowBlur=12; } else ctx.shadowBlur=0;
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+  }
+
+  function drawLever() {
+    const { leverPivotX, leverPivotY, leverLen } = lay;
+    // base mount
+    ctx.fillStyle = '#0c1330';
+    ctx.beginPath(); ctx.arc(leverPivotX, leverPivotY, leverLen*0.18, 0, TWO_PI); ctx.fill();
+    ctx.strokeStyle = '#C9962B'; ctx.lineWidth = Math.max(2,U*0.004); ctx.stroke();
+
+    // arm: rest points up; pull rotates it down toward the viewer
+    const restAng = -Math.PI*0.5;        // straight up
+    const pullAng = -Math.PI*0.16;       // swung down
+    const ang = restAng + (pullAng - restAng) * leverT;
+    const kx = leverPivotX + Math.cos(ang)*leverLen;
+    const ky = leverPivotY + Math.sin(ang)*leverLen;
+    // rod
+    ctx.lineCap='round'; ctx.lineWidth = leverLen*0.12;
+    const rg = ctx.createLinearGradient(leverPivotX, leverPivotY, kx, ky);
+    rg.addColorStop(0,'#9aa3c7'); rg.addColorStop(1,'#e8eeff');
+    ctx.strokeStyle = rg;
+    ctx.beginPath(); ctx.moveTo(leverPivotX, leverPivotY); ctx.lineTo(kx, ky); ctx.stroke();
+    // knob (red ball)
+    const kr = leverLen*0.2;
+    const g = ctx.createRadialGradient(kx-kr*0.35, ky-kr*0.4, kr*0.15, kx, ky, kr);
+    g.addColorStop(0,'#ff8a93'); g.addColorStop(0.5,'#E94B5A'); g.addColorStop(1,'#a32d39');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(kx, ky, kr, 0, TWO_PI); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.beginPath(); ctx.arc(kx-kr*0.32, ky-kr*0.36, kr*0.22, 0, TWO_PI); ctx.fill();
+    lay._knob = { x: kx, y: ky, r: kr*1.5 };
+  }
+
+  function drawConfetti() {
+    for (const p of confetti) {
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.color;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+    }
+  }
+
+  // ============================================================
+  //  Banner + public API
+  // ============================================================
+  let onResultCb = null;
+  const banner = document.getElementById('banner');
+  const prizeText = document.getElementById('prizeText');
+  function showBanner(prize) { prizeText.textContent = prize; setTimeout(()=>banner.classList.add('show'), 420); }
+  function hideBanner() { banner.classList.remove('show'); }
+
+  window.Slots = {
+    spinTo, spin,
+    set onResult(fn){ onResultCb = fn; }, get onResult(){ return onResultCb; },
+    get state(){ return state; }
+  };
+
+  // ============================================================
+  //  Events
+  // ============================================================
+  canvas.addEventListener('pointerdown', (e) => {
+    if (state === 'spinning') return;
+    if (banner.classList.contains('show')) return;
+    pullLever();
+  });
+  document.getElementById('spinBtn').addEventListener('click', (e)=>{ e.stopPropagation(); if(state!=='spinning'){ hideBanner(); pullLever(); } });
+  document.getElementById('againBtn').addEventListener('click', (e)=>{ e.stopPropagation(); hideBanner(); setTimeout(pullLever,140); });
+  const muteBtn = document.getElementById('muteBtn');
+  muteBtn.addEventListener('click', (e)=>{ e.stopPropagation(); soundEnabled=!soundEnabled; muteBtn.textContent = soundEnabled?'🔊 Sound on':'🔇 Sound off'; if(soundEnabled) audio(); });
+  window.addEventListener('resize', resize);
+
+  // ============================================================
+  //  Boot
+  // ============================================================
+  resize();
+  requestAnimationFrame((t)=>{ lastT=t; frame(t); });
+})();
+</script>
+</body>
+</html>

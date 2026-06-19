@@ -60,6 +60,24 @@
       "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
       "runtimeArgs": ["-m", "http.server", "3010", "--directory", "C:\\UpWork\\Websites Portfolio\\SpinWheel"],
       "port": 3010
+    },
+    {
+      "name": "birthday-celebration",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3011", "--directory", "C:\\UpWork\\KotlinSpinWheel-Asim\\web-demo-birthday"],
+      "port": 3011
+    },
+    {
+      "name": "slot-machine",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3012", "--directory", "C:\\UpWork\\KotlinSpinWheel-Asim\\web-demo-slot"],
+      "port": 3012
+    },
+    {
+      "name": "shell-game",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3013", "--directory", "C:\\UpWork\\KotlinSpinWheel-Asim\\web-demo-shell"],
+      "port": 3013
     }
   ]
 }

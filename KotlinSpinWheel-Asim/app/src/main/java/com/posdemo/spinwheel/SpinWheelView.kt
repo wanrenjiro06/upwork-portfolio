@@ -74,6 +74,13 @@ class SpinWheelView @JvmOverloads constructor(
     /** Honors the device "remove animations" accessibility setting when true. */
     var respectReducedMotion: Boolean = true
 
+    // ---- CONFIG (modular settings — edit freely) ----------------------------
+    /** Base spin length in ms (before the global [GameStyle.speedFactor]). */
+    var spinDurationMs: Float = 4600f
+    /** Full turns before the wheel settles (a small random 0–2 is added). */
+    var extraSpins: Int = 6
+    // Prizes/colours are fully configurable via [segments] above.
+
     val isSpinning: Boolean get() = spinning
 
     // ---- Geometry -----------------------------------------------------------
@@ -216,10 +223,10 @@ class SpinWheelView @JvmOverloads constructor(
         if (delta < 0) delta += TWO_PI
 
         val reduced = respectReducedMotion && isReducedMotion()
-        val fullSpins = if (reduced) 2 else 6 + Random.nextInt(3)   // 6–8 turns
+        val fullSpins = if (reduced) 2 else extraSpins + Random.nextInt(3)
         startRot = rotation
         targetRot = rotation + delta + fullSpins * TWO_PI
-        spinDurMs = if (reduced) 1400f else 4600f + Random.nextFloat() * 900f
+        spinDurMs = (if (reduced) 1400f else spinDurationMs + Random.nextFloat() * 900f) / GameStyle.speedFactor
         spinStartNs = System.nanoTime()
         lastTickIdx = segUnderPointer(rotation)
         if (soundEnabled) audio.warm()
