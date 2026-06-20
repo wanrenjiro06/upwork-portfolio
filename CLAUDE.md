@@ -418,33 +418,36 @@ Context is expensive. Only read old messages if the user explicitly asks you to 
 **Portfolio Setup:**
 - Keep 3 separate portfolio items (NOT combined) — better visibility, appears in more searches
 - Format: Title → My role → Description (with ✅ checkmarks) → Skills & deliverables → Live link
+- **Description formatting rule:** Always add a blank line between each ✅ bullet point in the Upwork portfolio description so they display with visible spacing (Upwork collapses adjacent lines into a wall of text otherwise). Keep the total description under 600 characters.
 
-**Portfolio Item Skills (Final):**
+**Portfolio Items on Upwork (live, published):**
 
-1. **Quillo (SaaS Landing Page):**
-   - Landing Page Design, Web Design, UI/UX Design, HTML5, CSS3, JavaScript, Animation, Responsive Design
+1. **Quillo – AI Writing SaaS Landing Page** — https://quillo-ai-writer.netlify.app/
+   - Skills: Landing Page Design, Web Design, UI/UX Design, HTML5, CSS3, JavaScript, Animation, Responsive Design
 
-2. **Meridian (Creative Agency Portfolio):**
-   - Web Design, UI/UX Design, HTML5, CSS3, JavaScript, Animation, Responsive Design, Portfolio Design (or closest match)
+2. **Meridian – Creative Agency Portfolio** — https://meridian-creative.netlify.app/
+   - Skills: Web Design, UI/UX Design, HTML5, CSS3, JavaScript, Animation, Responsive Design, Portfolio Design
 
-3. **Lumira (E-commerce Store):**
-   - Ecommerce Website Development, HTML5, CSS3, JavaScript, Responsive Design, UI/UX Design
+3. **Lumira – Fashion E-commerce Store** — https://lumira-apparel.netlify.app/
+   - Skills: Ecommerce Website Development, HTML5, CSS3, JavaScript, Responsive Design, UI/UX Design
+
+4. **STAG – Barbershop Website** — https://stag-barber-atelier.netlify.app/
+   - Skills: Web Design, HTML5, CSS3, JavaScript, Responsive Design, UI/UX Design
+
+5. **Sorrel – Fine Dining Restaurant Website** — https://sorrel-restaurant-paris.netlify.app/
+   - Skills: Web Design, HTML5, CSS3, JavaScript, Responsive Design, UI/UX Design, Animation
 
 Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose closest match.
-
-**First Application:**
-- Applied to Netlify/Node.js developer job ($100, 2-3 hours, posted 6 min ago, <5 proposals)
-- Proposal: "I can have this done in 2 hours. I've deployed 50+ Node.js projects to Netlify. Install 2 files, verify build, test endpoints, deploy. Live in 2 hours, test link before payment. Starting now."
+Note: Description must have a blank line between each ✅ bullet and stay under 600 characters.
 
 **Key Wins:**
 - Profile live and searchable
-- 3 portfolio items added
-- First job applied
-- Ready to apply to 2-3 more jobs in next 24 hours
+- 5 portfolio items published on Upwork
+- First job (Asim Hirji $100) completed and delivered
 
 ---
 
-## Current Job Status (as of 2026-06-18)
+## Current Job Status (as of 2026-06-20)
 
 ### Active Contracts
 1. **Asim Hirji (Plutis) — Kotlin UI Developer / POS Gamification** 🟢 HIRED
@@ -492,13 +495,28 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
    - Status: ✅ Submitted, waiting for response
    - Cover letter hook: "I build exactly this stack — Next.js App Router with TypeScript, Tailwind CSS, SSR/SSG for SEO, MongoDB, and Claude API for AI features."
 
+5. **Android Tablet App Developer — EST App** (Turkey)
+   - Budget: $200 fixed
+   - Client: Payment verified + phone verified, member since Jun 3, 2026
+   - Status: ✅ Submitted (10 connects), waiting for response
+   - Scope: Port existing JavaScript EST (Electronic Scoring Target) app to Android tablet
+   - Folder: `C:\UpWork\AndroidTablet-EST\PROPOSAL.md`
+
+6. **Web Developer for Proptech MVP** (Saudi Arabia)
+   - Budget: $300 fixed
+   - Client: Payment NOT verified ⚠️, phone verified, member since Jun 16, 2026
+   - Status: ✅ Submitted (10 connects), waiting for response
+   - Scope: Lean proptech MVP for Saudi/UAE real estate market, HTML5/JS/CSS
+   - ⚠️ Risk: Payment not verified — request milestone funded before starting work
+   - Folder: `C:\UpWork\Proptech-MVP\PROPOSAL.md`
+
 ### Expensify Bounties (GitHub)
 - All 20 open Help Wanted issues were already assigned when checked — bounties get grabbed within hours of posting
 - Posted proposals on: #93448, #91846, #93568 — waiting for Melvin Bot assignment
 - **Rule:** Always check `gh issue list --repo Expensify/App --label "Help Wanted"` first. If assigned → skip, don't write proposal.
 
 ### Connect Status
-- Current: ~32 connects remaining (as of 2026-06-16)
+- Current: 0 connects remaining (as of 2026-06-20) — need to top up before next application
 - Strategy: Be selective — only apply when screening signals are strong
 
 ### Portfolio Websites (Web Design Showcase)
@@ -657,6 +675,9 @@ Note: Use exact skill names from Upwork dropdown. If skill doesn't exist, choose
 4. Next portfolio piece: Restaurant/Food ordering page (need Framer inspo screenshot first)
 5. Keep applying: search "React developer" sorted by newest, 7–9am is best timing for fresh jobs
 6. Check Expensify bounties: `gh issue list --repo Expensify/App --label "Help Wanted"` — only post if NOT yet assigned
+
+### Jobs Screened & Rejected (2026-06-20)
+- **Immediate Hire: Expert App Developer** ($5,000) → SKIP: 20–50 proposals, $12.48 avg hourly rate paid (poverty wages despite high budget), iOS required, USA daytime hours, contract-to-hire, preferred location India
 
 ### Jobs Screened & Rejected (2026-06-16)
 - **Saudi Stock Market GitHub** ($30) → SKIP: 13% hire rate (175 jobs, 22 hires), $24.60 avg spend per hire, already interviewing 3, last viewed 2 days ago

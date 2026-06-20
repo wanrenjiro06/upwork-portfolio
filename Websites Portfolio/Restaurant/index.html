@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SORREL — Where Flavour Meets Unforgettable Dining · Paris</title>
+<meta name="description" content="SORREL is a Paris fine-dining restaurant where seasonal flavour meets warm hospitality. Reserve your table for breakfast, lunch and dinner." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ===================== TOKENS ===================== */
+:root{
+  --green:#21402e;
+  --green-deep:#1a3324;
+  --green-darker:#142619;
+  --cream:#f1eadb;
+  --cream-2:#f7f1e6;
+  --gold:#9c8a3c;
+  --gold-2:#c8a64f;
+  --gold-soft:#d8be77;
+  --ink:#16241b;
+  --ink-soft:#41513f;
+  --muted-ink:#6a7768;
+  --muted-green:#c7d2c6;
+  --line-green:rgba(255,255,255,.14);
+  --line-ink:rgba(22,36,27,.14);
+  --r:18px;
+  --r-lg:28px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --shadow:0 24px 60px -28px rgba(0,0,0,.55);
+  --pad:clamp(20px,5vw,96px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;line-height:1.02;letter-spacing:-.01em}
+::selection{background:var(--gold-2);color:#1c160a}
+/* scrollbar */
+::-webkit-scrollbar{width:11px}
+::-webkit-scrollbar-track{background:var(--green-darker)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:8px;border:3px solid var(--green-darker)}
+
+/* ===================== UTILITIES ===================== */
+.wrap{max-width:1320px;margin:0 auto;padding-inline:var(--pad)}
+.kicker{font-family:'Inter';font-size:.74rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.6em}
+.kicker::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+.kicker.dot::before{content:"//";width:auto;height:auto;background:none;opacity:.7;letter-spacing:0}
+.btn{
+  --bg:var(--gold);--fg:#1c1606;
+  display:inline-flex;align-items:center;gap:.6em;
+  background:var(--bg);color:var(--fg);
+  font-family:'Inter';font-weight:600;font-size:.9rem;
+  padding:14px 24px;border-radius:100px;border:none;cursor:pointer;
+  position:relative;overflow:hidden;will-change:transform;
+  transition:transform .5s var(--ease-spring),box-shadow .4s var(--ease),background .3s;
+}
+.btn svg{width:16px;height:16px;transition:transform .4s var(--ease)}
+.btn:hover{box-shadow:0 14px 34px -10px rgba(156,138,60,.6)}
+.btn:hover svg{transform:translateX(4px)}
+.btn.ghost{--bg:transparent;--fg:var(--ink);border:1px solid var(--line-ink)}
+.btn.ghost.light{--fg:var(--cream);border-color:rgba(241,234,219,.45);background:rgba(20,38,25,.28);backdrop-filter:blur(6px)}
+.btn.light{--bg:var(--cream);--fg:var(--green-deep)}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+
+/* grain + progress */
+.grain{position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.045;mix-blend-mode:overlay}
+.scrollbar-top{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));z-index:9100;transition:width .1s linear}
+
+/* ===================== NAV ===================== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:background .5s var(--ease),box-shadow .5s,padding .4s}
+.nav-inner{max-width:1320px;margin:0 auto;padding:22px var(--pad);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-family:'Fraunces';font-weight:600;font-size:1.5rem;letter-spacing:.02em;color:var(--cream);display:flex;align-items:center;gap:.45em}
+.logo .leaf{width:22px;height:22px;color:var(--gold-2)}
+.nav-links{display:flex;gap:34px;align-items:center}
+.nav-links a{color:var(--cream);font-size:.92rem;font-weight:500;position:relative;opacity:.85;transition:opacity .3s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:1.5px;width:0;background:var(--gold-2);transition:width .35s var(--ease)}
+.nav-links a:hover{opacity:1}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-phone{color:var(--cream);font-size:.9rem;font-weight:500;opacity:.85;display:flex;align-items:center;gap:.5em}
+.nav.solid{background:rgba(20,38,25,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line-green)}
+.nav.solid .nav-inner{padding-block:14px}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--cream);transition:.3s}
+.mobile-menu{position:fixed;inset:0;z-index:999;background:var(--green-darker);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px;transform:translateY(-100%);transition:transform .55s var(--ease);visibility:hidden}
+.mobile-menu.open{transform:none;visibility:visible}
+.mobile-menu a{color:var(--cream);font-family:'Fraunces';font-size:2rem}
+
+/* ===================== HERO ===================== */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;color:var(--cream);overflow:hidden;background:var(--green-darker)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:heroZoom 16s var(--ease) forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,38,25,.55) 0%,rgba(20,38,25,.2) 38%,rgba(20,38,25,.86) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto;padding:0 var(--pad) clamp(48px,8vh,110px);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.hero h1{font-size:clamp(2.7rem,6.6vw,6rem);font-weight:500;max-width:14ch;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--gold-soft)}
+.hero-kicker{color:var(--gold-soft);margin-bottom:26px}
+.hero-cta{margin-top:34px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero-card{max-width:320px;background:rgba(241,234,219,.1);border:1px solid var(--line-green);backdrop-filter:blur(8px);border-radius:var(--r);padding:22px 24px}
+.hero-card p{font-size:.92rem;color:var(--muted-green)}
+.hero-card .stars{color:var(--gold-2);letter-spacing:2px;margin-bottom:10px;font-size:.85rem}
+.hero-scroll{position:absolute;left:var(--pad);bottom:26px;z-index:3;display:flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-green);opacity:.8}
+.hero-scroll .mouse{width:20px;height:32px;border:1.5px solid currentColor;border-radius:12px;position:relative}
+.hero-scroll .mouse::after{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:6px;background:currentColor;border-radius:2px;animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:1;transform:translate(-50%,0)}80%,100%{opacity:0;transform:translate(-50%,10px)}}
+
+/* ===================== FLAVOURS STRIP (green) ===================== */
+.flavours{background:var(--green);color:var(--cream);padding:clamp(56px,8vw,104px) 0}
+.flav-meta{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-bottom:42px;border-bottom:1px solid var(--line-green);flex-wrap:wrap}
+.flav-meta .m{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-green)}
+.flav-meta .m.center{color:var(--gold-soft);font-weight:600}
+.flav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,46px);margin-top:52px}
+.flav-card h3{font-size:1.5rem;font-weight:500;margin-bottom:18px}
+.flav-card .ph{aspect-ratio:1/.82;border-radius:var(--r);overflow:hidden;margin-bottom:18px;position:relative}
+.flav-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.flav-card:hover .ph img{transform:scale(1.07)}
+.flav-card p{font-size:.92rem;color:var(--muted-green);max-width:34ch}
+
+/* ===================== ABOUT (cream) ===================== */
+.about{background:var(--cream);padding:clamp(64px,9vw,128px) 0}
+.about-top{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(28px,5vw,80px);align-items:end}
+.about-top h2{font-size:clamp(2rem,4.2vw,3.5rem);font-weight:500;letter-spacing:-.02em}
+.about-top h2 em{font-style:italic;color:var(--gold)}
+.about-lead{color:var(--ink-soft);max-width:46ch}
+.about-lead p{margin-bottom:22px}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px}
+.about-imgs .ph{aspect-ratio:1/.72;border-radius:var(--r);overflow:hidden}
+.about-imgs .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.about-imgs .ph:hover img{transform:scale(1.06)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px;padding-top:48px;border-top:1px solid var(--line-ink)}
+.stat .n{font-family:'Fraunces';font-size:clamp(2.2rem,4vw,3.4rem);font-weight:500;color:var(--green);line-height:1}
+.stat .l{font-size:.84rem;color:var(--muted-ink);margin-top:8px;letter-spacing:.04em}
+
+/* ===================== MEALS (scroll-pinned) ===================== */
+.meals{position:relative;height:340vh;background:var(--green-deep)}
+.meals-sticky{position:sticky;top:0;height:100vh;overflow:hidden;color:var(--cream);display:flex;align-items:center}
+.meals-sticky::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 50%,rgba(40,70,50,.5),transparent 70%)}
+.meal-bgword{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Fraunces';font-weight:900;font-size:clamp(5rem,22vw,20rem);color:rgba(255,255,255,.04);letter-spacing:-.04em;white-space:nowrap;pointer-events:none;z-index:0}
+.meal-stage{position:relative;width:100%;max-width:1320px;margin:0 auto;padding-inline:var(--pad);height:100%;z-index:2}
+.meal-m-head{display:none}
+.meal{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s var(--ease);}
+.meal.active{opacity:1;visibility:visible}
+.dish{position:absolute;width:clamp(180px,18vw,278px);opacity:0;transform:translateY(40px) scale(.96);transition:opacity .7s var(--ease),transform .8s var(--ease)}
+.meal.active .dish{opacity:1;transform:none}
+.meal.active .dish.d1{transition-delay:.05s}
+.meal.active .dish.d2{transition-delay:.15s}
+.meal.active .dish.d3{transition-delay:.25s}
+.meal.active .dish.d4{transition-delay:.35s}
+.dish.tl{top:9%;left:1%}
+.dish.tr{top:9%;right:1%}
+.dish.bl{bottom:9%;left:1%}
+.dish.br{bottom:9%;right:1%}
+.dish .pic{aspect-ratio:1/1.04;border-radius:var(--r);overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.dish .pic img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.dish:hover .pic img{transform:scale(1.07)}
+.dish .price{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--cream);color:var(--ink);font-family:'Fraunces';font-weight:600;font-size:1.5rem;width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.dish .cat{margin-top:14px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft)}
+.dish .name{font-family:'Fraunces';font-size:1.12rem;font-weight:500;margin-top:3px}
+.meal-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:3;width:min(46%,520px)}
+.meal-title-wrap{position:relative;height:clamp(4rem,12vw,11rem);margin-bottom:10px}
+.meal-title{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-weight:600;font-size:clamp(3rem,9vw,8rem);letter-spacing:-.02em;opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.meal-title.on{opacity:1;transform:none}
+.meal-sub{color:var(--muted-green);font-size:.94rem;max-width:34ch;margin:0 auto 26px}
+.meal-dots{display:flex;gap:10px;justify-content:center;margin-top:26px}
+.meal-dot{display:flex;align-items:center;gap:8px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-green);opacity:.5;transition:opacity .4s;cursor:pointer;background:none;border:none;font-family:inherit}
+.meal-dot i{width:7px;height:7px;border-radius:50%;background:currentColor;transition:.4s}
+.meal-dot.on{opacity:1;color:var(--gold-soft)}
+.meal-dot.on i{box-shadow:0 0 0 4px rgba(200,166,79,.2)}
+
+/* ===================== LEGACY MENU GRID (cream) ===================== */
+.legacy{background:var(--cream-2);padding:clamp(64px,9vw,128px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:54px}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3.6rem);font-weight:500;letter-spacing:-.02em;max-width:18ch}
+.sec-head h2 em{font-style:italic;color:var(--gold)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.6vw,38px)}
+.mcard .pic{aspect-ratio:1/.78;border-radius:var(--r);overflow:hidden;margin-bottom:18px}
+.mcard .pic img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.mcard:hover .pic img{transform:scale(1.07)}
+.mcard .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.mcard h3{font-size:1.22rem;font-weight:500}
+.mcard .pr{font-family:'Fraunces';font-weight:600;color:var(--green)}
+.mcard .desc{color:var(--muted-ink);font-size:.88rem;margin:6px 0 12px;max-width:38ch}
+.mcard .rate{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-soft)}
+.mcard .rate .s{color:var(--gold-2);letter-spacing:1px}
+
+/* ===================== FEATURE + CHEF ===================== */
+.feature{position:relative}
+.feature-img{height:clamp(420px,62vh,720px);position:relative;overflow:hidden}
+.feature-img img{width:100%;height:100%;object-fit:cover}
+.feature-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,38,25,.5),transparent 55%)}
+.chef-card{position:absolute;right:var(--pad);bottom:-60px;width:min(340px,80vw);background:var(--cream);border-radius:var(--r);padding:26px;box-shadow:var(--shadow);z-index:3}
+.chef-card .who{display:flex;align-items:center;gap:14px;margin-top:18px}
+.chef-card .who img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.chef-card .who b{font-family:'Fraunces';font-weight:600;display:block;font-size:1rem}
+.chef-card .who span{font-size:.8rem;color:var(--muted-ink)}
+.chef-card .q{font-size:.96rem;color:var(--ink-soft);font-style:italic}
+.chef-card .mk{color:var(--gold-2);font-size:1.6rem;font-family:'Fraunces';line-height:0;display:block;height:14px}
+
+/* ===================== FILTER MENU (green) ===================== */
+.fmenu{background:var(--green);color:var(--cream);padding:clamp(96px,12vw,160px) 0 clamp(64px,9vw,120px)}
+.fmenu-head{text-align:center;max-width:680px;margin:0 auto 18px}
+.fmenu-head h2{font-size:clamp(2rem,4.4vw,3.5rem);font-weight:500;letter-spacing:-.02em}
+.fmenu-head h2 em{font-style:italic;color:var(--gold-soft)}
+.tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:30px 0 44px}
+.tab{background:transparent;border:1px solid var(--line-green);color:var(--cream);padding:9px 20px;border-radius:100px;font-family:'Inter';font-size:.86rem;font-weight:500;cursor:pointer;transition:.3s}
+.tab:hover{border-color:var(--gold-soft)}
+.tab.active{background:var(--gold);color:#1c1606;border-color:var(--gold)}
+.flist{max-width:880px;margin:0 auto}
+.fitem{display:flex;align-items:center;gap:18px;padding:22px 6px;border-bottom:1px solid var(--line-green);transition:opacity .4s,transform .4s,padding .3s}
+.fitem .nm{font-family:'Fraunces';font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:500;white-space:nowrap}
+.fitem .ds{flex:1;border-bottom:1px dotted var(--line-green);height:1px;opacity:.5;min-width:20px}
+.fitem .tag{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);opacity:.85}
+.fitem .pr{font-family:'Fraunces';font-weight:600;font-size:1.15rem;color:var(--gold-soft);white-space:nowrap}
+.fitem:hover{padding-inline:14px}
+.fitem.hide{display:none}
+
+/* ===================== TESTIMONIALS ===================== */
+.testi{background:var(--cream);padding:clamp(64px,9vw,124px) 0 0}
+.testi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+.tcard{background:var(--cream-2);border:1px solid var(--line-ink);border-radius:var(--r);padding:26px}
+.tcard .s{color:var(--gold-2);letter-spacing:2px;margin-bottom:14px;font-size:.9rem}
+.tcard p{font-size:.92rem;color:var(--ink-soft)}
+.avatars{margin-top:60px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.avatars-track{display:flex;gap:34px;width:max-content;animation:marq 32s linear infinite}
+.avatars:hover .avatars-track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+.av{display:flex;align-items:center;gap:12px;white-space:nowrap}
+.av .pic{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-weight:600;color:#1c1606;font-size:1rem}
+.av b{font-size:.9rem;font-weight:600}
+.av span{font-size:.78rem;color:var(--muted-ink);display:block}
+
+/* ===================== BLOG ===================== */
+.blog{background:var(--cream);padding:clamp(56px,8vw,110px) 0}
+.blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:48px}
+.bcard{background:var(--cream-2);border-radius:var(--r);overflow:hidden;border:1px solid var(--line-ink);transition:transform .5s var(--ease),box-shadow .5s}
+.bcard:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.bcard .pic{aspect-ratio:16/9;overflow:hidden}
+.bcard .pic img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.bcard:hover .pic img{transform:scale(1.06)}
+.bcard .body{padding:26px 28px 30px}
+.bcard .meta{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.bcard h3{font-size:1.4rem;font-weight:500;margin-bottom:14px}
+.bcard .more{font-size:.86rem;font-weight:600;color:var(--green);display:inline-flex;align-items:center;gap:.5em}
+.bcard .more svg{width:14px;height:14px;transition:transform .4s}
+.bcard:hover .more svg{transform:translateX(4px)}
+
+/* ===================== RESERVE ===================== */
+.reserve{background:var(--cream);padding:clamp(40px,6vw,80px) 0 clamp(72px,10vw,130px)}
+.reserve-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,70px);align-items:center}
+.reserve-grid h2{font-size:clamp(2rem,4.6vw,3.6rem);font-weight:500;letter-spacing:-.02em}
+.reserve-grid h2 em{font-style:italic;color:var(--gold)}
+.reserve-grid .lead{color:var(--ink-soft);margin-top:20px;max-width:40ch}
+.rcontact{margin-top:30px;display:flex;flex-direction:column;gap:12px}
+.rcontact div{display:flex;align-items:center;gap:12px;font-size:.92rem;color:var(--ink-soft)}
+.rcontact svg{width:18px;height:18px;color:var(--gold);flex:none}
+.rform{background:var(--green);border-radius:var(--r-lg);padding:clamp(26px,3vw,42px);color:var(--cream)}
+.rform h3{font-size:1.5rem;font-weight:500;margin-bottom:24px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-size:.78rem;letter-spacing:.06em;color:var(--muted-green)}
+.field input,.field textarea,.field select{
+  background:rgba(241,234,219,.06);border:1px solid var(--line-green);border-radius:10px;
+  padding:12px 14px;color:var(--cream);font-family:'Inter';font-size:.92rem;transition:border .3s,background .3s
+}
+.field textarea{resize:vertical;min-height:78px}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold-soft);background:rgba(241,234,219,.1)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(199,210,198,.5)}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c7d2c6' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:18px}
+.field option{background:var(--green-deep)}
+.field.err input,.field.err select{border-color:#e08a6a}
+.field .msg{font-size:.72rem;color:#f0a78a;display:none}
+.field.err .msg{display:block}
+.rform .btn{margin-top:22px;width:100%;justify-content:center}
+.rform-success{text-align:center;padding:30px 10px;display:none}
+.rform-success.show{display:block;animation:pop .5s var(--ease-spring)}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+.rform-success .ic{width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.rform-success .ic svg{width:30px;height:30px;color:#1c1606}
+.rform-success h3{margin-bottom:10px}
+.rform-success p{color:var(--muted-green);font-size:.92rem}
+.rform-success .summary{margin-top:18px;font-size:.86rem;color:var(--gold-soft);background:rgba(241,234,219,.05);border:1px solid var(--line-green);border-radius:10px;padding:14px}
+
+/* ===================== FOOTER ===================== */
+.footer{background:var(--green-darker);color:var(--cream);padding:clamp(56px,7vw,90px) 0 30px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:clamp(28px,4vw,56px)}
+.foot-brand .logo{margin-bottom:18px}
+.foot-brand p{color:var(--muted-green);font-size:.9rem;max-width:32ch}
+.foot-col h4{font-family:'Inter';font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:18px;font-weight:600}
+.foot-col a,.foot-col p{display:block;color:var(--muted-green);font-size:.9rem;margin-bottom:11px;transition:color .3s}
+.foot-col a:hover{color:var(--cream)}
+.news{display:flex;gap:8px;margin-top:14px}
+.news input{flex:1;background:rgba(241,234,219,.07);border:1px solid var(--line-green);border-radius:10px;padding:11px 14px;color:var(--cream);font-family:'Inter';font-size:.86rem}
+.news input:focus{outline:none;border-color:var(--gold-soft)}
+.news button{background:var(--gold);border:none;border-radius:10px;width:46px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#1c1606}
+.news button svg{width:18px;height:18px}
+.socials{display:flex;gap:12px;margin-top:18px}
+.socials a{width:38px;height:38px;border:1px solid var(--line-green);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s}
+.socials a:hover{background:var(--gold);color:#1c1606;border-color:var(--gold)}
+.socials svg{width:16px;height:16px}
+.foot-bottom{margin-top:54px;padding-top:24px;border-top:1px solid var(--line-green);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--muted-green)}
+
+/* FAB */
+.fab{position:fixed;right:20px;bottom:20px;z-index:800;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.fab a{display:flex;align-items:center;gap:.5em;padding:12px 18px;border-radius:100px;font-weight:600;font-size:.85rem;box-shadow:0 10px 26px -8px rgba(0,0,0,.5);transition:transform .4s var(--ease-spring)}
+.fab a:hover{transform:translateY(-3px)}
+.fab .book{background:var(--gold);color:#1c1606}
+.fab svg{width:16px;height:16px}
+
+/* ===================== RESPONSIVE ===================== */
+@media(max-width:1024px){
+  .nav-links,.nav-phone{display:none}
+  .burger{display:flex}
+  .nav-right .btn{display:none}
+  .flav-grid{grid-template-columns:1fr 1fr}
+  .menu-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .meal-center{width:min(64%,520px)}
+  .dish{width:clamp(150px,22vw,220px)}
+}
+@media(max-width:760px){
+  :root{--pad:20px}
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card{max-width:none}
+  .hero-scroll{display:none}
+  .flav-grid{grid-template-columns:1fr}
+  .about-top{grid-template-columns:1fr}
+  .about-imgs{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr;gap:30px 16px}
+  .menu-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .blog-grid{grid-template-columns:1fr}
+  .reserve-grid{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .chef-card{position:relative;right:auto;bottom:auto;margin:24px var(--pad) 0;width:auto}
+  .feature-img{height:46vh}
+  /* meals -> static stacked on mobile */
+  .meals{height:auto}
+  .meals-sticky{position:static;height:auto;display:block;padding:60px 0}
+  .meal-bgword{display:none}
+  .meal{position:relative;inset:auto;opacity:1;visibility:visible;padding:0 0 10px}
+  .meal-stage{height:auto;display:flex;flex-direction:column}
+  .meal-center{position:relative;top:auto;left:auto;transform:none;width:auto;text-align:center;margin-bottom:30px}
+  .meal-title-wrap{height:auto}
+  .meal-title{position:relative;opacity:0;transform:none;display:block;height:auto}
+  .meal-title.show-static{opacity:1}
+  .meal .dish{position:relative;inset:auto;width:auto;opacity:1;transform:none;display:grid;grid-template-columns:84px 1fr;gap:16px;align-items:center;text-align:left;margin-bottom:16px}
+  .meal .dish .pic{aspect-ratio:1/1}
+  .meal .dish .price{position:static;transform:none;width:auto;height:auto;background:none;color:var(--gold-soft);box-shadow:none;font-size:1.3rem;display:inline}
+  .meal .dish .meta-m{display:flex;flex-direction:column}
+  .meal-dots{display:none}
+  .meal-m-head{display:block;font-family:'Fraunces';font-weight:600;font-size:2.6rem;color:var(--gold-soft);margin:18px 0 22px;letter-spacing:-.02em}
+  .meal:first-of-type .meal-m-head{margin-top:0}
+  .meal-title-wrap,.meal-sub{display:none}
+  .meal-center{order:99;margin:30px 0 0;padding-top:24px;border-top:1px solid var(--line-green)}
+  .fitem{gap:10px;flex-wrap:wrap}
+  .fitem .nm{white-space:normal}
+  .fitem .tag{display:none}
+}
+@media(max-width:420px){
+  .stats{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;transition-duration:.001s!important;scroll-behavior:auto}
+  .hero-bg img{animation:none;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- grain + progress -->
+<svg class="grain" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+<div class="scrollbar-top" id="progress"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo"><svg class="leaf" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 5 4 9 4 14a8 8 0 0016 0c0-5-3-9-8-12zm0 4c2.5 2 4 5 4 8a4 4 0 01-8 0c0-3 1.5-6 4-8z"/></svg>Sorrel.</a>
+    <div class="nav-links">
+      <a href="#top">Home</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#meals">Dining</a>
+      <a href="#reserve">Reserve</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-phone"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>+33 1 23 45 67 89</span>
+      <a href="#reserve" class="btn" data-magnetic>Book a Table <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#top">Home</a><a href="#about">About</a><a href="#menu">Menu</a><a href="#meals">Dining</a><a href="#reserve">Reserve</a>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg"><img src="assets/hero.jpg" alt="Plated gourmet steak with garnish" /></div>
+  <div class="hero-inner">
+    <div>
+      <span class="kicker hero-kicker">Fine Dining · Paris · Est. 2014</span>
+      <h1>Where Flavour Meets <em>Unforgettable</em> Dining.</h1>
+      <div class="hero-cta">
+        <a href="#reserve" class="btn" data-magnetic>Reserve a Table <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#menu" class="btn ghost light">View the Menu</a>
+      </div>
+    </div>
+    <div class="hero-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>Seasonal plates crafted from market-fresh ingredients, served in a room built for slow evenings and good company.</p>
+    </div>
+  </div>
+  <div class="hero-scroll"><span class="mouse"></span> Scroll to explore</div>
+</header>
+
+<!-- FLAVOURS STRIP -->
+<section class="flavours">
+  <div class="wrap">
+    <div class="flav-meta reveal">
+      <span class="m">Paris, France</span>
+      <span class="m center">Flavours of Sorrel</span>
+      <span class="m">N° 48° 51′ 24″</span>
+    </div>
+    <div class="flav-grid">
+      <article class="flav-card reveal" data-d="1">
+        <div class="ph"><img src="assets/card-main.jpg" alt="Gourmet main dish plated"></div>
+        <h3>Main Dishes</h3>
+        <p>Hearty, considered plates built on classic French technique and the day's best produce.</p>
+      </article>
+      <article class="flav-card reveal" data-d="2">
+        <div class="ph"><img src="assets/card-drinks.jpg" alt="Cocktails and drinks at the bar"></div>
+        <h3>Drinks</h3>
+        <p>A cellar-led wine list and house cocktails poured to complement every course.</p>
+      </article>
+      <article class="flav-card reveal" data-d="3">
+        <div class="ph"><img src="assets/card-dessert.jpg" alt="Plated gourmet desserts"></div>
+        <h3>Desserts</h3>
+        <p>Indulgent finishes — chocolate, citrus and seasonal fruit, crafted to sweet perfection.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-top">
+      <h2 class="reveal">Where Culinary Excellence Meets <em>Warm Hospitality.</em></h2>
+      <div class="about-lead reveal" data-d="1">
+        <span class="kicker dot" style="color:var(--gold);margin-bottom:18px">About Sorrel</span>
+        <p>For over a decade, Sorrel has served the heart of Paris with food made to be lingered over. Every dish carries intent — sourced carefully, cooked with patience, and plated with quiet confidence.</p>
+        <p>Our room is warm, our service unhurried, and our table always open to a memorable evening.</p>
+        <a href="#about" class="btn ghost" data-magnetic>More About Us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+    <div class="about-imgs">
+      <div class="ph reveal"><img src="assets/interior1.jpg" alt="Warm restaurant dining room"></div>
+      <div class="ph reveal" data-d="1"><img src="assets/interior2.jpg" alt="Intimate restaurant interior with pendant lighting"></div>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><div class="n" data-count="12" data-suffix="">0</div><div class="l">Years of Craft</div></div>
+      <div class="stat reveal" data-d="1"><div class="n" data-count="48" data-suffix="">0</div><div class="l">Signature Dishes</div></div>
+      <div class="stat reveal" data-d="2"><div class="n" data-count="30" data-suffix="k">0</div><div class="l">Guests Served</div></div>
+      <div class="stat reveal" data-d="3"><div class="n" data-count="4.9" data-dec="1" data-suffix="">0</div><div class="l">Average Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEALS — scroll-pinned Breakfast → Lunch → Dinner -->
+<section class="meals" id="meals">
+  <div class="meals-sticky">
+    <div class="meal-bgword" id="bgword">Breakfast</div>
+    <div class="meal-stage">
+
+      <!-- BREAKFAST -->
+      <div class="meal active" data-meal="0">
+        <div class="meal-m-head">Breakfast</div>
+        <article class="dish tl d1">
+          <div class="pic"><img src="assets/bf-avocado.jpg" alt="Avocado toast"><span class="price">$20</span></div>
+          <div class="meta-m"><div class="cat">Breakfast</div><div class="name">Avocado Dream Toast</div></div>
+        </article>
+        <article class="dish tr d2">
+          <div class="pic"><img src="assets/bf-coffee.jpg" alt="Latte coffee"><span class="price">$18</span></div>
+          <div class="meta-m"><div class="cat">Breakfast</div><div class="name">Rise &amp; Shine Latte</div></div>
+        </article>
+        <article class="dish bl d3">
+          <div class="pic"><img src="assets/bf-pancake.jpg" alt="Berry pancake stack"><span class="price">$24</span></div>
+          <div class="meta-m"><div class="cat">Breakfast</div><div class="name">Berry Pancake Stack</div></div>
+        </article>
+        <article class="dish br d4">
+          <div class="pic"><img src="assets/bf-eggs.jpg" alt="Eggs benedict"><span class="price">$19</span></div>
+          <div class="meta-m"><div class="cat">Breakfast</div><div class="name">Eggs Benedict Royale</div></div>
+        </article>
+      </div>
+
+      <!-- LUNCH -->
+      <div class="meal" data-meal="1">
+        <div class="meal-m-head">Lunch</div>
+        <article class="dish tl d1">
+          <div class="pic"><img src="assets/lunch-chicken.jpg" alt="Grilled chicken bowl"><span class="price">$28</span></div>
+          <div class="meta-m"><div class="cat">Lunch</div><div class="name">Grilled Chicken Bowl</div></div>
+        </article>
+        <article class="dish tr d2">
+          <div class="pic"><img src="assets/lunch-burger.jpg" alt="Classic beef burger"><span class="price">$22</span></div>
+          <div class="meta-m"><div class="cat">Lunch</div><div class="name">Classic Beef Burger</div></div>
+        </article>
+        <article class="dish bl d3">
+          <div class="pic"><img src="assets/lunch-salad.jpg" alt="Garden harvest salad"><span class="price">$18</span></div>
+          <div class="meta-m"><div class="cat">Lunch</div><div class="name">Garden Harvest Salad</div></div>
+        </article>
+        <article class="dish br d4">
+          <div class="pic"><img src="assets/lunch-pizza.jpg" alt="Margherita pizza"><span class="price">$26</span></div>
+          <div class="meta-m"><div class="cat">Lunch</div><div class="name">Margherita Pizza</div></div>
+        </article>
+      </div>
+
+      <!-- DINNER -->
+      <div class="meal" data-meal="2">
+        <div class="meal-m-head">Dinner</div>
+        <article class="dish tl d1">
+          <div class="pic"><img src="assets/dinner-steak.jpg" alt="Prime ribeye steak"><span class="price">$45</span></div>
+          <div class="meta-m"><div class="cat">Dinner</div><div class="name">Prime Ribeye Steak</div></div>
+        </article>
+        <article class="dish tr d2">
+          <div class="pic"><img src="assets/dinner-salmon.jpg" alt="Grilled salmon fillet"><span class="price">$38</span></div>
+          <div class="meta-m"><div class="cat">Dinner</div><div class="name">Grilled Salmon Fillet</div></div>
+        </article>
+        <article class="dish bl d3">
+          <div class="pic"><img src="assets/dinner-pasta.jpg" alt="Truffle cream pasta"><span class="price">$32</span></div>
+          <div class="meta-m"><div class="cat">Dinner</div><div class="name">Truffle Cream Pasta</div></div>
+        </article>
+        <article class="dish br d4">
+          <div class="pic"><img src="assets/dinner-duck.jpg" alt="Roast duck breast"><span class="price">$42</span></div>
+          <div class="meta-m"><div class="cat">Dinner</div><div class="name">Roast Duck Breast</div></div>
+        </article>
+      </div>
+
+      <!-- CENTER -->
+      <div class="meal-center">
+        <div class="meal-title-wrap">
+          <h2 class="meal-title on" data-t="0">Breakfast</h2>
+          <h2 class="meal-title" data-t="1">Lunch</h2>
+          <h2 class="meal-title" data-t="2">Dinner</h2>
+        </div>
+        <p class="meal-sub" id="mealSub">Slow mornings, served from 8am — fresh bakes, eggs and single-origin coffee.</p>
+        <a href="#reserve" class="btn" data-magnetic>Book a Table <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="meal-dots">
+          <button class="meal-dot on" data-go="0"><i></i>Breakfast</button>
+          <button class="meal-dot" data-go="1"><i></i>Lunch</button>
+          <button class="meal-dot" data-go="2"><i></i>Dinner</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGACY MENU GRID -->
+<section class="legacy" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="reveal">
+        <span class="kicker dot" style="color:var(--gold);margin-bottom:16px">Our Menu</span>
+        <h2>A Legacy of Flavour, <em>Perfected Over Time.</em></h2>
+      </div>
+      <a href="#fullmenu" class="btn reveal" data-d="1" data-magnetic>Explore Full Menu <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="menu-grid">
+      <article class="mcard reveal"><div class="pic"><img src="assets/menu-skewers.jpg" alt="Charcoal glazed skewers"></div>
+        <div class="row"><h3>Charcoal Glazed Skewers</h3><span class="pr">$30.00</span></div>
+        <p class="desc">Flame-kissed skewers lacquered in a smoked honey glaze.</p>
+        <div class="rate"><span class="s">★★★★★</span> 4.9 <span style="opacity:.6">(40 reviews)</span></div>
+      </article>
+      <article class="mcard reveal" data-d="1"><div class="pic"><img src="assets/menu-shumai.jpg" alt="Steamed pork shumai"></div>
+        <div class="row"><h3>Steamed Pork Shumai</h3><span class="pr">$35.00</span></div>
+        <p class="desc">Delicate open-topped dumplings steamed to order in bamboo.</p>
+        <div class="rate"><span class="s">★★★★★</span> 4.8 <span style="opacity:.6">(32 reviews)</span></div>
+      </article>
+      <article class="mcard reveal" data-d="2"><div class="pic"><img src="assets/menu-soup.jpg" alt="Pan-seared dumplings"></div>
+        <div class="row"><h3>Pan-Seared Dumplings</h3><span class="pr">$20.00</span></div>
+        <p class="desc">Crisp-bottomed dumplings with a black vinegar dip.</p>
+        <div class="rate"><span class="s">★★★★★</span> 4.9 <span style="opacity:.6">(51 reviews)</span></div>
+      </article>
+      <article class="mcard reveal"><div class="pic"><img src="assets/menu-wagyu.jpg" alt="Wagyu smash burger"></div>
+        <div class="row"><h3>Wagyu Smash Burger</h3><span class="pr">$45.00</span></div>
+        <p class="desc">Double wagyu patties, aged cheddar and house sauce.</p>
+        <div class="rate"><span class="s">★★★★★</span> 5.0 <span style="opacity:.6">(64 reviews)</span></div>
+      </article>
+      <article class="mcard reveal" data-d="1"><div class="pic"><img src="assets/menu-peking.jpg" alt="Classic peking duck"></div>
+        <div class="row"><h3>Classic Peking Duck</h3><span class="pr">$45.00</span></div>
+        <p class="desc">Lacquered duck with cucumber, scallion and thin pancakes.</p>
+        <div class="rate"><span class="s">★★★★★</span> 4.9 <span style="opacity:.6">(47 reviews)</span></div>
+      </article>
+      <article class="mcard reveal" data-d="2"><div class="pic"><img src="assets/menu-tacos.jpg" alt="Street-style tacos"></div>
+        <div class="row"><h3>Street-Style Tacos</h3><span class="pr">$50.00</span></div>
+        <p class="desc">A vibrant trio of tacos with bright salsas and lime.</p>
+        <div class="rate"><span class="s">★★★★★</span> 4.7 <span style="opacity:.6">(38 reviews)</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE + CHEF -->
+<section class="feature">
+  <div class="feature-img"><img src="assets/feature-dark.jpg" alt="Signature plated dish on a dark table"></div>
+  <div class="chef-card reveal">
+    <span class="mk">“</span>
+    <p class="q">Every plate that leaves this kitchen carries our name. We cook the way we'd want to be served — honestly, and with care.</p>
+    <div class="who">
+      <img src="assets/chef.jpg" alt="James Arnold, Head Chef">
+      <div><b>James Arnold</b><span>Founder &amp; Head Chef</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER MENU -->
+<section class="fmenu" id="fullmenu">
+  <div class="wrap">
+    <div class="fmenu-head reveal">
+      <span class="kicker" style="color:var(--gold-soft);justify-content:center;margin-bottom:16px">Full Menu</span>
+      <h2>A Legacy of Flavour. A Future of <em>Culinary Excellence.</em></h2>
+    </div>
+    <div class="tabs reveal" data-d="1">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="breakfast">Breakfast</button>
+      <button class="tab" data-filter="mains">Mains</button>
+      <button class="tab" data-filter="drinks">Drinks</button>
+      <button class="tab" data-filter="desserts">Desserts</button>
+    </div>
+    <div class="flist reveal" data-d="2">
+      <div class="fitem" data-cat="breakfast"><span class="nm">Classic Pancake Stack</span><span class="ds"></span><span class="tag">Breakfast</span><span class="pr">$14</span></div>
+      <div class="fitem" data-cat="breakfast"><span class="nm">Avocado Toast Deluxe</span><span class="ds"></span><span class="tag">Breakfast</span><span class="pr">$16</span></div>
+      <div class="fitem" data-cat="breakfast"><span class="nm">Cheese Omelette Plate</span><span class="ds"></span><span class="tag">Breakfast</span><span class="pr">$13</span></div>
+      <div class="fitem" data-cat="breakfast"><span class="nm">French Toast with Honey</span><span class="ds"></span><span class="tag">Breakfast</span><span class="pr">$15</span></div>
+      <div class="fitem" data-cat="mains"><span class="nm">Prime Ribeye Steak</span><span class="ds"></span><span class="tag">Mains</span><span class="pr">$45</span></div>
+      <div class="fitem" data-cat="mains"><span class="nm">Truffle Cream Pasta</span><span class="ds"></span><span class="tag">Mains</span><span class="pr">$32</span></div>
+      <div class="fitem" data-cat="mains"><span class="nm">Roast Duck Breast</span><span class="ds"></span><span class="tag">Mains</span><span class="pr">$42</span></div>
+      <div class="fitem" data-cat="mains"><span class="nm">Grilled Salmon Fillet</span><span class="ds"></span><span class="tag">Mains</span><span class="pr">$38</span></div>
+      <div class="fitem" data-cat="drinks"><span class="nm">Rise &amp; Shine Latte</span><span class="ds"></span><span class="tag">Drinks</span><span class="pr">$6</span></div>
+      <div class="fitem" data-cat="drinks"><span class="nm">Spiced Negroni</span><span class="ds"></span><span class="tag">Drinks</span><span class="pr">$14</span></div>
+      <div class="fitem" data-cat="drinks"><span class="nm">Garden Spritz</span><span class="ds"></span><span class="tag">Drinks</span><span class="pr">$12</span></div>
+      <div class="fitem" data-cat="drinks"><span class="nm">Single-Origin Pour-Over</span><span class="ds"></span><span class="tag">Drinks</span><span class="pr">$7</span></div>
+      <div class="fitem" data-cat="desserts"><span class="nm">Dark Chocolate Mousse</span><span class="ds"></span><span class="tag">Desserts</span><span class="pr">$11</span></div>
+      <div class="fitem" data-cat="desserts"><span class="nm">Crème Brûlée</span><span class="ds"></span><span class="tag">Desserts</span><span class="pr">$10</span></div>
+      <div class="fitem" data-cat="desserts"><span class="nm">Seasonal Berry Tart</span><span class="ds"></span><span class="tag">Desserts</span><span class="pr">$12</span></div>
+      <div class="fitem" data-cat="desserts"><span class="nm">Affogato</span><span class="ds"></span><span class="tag">Desserts</span><span class="pr">$9</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div class="wrap">
+    <span class="kicker dot reveal" style="color:var(--gold)">Testimonials</span>
+    <h2 class="reveal" data-d="1" style="font-size:clamp(2rem,4.4vw,3.4rem);font-weight:500;margin-top:14px;max-width:16ch">Dining Stories From <em style="font-style:italic;color:var(--gold)">Our Guests.</em></h2>
+    <div class="testi-grid">
+      <div class="tcard reveal"><div class="s">★★★★★</div><p>A perfect place for a relaxing meal with family and friends. We came for a birthday and every dish we tried was absolutely delicious.</p></div>
+      <div class="tcard reveal" data-d="1"><div class="s">★★★★★</div><p>The ambience is perfect, the dishes are truly a work of art. This is my go-to spot for date nights and special occasions. Highly recommend.</p></div>
+      <div class="tcard reveal" data-d="2"><div class="s">★★★★★</div><p>The atmosphere, the flavours and the service were all exceptional. Easily one of the best dining experiences we've had this year.</p></div>
+      <div class="tcard reveal" data-d="3"><div class="s">★★★★★</div><p>The attention to detail is impressive. The ingredients taste fresh and the flavours are balanced perfectly. We'll be coming back soon.</p></div>
+    </div>
+    <div class="avatars"><div class="avatars-track" id="avTrack"></div></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:0">
+      <div class="reveal"><span class="kicker dot" style="color:var(--gold);margin-bottom:14px">Blog</span><h2 style="font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:500">Latest Articles</h2></div>
+      <a href="#blog" class="btn ghost reveal" data-d="1" data-magnetic>All Articles <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="blog-grid">
+      <article class="bcard reveal"><div class="pic"><img src="assets/blog1.jpg" alt="Fresh, colourful plated dish"></div>
+        <div class="body"><div class="meta">Kitchen · 5 min read</div><h3>The Secret Behind Our Fresh, Flavourful Dishes</h3>
+          <a href="#blog" class="more">Read Full Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+      <article class="bcard reveal" data-d="1"><div class="pic"><img src="assets/blog2.jpg" alt="Signature plated dish on dark background"></div>
+        <div class="body"><div class="meta">Menu · 4 min read</div><h3>5 Must-Try Signature Dishes for Your Next Visit</h3>
+          <a href="#blog" class="more">Read Full Blog <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE -->
+<section class="reserve" id="reserve">
+  <div class="wrap">
+    <div class="reserve-grid">
+      <div class="reveal">
+        <span class="kicker dot" style="color:var(--gold);margin-bottom:16px">Reserve Your Table</span>
+        <h2>Your Seat Awaits. Reserve a <em>Memorable</em> Dining Experience.</h2>
+        <p class="lead">Tell us when you're coming and how many will join you. We'll take care of the rest — and confirm your table by email.</p>
+        <div class="rcontact">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>12 Rue Saint-Honoré, 75001 Paris</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>+33 1 23 45 67 89</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>hello@sorrel.paris</div>
+        </div>
+      </div>
+      <div class="rform reveal" data-d="1">
+        <form id="resForm" novalidate>
+          <h3>Reserve Your Table</h3>
+          <div class="fgrid">
+            <div class="field full"><label>Full Name *</label><input type="text" name="name" placeholder="Your name" /><span class="msg">Please enter your name.</span></div>
+            <div class="field"><label>Email *</label><input type="email" name="email" placeholder="you@example.com" /><span class="msg">Enter a valid email.</span></div>
+            <div class="field"><label>Phone Number *</label><input type="tel" name="phone" placeholder="+33 ..." /><span class="msg">Enter your phone.</span></div>
+            <div class="field"><label>Date *</label><input type="date" name="date" /><span class="msg">Pick a date.</span></div>
+            <div class="field"><label>Guests *</label>
+              <select name="guests"><option value="">Select…</option><option>1 guest</option><option>2 guests</option><option>3 guests</option><option>4 guests</option><option>5 guests</option><option>6+ guests</option></select>
+              <span class="msg">Select guests.</span></div>
+            <div class="field full"><label>Notes (optional)</label><textarea name="notes" placeholder="Allergies, occasion, seating preference…"></textarea></div>
+          </div>
+          <button type="submit" class="btn">Submit Reservation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </form>
+        <div class="rform-success" id="resSuccess">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Table Requested!</h3>
+          <p>Thank you — we've received your reservation and will confirm by email shortly.</p>
+          <div class="summary" id="resSummary"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo"><svg class="leaf" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 5 4 9 4 14a8 8 0 0016 0c0-5-3-9-8-12zm0 4c2.5 2 4 5 4 8a4 4 0 01-8 0c0-3 1.5-6 4-8z"/></svg>Sorrel.</a>
+        <p>Where seasonal flavour meets warm hospitality, in the heart of Paris since 2014.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#top">Home</a><a href="#about">About Us</a><a href="#menu">Menu</a><a href="#reserve">Reserve</a>
+      </div>
+      <div class="foot-col">
+        <h4>Opening Hours</h4>
+        <p>Mon — Closed</p><p>Tue – Fri — 11:00 to 22:00</p><p>Sat – Sun — 12:00 to 19:00</p>
+      </div>
+      <div class="foot-col">
+        <h4>Stay in Touch</h4>
+        <p>12 Rue Saint-Honoré, Paris</p>
+        <form class="news" id="newsForm"><input type="email" placeholder="Your email" aria-label="Email" /><button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sorrel — Fine Dining, Paris. All rights reserved.</span>
+      <span>Designed &amp; built with care.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB -->
+<div class="fab">
+  <a href="#reserve" class="book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Book Now</a>
+</div>
+
+<script>
+(function(){
+  var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- nav solid + progress ---- */
+  var nav=document.getElementById('nav'), prog=document.getElementById('progress');
+  function onScrollTop(){
+    var y=window.scrollY||window.pageYOffset;
+    nav.classList.toggle('solid', y>40);
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(h>0?(y/h*100):0)+'%';
+  }
+  window.addEventListener('scroll',onScrollTop,{passive:true}); onScrollTop();
+
+  /* ---- mobile menu ---- */
+  var burger=document.getElementById('burger'), mm=document.getElementById('mobileMenu');
+  burger.addEventListener('click',function(){mm.classList.toggle('open');});
+  mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open');});});
+
+  /* ---- reveals ---- */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  /* ---- count up ---- */
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting) return; cio.unobserve(e.target);
+    var el=e.target, target=parseFloat(el.dataset.count), dec=parseInt(el.dataset.dec||'0'), suf=el.dataset.suffix||'', t0=null, dur=1500;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var ease=1-Math.pow(1-p,3); var v=target*ease;
+      el.textContent=(dec? v.toFixed(dec): Math.round(v))+suf; if(p<1)requestAnimationFrame(step); else el.textContent=(dec?target.toFixed(dec):target)+suf; }
+    requestAnimationFrame(step);
+  });},{threshold:0.5});
+  document.querySelectorAll('[data-count]').forEach(function(el){cio.observe(el);});
+
+  /* ---- magnetic buttons ---- */
+  if(!rm && window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('[data-magnetic]').forEach(function(b){
+      b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();var x=e.clientX-r.left-r.width/2;var y=e.clientY-r.top-r.height/2;b.style.transform='translate('+x*0.25+'px,'+y*0.3+'px)';});
+      b.addEventListener('mouseleave',function(){b.style.transform='';});
+    });
+  }
+
+  /* ---- MEALS pinned scroll ---- */
+  var meals=Array.prototype.slice.call(document.querySelectorAll('.meal'));
+  var titles=document.querySelectorAll('.meal-title');
+  var dots=document.querySelectorAll('.meal-dot');
+  var bgword=document.getElementById('bgword');
+  var sub=document.getElementById('mealSub');
+  var names=['Breakfast','Lunch','Dinner'];
+  var subs=[
+    "Slow mornings, served from 8am — fresh bakes, eggs and single-origin coffee.",
+    "Midday plates from noon — bowls, burgers and wood-fired classics done right.",
+    "Evenings from 6pm — dry-aged cuts, seafood and candlelit indulgence."
+  ];
+  var cur=-1;
+  function setMeal(i){
+    if(i===cur) return; cur=i;
+    meals.forEach(function(m,idx){m.classList.toggle('active',idx===i);});
+    titles.forEach(function(t,idx){t.classList.toggle('on',idx===i);});
+    dots.forEach(function(d,idx){d.classList.toggle('on',idx===i);});
+    if(bgword) bgword.textContent=names[i];
+    if(sub) sub.textContent=subs[i];
+  }
+  var wrap=document.getElementById('meals');
+  function mealScroll(){
+    if(window.innerWidth<=760) return; // static on mobile
+    var rect=wrap.getBoundingClientRect();
+    var total=wrap.offsetHeight-window.innerHeight;
+    var scrolled=Math.min(Math.max(-rect.top,0),total);
+    var p=total>0?scrolled/total:0;
+    var idx=Math.min(meals.length-1,Math.floor(p*meals.length+0.0001));
+    setMeal(idx<0?0:idx);
+  }
+  // dot click -> scroll to that portion
+  dots.forEach(function(d){d.addEventListener('click',function(){
+    if(window.innerWidth<=760){return;}
+    var go=parseInt(d.dataset.go);
+    var total=wrap.offsetHeight-window.innerHeight;
+    var y=wrap.offsetTop + (total*(go+0.5)/meals.length);
+    window.scrollTo({top:y,behavior:'smooth'});
+  });});
+  if(window.innerWidth<=760){
+    // mobile: show all meals static, reveal titles
+    meals.forEach(function(m){m.classList.add('active');});
+    titles.forEach(function(t){t.classList.add('show-static');});
+  } else {
+    window.addEventListener('scroll',mealScroll,{passive:true}); setMeal(0); mealScroll();
+  }
+
+  /* ---- filter menu ---- */
+  var tabs=document.querySelectorAll('.tab'), fitems=document.querySelectorAll('.fitem');
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.classList.remove('active');}); t.classList.add('active');
+    var f=t.dataset.filter;
+    fitems.forEach(function(it){var show=(f==='all'||it.dataset.cat===f); it.classList.toggle('hide',!show);});
+  });});
+
+  /* ---- avatars marquee ---- */
+  var guests=[
+    ['Collin Munro','Birthday dinner'],['Eoin Morgan','Date night'],['Jimmy Anderson','Family lunch'],
+    ['Stewart Binny','Anniversary'],['Sofia Laurent','Brunch'],['Marco Bianchi','Business dinner'],
+    ['Amara Okafor','Tasting menu'],['Liam Walsh','Celebration']
+  ];
+  var pal=[['#c8a64f','#9c8a3c'],['#d8be77','#a98f3a'],['#bfae6a','#8a7a35'],['#e0c98a','#b39a4a']];
+  var track=document.getElementById('avTrack');
+  function av(g,i){var c=pal[i%pal.length];var init=g[0].split(' ').map(function(s){return s[0];}).join('');
+    return '<div class="av"><div class="pic" style="background:linear-gradient(135deg,'+c[0]+','+c[1]+')">'+init+'</div><div><b>'+g[0]+'</b><span>'+g[1]+'</span></div></div>';}
+  var html=''; guests.forEach(function(g,i){html+=av(g,i);});
+  track.innerHTML=html+html; // duplicate for seamless loop
+
+  /* ---- reservation form ---- */
+  var form=document.getElementById('resForm');
+  form.addEventListener('submit',function(e){
+    e.preventDefault(); var ok=true;
+    ['name','email','phone','date','guests'].forEach(function(n){
+      var inp=form.querySelector('[name="'+n+'"]'); var f=inp.closest('.field'); var val=inp.value.trim(); var bad=!val;
+      if(n==='email'&&val) bad=!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val);
+      f.classList.toggle('err',bad); if(bad)ok=false;
+    });
+    if(!ok) return;
+    var d=new FormData(form);
+    document.getElementById('resSummary').innerHTML='<strong>'+d.get('guests')+'</strong> · '+d.get('date')+'<br>Under '+d.get('name');
+    form.style.display='none';
+    document.getElementById('resSuccess').classList.add('show');
+  });
+  form.querySelectorAll('input,select').forEach(function(inp){inp.addEventListener('input',function(){inp.closest('.field').classList.remove('err');});});
+
+  document.getElementById('newsForm').addEventListener('submit',function(e){e.preventDefault();var i=this.querySelector('input');if(i.value){i.value='';i.placeholder='Subscribed ✓';}});
+})();
+</script>
+</body>
+</html>

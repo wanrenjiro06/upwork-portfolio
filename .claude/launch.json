@@ -78,6 +78,24 @@
       "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
       "runtimeArgs": ["-m", "http.server", "3013", "--directory", "C:\\UpWork\\KotlinSpinWheel-Asim\\web-demo-shell"],
       "port": 3013
+    },
+    {
+      "name": "lexirac",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3014", "--directory", "C:\\UpWork\\NextJS-Claude-Stripe-App\\demo"],
+      "port": 3014
+    },
+    {
+      "name": "barbershop",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3015", "--directory", "C:\\UpWork\\Websites Portfolio\\Barbershop"],
+      "port": 3015
+    },
+    {
+      "name": "restaurant",
+      "runtimeExecutable": "C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3016", "--directory", "C:\\UpWork\\Websites Portfolio\\Restaurant"],
+      "port": 3016
     }
   ]
 }
